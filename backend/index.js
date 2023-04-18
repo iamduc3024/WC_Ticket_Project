@@ -1,9 +1,13 @@
-const db = require('./configdb/db');
+const express = require('express');
 
-db.query('SELECT * FROM customer', (err, result) => {
-    if (err) {
-        throw err;
-    } else {
-        console.log(result);
-    }
+const router = require('./router/router');
+
+const app = express();
+
+app.use(express.json());
+
+app.use(router);
+
+app.listen(3000, () => {
+    console.log('Test');
 })
