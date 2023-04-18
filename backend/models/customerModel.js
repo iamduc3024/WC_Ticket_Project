@@ -1,0 +1,1 @@
+const customerModels = require('../config')

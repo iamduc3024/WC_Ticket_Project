@@ -2,7 +2,7 @@ const mysql = require('mysql');
 
 const db = mysql.createConnection({
     host: 'localhost',
-    username: 'root',
+    user: 'root',
     password: '',
     database: 'wc_ticket'
 })
@@ -15,4 +15,4 @@ db.connect((err) => {
     }
 })
 
-//export default db;
+module.exports = db;
