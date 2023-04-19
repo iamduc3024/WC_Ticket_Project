@@ -1,12 +1,15 @@
-// const customerRouter = require('./customerRoute');
-// const standRouter = require('./standRoute');
+const customerRouter = require('./customerRoute');
+const matchRouter = require('./matchRoute');
+const standRouter = require('./standRoute');
 
-// function route(app) {
-//   //app.use('/customer', customerRouter);
-//   app.use('/stand', standRouter);
-// }
+function route(app) {
+  app.use('/customer', customerRouter);
+  app.use('/stand', standRouter);
+  app.use('/match', matchRouter);
+  //app.use('/transaction', transactionRouter);
+}
 
-// module.exports = route;
+module.exports = route;
 
 
 // T muốn tạo hàm này để gộp hết mấy cái cus,stand,transaction,match vào 1 router xuất ra mà chưa biết cách
