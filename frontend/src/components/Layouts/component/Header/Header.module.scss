@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+
+*{
+    font-family: 'Nunito', sans-serif;
+    margin:0; padding:0;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    outline: none; border:none;
+    text-decoration: none;
+    transition: all .2s linear;
+  }
+
+  html {
+    font-size: 20px;
+    overflow-x: hidden;
+    scroll-padding-top: 200px;
+    scroll-behavior: smooth;
+  }
+
+  .headerContainer {
+    display: flex;
+    width: 100vw;
+    height: 80px;
+    background-color: #550065;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+  }
+
+  .logo {
+    color: #fff;
+    margin: 24px;
+    font-size: 36px;
+  }
+
+  .searchContainer {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .searchContainer .searchBar {
+    background-color: #fff;
+    width: 80%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    margin-right: 12px;
+  }
+
+  .searchIcon {
+    font-size: 30px;
+    
+  }
+
+  .cartIcon {
+    font-size: 30px;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    margin-right: 12px;
+  }
+
+  li {
+    
+  }
+
+  ul .loginBtn {
+    width: 130px;
+    background-color: #fff;
+    color: #18A0FB;
+    border: 1px solid #18A0FB;
+    border-radius: 6px;
+    text-align: center;
+    padding: 2px;
+  }
+
+  ul .registerBtn {
+    width: 130px;
+    color: #FFFFFF;
+    border: 1px solid #18A0FB;
+    border-radius: 6px;
+    text-align: center;
+    padding: 2px;
+    margin-right: 20px;
+  }
