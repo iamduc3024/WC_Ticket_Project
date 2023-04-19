@@ -19,6 +19,7 @@
   }
 
   .headerContainer {
+    position: fixed;
     display: flex;
     width: 100vw;
     height: 80px;
@@ -26,6 +27,7 @@
     align-items: center;
     justify-content: space-between;
     color: #fff;
+    z-index: 1;
   }
 
   .logo {
@@ -70,6 +72,7 @@
   }
 
   ul .loginBtn {
+    font-size: 24px;
     width: 130px;
     background-color: #fff;
     color: #18A0FB;
@@ -80,6 +83,7 @@
   }
 
   ul .registerBtn {
+    font-size: 24px;
     width: 130px;
     color: #FFFFFF;
     border: 1px solid #18A0FB;

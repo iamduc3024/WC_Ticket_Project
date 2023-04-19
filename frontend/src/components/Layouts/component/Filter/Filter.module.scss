@@ -1,0 +1,48 @@
+input {
+    width: 100%;
+    border: solid #333;
+    border-radius: 50px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }
+
+  .filterContainer {
+    font-size: 24px;
+    margin-top: 100px;
+    z-index: 2;
+    
+    width: 300px;
+    height: 100vh;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #550065;
+    color: #fff ;
+    font-weight: bolder;
+    padding: 12px;
+    padding-top: 36px;
+  }
+
+  section {
+    font-size: 20px !important;
+    text-align: left;
+    padding: 0px 8px;
+    font-weight: normal;
+  }
+
+  .standInpContainer {
+    margin-top: 60px;
+  }
+
+  .filterSubmitBtn {
+    width: 50%;
+    background-color: #2853C2;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 10%;
+    padding: 4px;
+    margin: 24px 0px;
+    bottom: 0px;
+  }
