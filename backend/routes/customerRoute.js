@@ -14,12 +14,12 @@ router.get("/show", customerController.showCustomer);
 router.get("/showbyid", customerController.showCustomerById);
 
 // // Create New Customer
-// router.post("/customer/create", createCustomer);
+// router.post("/create", createCustomer);
 
 // // Update Customer
-// router.put("/customer/:id", updateCustomer);
+// router.put("/update/:id", updateCustomer);
 
 // // Delete Customer
-// router.delete("/customer/:id", deleteCustomer);
+// router.delete("/delete/:id", deleteCustomer);
 
 module.exports = router;
