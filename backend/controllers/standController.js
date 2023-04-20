@@ -1,11 +1,15 @@
-const getAllStandInfo = require('../models/standModel');
+const standModel = require('../models/standModel');
 
-module.exports = showAllStandInfo = (req, res) => {
-    getAllStandInfo((err, results) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(results);
-        }
-    })
-};
+class standController {
+    showAllStandInfo = (req, res) => {
+        standModel.getAllStandInfo((err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(result);
+            }
+        })
+    }
+}
+
+module.exports = new standController();

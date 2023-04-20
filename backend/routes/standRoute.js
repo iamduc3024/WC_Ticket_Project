@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const standController = require('../controllers/standController');
 
-const showAllStandInfo = require('../controllers/standController');
-
-
-
-router.get('/stand', showAllStandInfo);
+router.get('/showAllStand', standController.showAllStandInfo);
 
 module.exports = router;
