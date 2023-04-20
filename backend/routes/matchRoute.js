@@ -6,4 +6,8 @@ const matchController = require('../controllers/matchController');
 
 //router.get('/', matchController.)
 
+router.get("/show", matchController.showMatch);
+router.get("/showbyid", matchController.showMatchById);
+router.put("/update", matchController.updateMatch);
+
 module.exports = router;

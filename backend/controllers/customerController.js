@@ -2,7 +2,7 @@ const customerModel = require('../models/customerModel')
 
 class customerController {
 
-    //Show all customer
+    //Show all customers
     showCustomer = (req, res) => {
         customerModel.getCustomer((err, result) => {
             if (err) {
@@ -15,7 +15,7 @@ class customerController {
 
     //Show customer by ID
     showCustomerById = (req, res) => {
-        customerModel.getCustomerById((err, result) => {
+        customerModel.getCustomerById(req.params.id, (err, result) => {
             if (err) {
                 res.send(err);
             } else {
@@ -39,7 +39,8 @@ class customerController {
     //Update customer
     updateCustomer = (req, res) => {
         const data = req.body;
-        customerModel.updateCustomerById(data, (err, results) => {
+        const id = req.params.id;
+        customerModel.updateCustomerById(data, id, (err, results) => {
             if (err) {
                 res.send(err);
             } else {
@@ -50,8 +51,8 @@ class customerController {
 
     //Delete customer
     deleteCustomer = (req, res) => {
-        const data = req.body;
-        customerModel.deleteCustomerById(data, (err, results) => {
+        const id = req.params.id;
+        customerModel.deleteCustomerById(id, (err, results) => {
             if (err) {
                 res.send(err);
             } else {
