@@ -1,18 +1,35 @@
 const db = require('../configdb/db');
 
+class standModel {
+    // Query all information from stand
+    getAllStandInfo = (result) => {
+        const getAllStandInfoQuery = "SELECT * FROM stand";
+        db.query(getAllStandInfoQuery, (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
+}
+
+module.exports = new standModel();
+
 // Lọc ra tất cả các vé có thông tin sân, chỗ ngồi, giá tiền
-const getAllStandInfo = ((result) => {
-    const getAllStandInfoQuery = "SELECT * FROM stand";
-    db.query(getAllStandInfoQuery, (err, results) => {
-        if (err) {
-            console.log(err);
-            result(err, null);
-        } else {
-            result(null, results);
-        }
-    })
-});
-module.exports = getAllStandInfo;
+// const getAllStandInfo = ((result) => {
+//     const getAllStandInfoQuery = "SELECT * FROM stand";
+//     db.query(getAllStandInfoQuery, (err, results) => {
+//         if (err) {
+//             console.log(err);
+//             result(err, null);
+//         } else {
+//             result(null, results);
+//         }
+//     })
+// });
+// module.exports = getAllStandInfo;
 
 // Lọc theo tên khán đài
 // const getAllStandInfoByName = ((stand_name, result) => {
