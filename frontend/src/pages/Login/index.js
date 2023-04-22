@@ -1,7 +1,32 @@
 import clsx from 'clsx';
 import style from './Login.module.scss'
+import { useEffect, useState } from 'react';
 
 function Login() {
+
+    const [passHide, setPassHide] = useState(false)
+
+    let passInp = document.querySelector('.' + style.passInput)
+    
+    useEffect( () => {
+        passInp = document.querySelector('.' + style.passInput)
+    }, [passHide] )
+
+    function handleHide() {
+        
+        console.log(passInp);
+        
+        setPassHide(!passHide);
+        if(!passHide)
+        {
+            passInp.type = "text"
+        }
+        else {
+            passInp.type = "password"
+        }
+    }
+
+
     return (
         <div className={style.container}>
 
@@ -17,7 +42,9 @@ function Login() {
                 <section className={style.passInputContainer}>
                     <label htmlFor="passInput">Password</label>
                     <input className={style.passInput} type="password" placeholder="Enter your password" />
-                    <i className={ clsx(style.hiddenPass, "ti-eye") }></i>
+                    <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
+                        onClick={handleHide}
+                    ></i>
                 </section>
 
                 <button className={style.submitSignInBtn}>Sign In</button>
