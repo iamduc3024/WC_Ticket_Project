@@ -13,6 +13,45 @@ class standModel {
             }
         })
     }
+
+    // Query all information from stand by name
+    getAllStandInfoByName = (standName, result) => {
+        const getAllStandInfoByNameQuery = "SELECT * FROM stand WHERE stand_name = ?";
+        db.query(getAllStandInfoByNameQuery, [standName], (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
+
+    // Query all information from stand by price
+    getAllStandInfoByPrice = (priceMin, priceMax, result) => {
+        const getAllStandInfoByPriceQuery = "SELECT * FROM stand WHERE price BETWEEN ? AND ?";
+        db.query(getAllStandInfoByPriceQuery, [priceMin, priceMax], (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
+
+    // Update capacity when customer order
+    updateStandWhenCustomerOrder = (data, standName, standId, result) => {
+        const updateStandWhenCustomerOrderQuery = "UPDATE stand SET capacity = capacity - ? WHERE stand_name = ? AND stand_id = ?";
+        db.query(updateStandWhenCustomerOrderQuery,[data.quantity, standName, standId] , (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
 }
 
 module.exports = new standModel();

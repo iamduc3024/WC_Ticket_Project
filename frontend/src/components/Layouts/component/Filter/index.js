@@ -1,4 +1,5 @@
 import style from './Filter.module.scss'
+//import ro from '../../../../../../backend/routes/indexRoute'
 
 function Filter(props) {
     return (
@@ -40,7 +41,7 @@ function Filter(props) {
             <input className={style.priceToInput} type="text" />
             <br />
         </section>
-        <button className={style.filterSubmitBtn}>Filter</button>
+        <button onClick={() => console.log('123')} className={style.filterSubmitBtn}>Filter</button>
     </div>
     )
 }

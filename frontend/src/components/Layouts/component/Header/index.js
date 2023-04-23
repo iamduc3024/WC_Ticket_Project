@@ -16,7 +16,11 @@ function Header() {
             
             <i className={clsx(style.cartIcon, 'ti-shopping-cart')}></i>
             <ul>
-                <li className={style.loginBtn}>Login</li>
+            <Link to = "/login">
+                <li className={style.loginBtn}>
+                    Login
+                </li>
+            </Link>
                 <li className={style.registerBtn}>Register</li>
             </ul>
         </div>
