@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 function Register() {
@@ -20,13 +21,53 @@ function Register() {
 
     const [err, setError] = useState(null);
 
+    let userInp = document.querySelector('.' + style.userInput)
+    let phoneInp = document.querySelector('.' + style.phoneInput)
     let passInp = document.querySelector('.' + style.passInput)
     let passCheckInp = document.querySelector('.' + style.passInputCheck)
+    const [isUser, setIsUser] = useState(true)
+    const [isPhone, setIsPhone] = useState(true)
+    const [isPass, setIsPass] = useState(true)
+    const [isPassCheck, setIsPassCheck] = useState(true)
     
-    useEffect( () => {
-        passInp = document.querySelector('.' + style.passInput)
-        passCheckInp = document.querySelector('.' + style.passInputCheck)
-    }, [passHide, passCheckInp] )
+    
+    function handleUserBlur() {
+        if(userInp.value) {
+            setIsUser(true)
+        }
+        else {
+            setIsUser(false)
+        }
+    }
+
+    function handlePhoneBlur() {
+        var phoneno = /^\d{10}$/;
+        if(phoneInp.value.match(phoneno)) {
+            setIsPhone(true)
+        }
+        else {
+            setIsPhone(false)
+        }
+    }
+
+    function handlePassBlur() {
+        if(passInp.value.length >= 6) {
+            setIsPass(true)
+        }
+        else {
+            setIsPass(false)
+        }
+    }
+
+    function handlePassCheckBlur() {
+        let passInput = document.querySelector('.' + style.passInput)
+        if(isPass && passCheckInp.value.match(passInput.value)) {
+            setIsPassCheck(true)
+        }
+        else {
+            setIsPassCheck(false)
+        }
+    }
 
     function handlePassHide() {
         
@@ -70,6 +111,8 @@ function Register() {
         }
     }
 
+
+
     return (
         <div className= {style.container}>
 
@@ -79,46 +122,75 @@ function Register() {
 
                 <section className= {style.userInputContainer}>
                     <label htmlFor="userInput" >Your Name</label>
-                    <input className= {style.userInput} type="text" placeholder="Enter your name." 
+                    <input className= {clsx(style.userInput, {[style.invalidBorder] : !isUser})} 
+                    type="text" placeholder="Enter your name." 
+                    name='name'
+                    onBlur={handleUserBlur}
+                    onFocus={() => {
+                        setIsUser(true)
+                    }}
                     onChange={handleChange}/>
                     <div className= {style.errContainer}>
-                        <p>aha</p>
+                        <p className= {clsx({[style.errMessage] : isUser} )}>Username is already existed</p>
                     </div>
                 </section>
 
                 <section className= {style.phoneInputContainer}>
                     <label htmlFor="phoneInput" >Phone</label>
-                    <input className= {style.phoneInput} type="text" placeholder="Enter your phone." 
+                    <input className= {clsx(style.phoneInput, {[style.invalidBorder] : !isPhone})} 
+                    type="text" placeholder="Enter your phone." 
+                    name='phone'
+                    onBlur={handlePhoneBlur}
+                    onClick={() => {
+                        setIsPhone(true)
+                    }}
                     onChange={handleChange}/>
                     <div className= {style.errContainer}>
-                        <p>aha</p>
+                        <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
                     </div>
                 </section>
 
                 <section className= {style.passInputContainer}>
                     <label htmlFor="passInput">Password</label>
-                    <input className= {style.passInput} type="password" placeholder="Enter your password" 
+                    <input className= {clsx(style.passInput, {[style.invalidBorder] : !isPass})} 
+                    type="password" placeholder="Enter your password" 
+                    name='password'
+                    onBlur={handlePassBlur}
+                    onClick={() => {
+                        setIsPass(true)
+                    }}
                     onChange={handleChange}/>
                     <i className= {clsx(style.hiddenPass , "ti-eye")}
                     onClick={handlePassHide}></i>
                     <div className= {style.errContainer}>
-                        <p>aha</p>
+                        <p className= {clsx({[style.errMessage] : isPass} )}>Invalid password</p>
                     </div>
                 </section>
 
                 <section className= {style.passInputCheckContainer}>
                     <label htmlFor="passInputCheck">Retype Password</label>
-                    <input className= {style.passInputCheck} type="password" placeholder="Confirm your password" 
+                    <input className= {clsx(style.passInputCheck, {[style.invalidBorder] : !isPassCheck})} 
+                    type="password" placeholder="Confirm your password" 
+                    name='passCheck'
+                    onBlur={handlePassCheckBlur}
+                    onClick={() => {
+                        setIsPassCheck(true)
+                    }}
                     onChange={handleChange}/>
                     <i className= {clsx(style.hiddenPassCheck, "ti-eye")}
                     onClick={handlePassCheckHide}></i>
                     <div className= {style.errContainer}>
-                        <p>aha</p>
+                        <p className= {clsx({[style.errMessage] : isPassCheck} )}>Password does not match</p>
                     </div>
                 </section>
 
-                <button className= {style.submitSignInBtn}>Sign Up</button>
+                <button className= {style.submitSignInBtn}
+                onClick={handleSubmit}>Sign Up</button>
 
+                <p className={style.moveSignUp}>
+                    I have an account.
+                    <Link to ="/login" > Sign In</Link>
+                </p>
             </div>
             
             <div className= {style.logo}>

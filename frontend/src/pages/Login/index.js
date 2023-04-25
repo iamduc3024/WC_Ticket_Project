@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import style from './Login.module.scss'
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -51,7 +52,7 @@ function Login() {
 
                 <p className={style.moveSignUp}>
                     Do not have account yet?
-                    <a href="" > Sign Up</a>
+                    <Link to ="/register" > Sign Up</Link>
                 </p>
             </div>
             
