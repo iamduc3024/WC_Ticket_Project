@@ -7,6 +7,7 @@ import { DefaultLayout } from './components/Layouts';
 import HomePage from './pages/Home';
 import OrderPage from './pages/Order';
 import LoginPage from './pages/Login';
+import RegisterPage from './pages/Register';
 import ProfilesPage from './pages/Profiles';
 import RegisterPage from './pages/Register';
 
@@ -17,6 +18,7 @@ function App() {
                 <Route path='/' element = {<HomePage />}/>
                 <Route path='/order' element = {<OrderPage />}/>
                 <Route path='/login' element = {<LoginPage />}/>
+                <Route path='/register' element = {<RegisterPage />}/>
                 <Route path='/profiles' element = {<ProfilesPage />}/>
                 <Route path='/login' element = {<LoginPage />}/>
                 <Route path='/register' element = {<RegisterPage />}/>

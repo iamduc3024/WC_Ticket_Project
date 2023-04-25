@@ -50,7 +50,7 @@ function Login() {
                 <button className={style.submitSignInBtn}>Sign In</button>
 
                 <p className={style.moveSignUp}>
-                    Don't have account yet?
+                    Do not have account yet?
                     <a href="" > Sign Up</a>
                 </p>
             </div>

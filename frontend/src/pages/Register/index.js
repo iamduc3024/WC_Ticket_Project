@@ -1,13 +1,17 @@
 import clsx from 'clsx';
 import style from './Register.module.scss'
 import { useEffect, useState } from 'react';
+
 import axios from 'axios';
 import React from 'react';
+
 
 function Register() {
 
     const [passHide, setPassHide] = useState(false)
 
+    const [passCheckHide, setPassCheckHide] = useState(false)
+    
     const [inputs, setInputs] = useState({
         name: "dat",
         phone: "22",
@@ -17,17 +21,20 @@ function Register() {
     const [err, setError] = useState(null);
 
     let passInp = document.querySelector('.' + style.passInput)
-
-    useEffect(() => {
+    let passCheckInp = document.querySelector('.' + style.passInputCheck)
+    
+    useEffect( () => {
         passInp = document.querySelector('.' + style.passInput)
-    }, [passHide])
+        passCheckInp = document.querySelector('.' + style.passInputCheck)
+    }, [passHide, passCheckInp] )
 
-    function handleHide() {
-
-        console.log(passInp);
-
+    function handlePassHide() {
+        
+        //console.log(passInp);
+        
         setPassHide(!passHide);
-        if (!passHide) {
+        if(!passHide)
+        {
             passInp.type = "text"
         }
         else {
@@ -49,48 +56,79 @@ function Register() {
         }
     };
 
+    function handlePassCheckHide() {
+        
+        //console.log(passInp);
+        
+        setPassCheckHide(!passCheckHide);
+        if(!passCheckHide)
+        {
+            passCheckInp.type = "text"
+        }
+        else {
+            passCheckInp.type = "password"
+        }
+    }
+
     return (
-        <div className={style.container}>
+        <div className= {style.container}>
 
-            <div className={style.loginContainer}>
-                <div className={style.loginContent}>
-                    <h1>Register</h1>
+        <div className= {style.loginContainer}>
+            <div className= {style.loginContent}>
+                <h1>Register</h1>
 
-                    <form>
-                        <input
-                            required
-                            type="text"
-                            placeholder="name"
-                            name="name"
-                            onChange={handleChange}
-                        />
-                        <input
-                            required
-                            type="text"
-                            placeholder="phone"
-                            name="phone"
-                            onChange={handleChange}
-                        />
-                        <input
-                            required
-                            type="password"
-                            placeholder="password"
-                            name="password"
-                            onChange={handleChange}
-                        />
-                        <button onClick={handleSubmit}>Register</button>
-                        {err && <p>{err}</p>}
-                    </form>
+                <section className= {style.userInputContainer}>
+                    <label htmlFor="userInput" >Your Name</label>
+                    <input className= {style.userInput} type="text" placeholder="Enter your name." 
+                    onChange={handleChange}/>
+                    <div className= {style.errContainer}>
+                        <p>aha</p>
+                    </div>
+                </section>
 
-                </div>
+                <section className= {style.phoneInputContainer}>
+                    <label htmlFor="phoneInput" >Phone</label>
+                    <input className= {style.phoneInput} type="text" placeholder="Enter your phone." 
+                    onChange={handleChange}/>
+                    <div className= {style.errContainer}>
+                        <p>aha</p>
+                    </div>
+                </section>
 
-                <div className={style.logo}>
+                <section className= {style.passInputContainer}>
+                    <label htmlFor="passInput">Password</label>
+                    <input className= {style.passInput} type="password" placeholder="Enter your password" 
+                    onChange={handleChange}/>
+                    <i className= {clsx(style.hiddenPass , "ti-eye")}
+                    onClick={handlePassHide}></i>
+                    <div className= {style.errContainer}>
+                        <p>aha</p>
+                    </div>
+                </section>
 
-                </div>
+                <section className= {style.passInputCheckContainer}>
+                    <label htmlFor="passInputCheck">Retype Password</label>
+                    <input className= {style.passInputCheck} type="password" placeholder="Confirm your password" 
+                    onChange={handleChange}/>
+                    <i className= {clsx(style.hiddenPassCheck, "ti-eye")}
+                    onClick={handlePassCheckHide}></i>
+                    <div className= {style.errContainer}>
+                        <p>aha</p>
+                    </div>
+                </section>
 
+                <button className= {style.submitSignInBtn}>Sign Up</button>
 
             </div>
+            
+            <div className= {style.logo}>
+
         </div>
+
+
+        </div>
+    </div>
+
     );
 }
 

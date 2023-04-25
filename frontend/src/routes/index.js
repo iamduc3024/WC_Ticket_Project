@@ -5,7 +5,9 @@ import LoginRegister from '../pages/Login';
 
 // Layout
 import HeaderLayoutOnly from '../components/Layouts/HeaderLayoutOnly';
-import Register from '../pages/Register';
+
+import Register from '../pages/Register'
+
 import Order from '~/pages/Order';
 import Login from '../pages/Login';
 
