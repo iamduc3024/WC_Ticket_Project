@@ -14,7 +14,7 @@ router.get("/show", customerController.showCustomer);
 router.get("/showbyid", customerController.showCustomerById);
 
 // // Create New Customer
-// router.post("/create", createCustomer);
+router.post("/create", customerController.createCustomer);
 
 // // Update Customer
 // router.put("/update/:id", updateCustomer);

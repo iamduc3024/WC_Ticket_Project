@@ -5,7 +5,9 @@ import LoginRegister from '../pages/Login';
 
 // Layout
 import HeaderLayoutOnly from '../components/Layouts/HeaderLayoutOnly';
+
 import Register from '../pages/Register'
+
 import Order from '~/pages/Order';
 import Login from '../pages/Login';
 
@@ -14,7 +16,7 @@ const publicRoutes = [
     { path: '/', component: Home },
     { path: '/following', component: Following },
     { path: '/profiles', component: Profiles },
-    { path: '/register', component: Register },
+    { path: '/register', component: Register},
     { path: '/order', component: Order },
     { path: '/login', component: Login, layout: HeaderLayoutOnly },
 ];
