@@ -1,0 +1,104 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to right, #85009f, #480057);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .loginContainer {
+    width: 70%;
+    height: 70%;
+    background-color: #333;
+    display: inline-flex;
+  }
+
+  .loginContent {
+    width: 50%;
+    background-color: #fff;
+    height: 100%;
+    text-align: center;
+    padding: 36px;
+  }
+
+  .userInputContainer {
+    text-align: left;
+    margin-top: 24px;
+  }
+
+  .userInput {
+    width: 90%;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    padding-left: 12px;
+  }
+
+  .phoneInputContainer {
+    text-align: left;
+  }
+
+  .phoneInput {
+    width: 90%;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    padding-left: 12px;
+  }
+
+  .passInputContainer {
+    text-align: left;
+    
+  }
+
+  .passInput {
+    width: 90%;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    padding-left: 12px;
+  }
+
+  .hiddenPass {
+    color: #000;
+  }
+
+  .passInputCheckContainer {
+    text-align: left;
+  }
+
+  .passInputCheck {
+    width: 90%;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    padding-left: 12px;
+  }
+
+  .hiddenPassCheck {
+    color: #000;
+  }
+
+  .errContainer {
+    color: red;
+    font-size: 14px;
+    margin: 2px;
+  }
+
+  .submitSignInBtn {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #550065;
+    padding: 12px;
+    min-width: 200px;
+    border-radius: 40px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
+
+  }
+
+  .logo {
+    width: 50%;
+    height: 100%;
+  }
