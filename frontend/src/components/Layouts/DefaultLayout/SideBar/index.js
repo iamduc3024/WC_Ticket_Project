@@ -1,6 +1,7 @@
 import stationImg from '../../../../assets/images/station-image.jpg';
 import nation1 from '../../../../assets/images/nations/VietNam-flag.png';
-import nation2 from '../../../../assets/images/nations/Argentina-flag.png';
+//Chua doc duoc file.svg
+import nation2 from '../../../../assets/images/nations/VietNam-flag.png';
 import style from './SlideBar.module.scss';
 import clsx from 'clsx';
 const { Fragment, useState, useEffect, useMemo, useRef } = require("react");
