@@ -9,7 +9,6 @@ import OrderPage from './pages/Order';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import ProfilesPage from './pages/Profiles';
-import RegisterPage from './pages/Register';
 
 function App() {
     return (
