@@ -4,7 +4,7 @@ import Following from '../Following';
 import SlideBar from 'src/components/Layouts/DefaultLayout/SideBar'
 import { Fragment } from 'react';
 import Footer from 'src/components/Layouts/component/Footer';
-import Filter from 'src/components/Layouts/component/Filter'
+import Filter from 'src/components/Layouts/component/Filter';
 
 function Home() {
     return(
