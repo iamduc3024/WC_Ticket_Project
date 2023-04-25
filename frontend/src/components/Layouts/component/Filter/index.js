@@ -1,5 +1,29 @@
 import style from './Filter.module.scss'
-//import ro from '../../../../../../backend/routes/indexRoute'
+import axios from 'axios';
+
+// function abc (){
+//     data: {
+//         return {
+//           standName: "",
+//           price: "",
+//         };
+//       }
+//       methods: {
+//         //create new product
+//         async saveProduct => {
+//           try {
+//             await axios.get("http://localhost:3000/stand/showAllStand", {
+//               stand_name: this.standName,
+//               price: this.price,
+//             });
+//             (this.standName = ""), (this.price = "");
+//             this.$router.get("/");
+//           } catch (err) {
+//             console.log(err);
+//           }
+//         };
+//       }
+// }
 
 function Filter(props) {
     return (
@@ -41,7 +65,7 @@ function Filter(props) {
             <input className={style.priceToInput} type="text" />
             <br />
         </section>
-        <button onClick={() => console.log('123')} className={style.filterSubmitBtn}>Filter</button>
+        <button onClick={() => console.log(123)} className={style.filterSubmitBtn}>Filter</button>
     </div>
     )
 }
