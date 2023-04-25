@@ -21,7 +21,9 @@ function Header() {
                     Login
                 </li>
             </Link>
-                <li className={style.registerBtn}>Register</li>
+            <Link to = "/register">
+                <li className={style.registerBtn}>Register</li> 
+            </Link>
             </ul>
         </div>
         </Fragment>
