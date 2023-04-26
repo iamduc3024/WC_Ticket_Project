@@ -1,0 +1,177 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to right, #85009f, #480057);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 24px;
+  }
+
+  .paymentCointainer {
+    width: 70%;
+    height: 70%;
+    background-color: #333;
+    display: inline-flex;
+
+  }
+
+  .paymentContent {
+    width: 50%;
+    background-color: #fff;
+    height: 100%;
+    padding: 50px;
+    padding-top: 74px;
+    
+  }
+
+  .paymentMethodContainer {
+    justify-content: center;
+  }
+
+  .paymentMethodContainer p {
+    font-size: 42px;
+    padding: 0px 12px;
+  }
+  
+  .imageContainer {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .paymentMethodContainer h1 {
+    font-size: 24px;
+  }
+
+  .visaLogo {
+    width: 42px;
+    height: 42px;
+
+    &:hover {
+        opacity: .8;
+        cursor: pointer;
+    }
+  }
+
+  .momoLogo {
+    width: 42px;
+    height: 42px;
+
+    &:hover {
+        opacity: .8;
+        cursor: pointer;
+    }
+  }
+
+  .paymentVisaDetails {
+    margin-top: 24px;
+    height: 160px;
+  }
+
+  .paymentVisaDetails h1 {
+    font-size: 24px
+  }
+
+  .nameCardInp {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 12px 4px;
+    border-bottom: 2px solid #000;
+  }
+
+
+  .cardNumberInp {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 12px 4px;
+    border-bottom: 2px solid #000;
+  }
+
+  .exDateInp {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 12px 4px;
+    border-bottom: 2px solid #000;
+  }
+
+  
+
+  .paymentMomoDetails {
+    margin-top: 24px;
+    height: 160px;
+  }
+
+  .paymentMomoDetails h1 {
+    font-size: 24px;
+  }
+
+  .momoNumberInp {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 12px 4px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 12px;
+  }
+
+  .invalidPay {
+    display: none;
+  }
+
+  .invalidInput {
+    color: red;
+    border-bottom: 2px solid red;
+  }
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    margin-top: 48px;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+
+  .backBtn {
+    padding: 8px 12px;
+    font-size: 14px;
+    min-width: 100px;
+    border: solid 2px ;
+    background-color: #fff;
+    border-radius: 12px;
+
+    &:hover {
+        opacity: .8;
+        cursor: pointer;
+        background-color: red;
+        color: #fff;
+    }
+  }
+
+  .cfBtn {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #fff;
+    min-width: 200px;
+    border: solid 2px ;
+    background-color: #550065;
+    border-radius: 12px;
+
+    &:hover {
+        opacity: .8;
+        cursor: pointer;
+    }
+  }
+
+  .logo {
+    position: relative;
+  }
+
+
+  .triangle {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 70vh 10vw 00px 00px;
+    border-color: #fff transparent transparent transparent;
+  }

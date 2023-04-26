@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import style from './Login.module.scss'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Login() {
@@ -31,10 +31,8 @@ function Login() {
     }
 
     function handlePassBlur() {
-        console.log(passInp);
-
         if(passInp) {
-            console.log(123);
+            
             if(passInp.value.length >= 6) {
                 setIsPass(true)
             }
@@ -80,7 +78,7 @@ function Login() {
                      type="text" placeholder="Enter your phone." />
 
                     <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isPhone} )}>Username is already existed</p>
+                        <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
                     </div>
                 </section>
 
@@ -88,7 +86,10 @@ function Login() {
                     <label htmlFor="passInput">Password</label>
                     <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
                     type="password" placeholder="Enter your password" 
-                    onBlur={handlePassBlur}/>
+                    onBlur={handlePassBlur}
+                    onFocus={() => {
+                        setIsPass(true)
+                    }}/>
                     <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
                         onClick={handleHide}
                     ></i>

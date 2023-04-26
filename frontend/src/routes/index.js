@@ -10,6 +10,7 @@ import Register from '../pages/Register'
 
 import Order from '~/pages/Order';
 import Login from '../pages/Login';
+import Payment from 'src/pages/Payment';
 
 //Public Routes
 const publicRoutes = [
@@ -18,6 +19,7 @@ const publicRoutes = [
     { path: '/profiles', component: Profiles },
     { path: '/register', component: Register},
     { path: '/order', component: Order },
+    { path: '/payment', component: Payment },
     { path: '/login', component: Login, layout: HeaderLayoutOnly },
 ];
 
