@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import style from './Register.module.scss'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
@@ -84,8 +84,10 @@ function Register() {
         
         if(passCheckInp) {
             let passInput = document.querySelector('.' + style.passInput)
-            if(isPass && passCheckInp.value.match(passInput.value) && passCheckInp.value) {
+            console.log(passCheckInp.value , " " , passInput.value);
+            if(isPass && (passCheckInp.value === passInput.value) && passCheckInp.value) {
                 setIsPassCheck(true)
+                
             }
             else {
                 setIsPassCheck(false)
