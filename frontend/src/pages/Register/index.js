@@ -14,9 +14,9 @@ function Register() {
     const [passCheckHide, setPassCheckHide] = useState(false)
     
     const [inputs, setInputs] = useState({
-        name: "dat",
-        phone: "22",
-        password: "33",
+        name: "",
+        phone: "",
+        password: "",
     });
 
     const [err, setError] = useState(null);
@@ -113,8 +113,14 @@ function Register() {
     }
 
     const handleChange = (e) => {
-        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
+        setInputs((prev) => {
+                if (e.target.name === 'passCheck') {
+                    return {...prev};
+                }
+                return { ...prev, [e.target.name]: e.target.value }
+            }
+        )
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -125,6 +131,12 @@ function Register() {
             setError(err.response.data);
         }
     };
+
+    function handlePassReplicationPassCheck() {
+        if (isUser && isPhone && isPassCheck) {
+            handleSubmit();
+        }
+    }
 
     function handlePassCheckHide() {
         
