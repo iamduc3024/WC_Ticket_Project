@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import WCLogo from '../../assets/logos/WCLogo.png'
 
 
 function Register() {
@@ -125,7 +126,6 @@ function Register() {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
         try {
             console.log(inputs);
             if (isUser && isPassCheck && isPhone) {
@@ -137,6 +137,10 @@ function Register() {
     };
 
     function handlePassReplicationPassCheck() {
+        handleUserBlur() 
+        handlePhoneBlur()
+        handlePassBlur()
+        handlePassCheckBlur()
         if (isUser && isPhone && isPassCheck) {
             handleSubmit();
         }
@@ -161,93 +165,91 @@ function Register() {
     return (
         <div className= {style.container}>
 
-        <div className= {style.loginContainer}>
-            <div className= {style.loginContent}>
-                <h1>Register</h1>
+            <div className= {style.registerContainer}>
+                <div className= {style.registerContent}>
+                    <h1>Register</h1>
 
-                <section className= {style.userInputContainer}>
-                    <label htmlFor="userInput" >Your Name</label>
-                    <input className= {clsx(style.userInput, {[style.invalidBorder] : !isUser})} 
-                    type="text" placeholder="Enter your name." 
-                    name='name'
-                    onBlur={handleUserBlur}
-                    onFocus={() => {
-                        setIsUser(true)
-                    }}
-                    onClick={() => {
-                        console.log(isUser)
-                        setIsUser(true);
-                    }}
-                    onChange={handleChange}/>
-                    <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isUser} )}>Username is already existed</p>
-                    </div>
-                </section>
+                    <section className= {style.userInputContainer}>
+                        <label htmlFor="userInput" >Your Name</label>
+                        <input className= {clsx(style.userInput, {[style.invalidBorder] : !isUser})} 
+                        type="text" placeholder="Enter your name." 
+                        name='name'
+                        onBlur={handleUserBlur}
+                        onFocus={() => {
+                            setIsUser(true)
+                        }}
+                        onClick={() => {
+                            console.log(isUser)
+                            setIsUser(true);
+                        }}
+                        onChange={handleChange}/>
+                        <div className= {style.errContainer}>
+                            <p className= {clsx({[style.errMessage] : isUser} )}>Username is already existed</p>
+                        </div>
+                    </section>
 
-                <section className= {style.phoneInputContainer}>
-                    <label htmlFor="phoneInput" >Phone</label>
-                    <input className= {clsx(style.phoneInput, {[style.invalidBorder] : !isPhone})} 
-                    type="text" placeholder="Enter your phone." 
-                    name='phone'
-                    onBlur={handlePhoneBlur}
-                    onClick={() => {
-                        setIsPhone(true)
-                    }}
-                    onChange={handleChange}/>
-                    <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
-                    </div>
-                </section>
+                    <section className= {style.phoneInputContainer}>
+                        <label htmlFor="phoneInput" >Phone</label>
+                        <input className= {clsx(style.phoneInput, {[style.invalidBorder] : !isPhone})} 
+                        type="text" placeholder="Enter your phone." 
+                        name='phone'
+                        onBlur={handlePhoneBlur}
+                        onClick={() => {
+                            setIsPhone(true)
+                        }}
+                        onChange={handleChange}/>
+                        <div className= {style.errContainer}>
+                            <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
+                        </div>
+                    </section>
 
-                <section className= {style.passInputContainer}>
-                    <label htmlFor="passInput">Password</label>
-                    <input className= {clsx(style.passInput, {[style.invalidBorder] : !isPass})} 
-                    type="password" placeholder="Enter your password" 
-                    name='password'
-                    onBlur={handlePassBlur}
-                    onClick={() => {
-                        setIsPass(true)
-                    }}
-                    onChange={handleChange}/>
-                    <i className= {clsx(style.hiddenPass , "ti-eye")}
-                    onClick={handlePassHide}></i>
-                    <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isPass} )}>Invalid password</p>
-                    </div>
-                </section>
+                    <section className= {style.passInputContainer}>
+                        <label htmlFor="passInput">Password</label>
+                        <input className= {clsx(style.passInput, {[style.invalidBorder] : !isPass})} 
+                        type="password" placeholder="Enter your password" 
+                        name='password'
+                        onBlur={handlePassBlur}
+                        onClick={() => {
+                            setIsPass(true)
+                        }}
+                        onChange={handleChange}/>
+                        <i className= {clsx(style.hiddenPass , "ti-eye")}
+                        onClick={handlePassHide}></i>
+                        <div className= {style.errContainer}>
+                            <p className= {clsx({[style.errMessage] : isPass} )}>Invalid password</p>
+                        </div>
+                    </section>
 
-                <section className= {style.passInputCheckContainer}>
-                    <label htmlFor="passInputCheck">Retype Password</label>
-                    <input className= {clsx(style.passInputCheck, {[style.invalidBorder] : !isPassCheck})} 
-                    type="password" placeholder="Confirm your password" 
-                    name='passCheck'
-                    onBlur={handlePassCheckBlur}
-                    onClick={() => {
-                        setIsPassCheck(true)
-                    }}
-                    onChange={handleChange}/>
-                    <i className= {clsx(style.hiddenPassCheck, "ti-eye")}
-                    onClick={handlePassCheckHide}></i>
-                    <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isPassCheck} )}>Password does not match</p>
-                    </div>
-                </section>
+                    <section className= {style.passInputCheckContainer}>
+                        <label htmlFor="passInputCheck">Retype Password</label>
+                        <input className= {clsx(style.passInputCheck, {[style.invalidBorder] : !isPassCheck})} 
+                        type="password" placeholder="Confirm your password" 
+                        name='passCheck'
+                        onBlur={handlePassCheckBlur}
+                        onClick={() => {
+                            setIsPassCheck(true)
+                        }}
+                        onChange={handleChange}/>
+                        <i className= {clsx(style.hiddenPassCheck, "ti-eye")}
+                        onClick={handlePassCheckHide}></i>
+                        <div className= {style.errContainer}>
+                            <p className= {clsx({[style.errMessage] : isPassCheck} )}>Password does not match</p>
+                        </div>
+                    </section>
 
-                <button className= {style.submitSignInBtn}
-                onClick={handleSubmit}>Sign Up</button>
+                    <button className= {style.submitSignInBtn}
+                    onClick={handlePassReplicationPassCheck}>Sign Up</button>
 
-                <p className={style.moveSignUp}>
-                    I have an account.
-                    <Link to ="/login" > Sign In</Link>
-                </p>
+                    <p className={style.moveSignUp}>
+                        I have an account.
+                        <Link to ="/login" > Sign In</Link>
+                    </p>
+                </div>
+                
+                <div className= {style.logo}>
+                    <img className= {style.WCLogo} src={WCLogo} alt="" />
+                </div>
             </div>
-            
-            <div className= {style.logo}>
-
-        </div>
-
-
-        </div>
     </div>
 
     );

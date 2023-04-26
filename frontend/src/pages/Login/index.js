@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import style from './Login.module.scss'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import WCLogo from '../../assets/logos/WCLogo.png'
 
 function Login() {
 
@@ -64,55 +65,53 @@ function Login() {
     return (
         <div className={style.container}>
 
-        <div className={style.loginContainer}>
-            <div className={style.loginContent}>
-                <h1>Login</h1>
+            <div className={style.loginContainer}>
+                <div className={style.loginContent}>
+                    <h1>Login</h1>
 
-                <section className={style.userInputContainer}>
-                    <label htmlFor="userInput" >Phone</label>
-                    <input className={clsx(style.userInput, {[style.invalidBorder] : !isPhone}) }
-                    onBlur={handlePhoneBlur}
-                    onFocus={() => {
-                        setIsPhone(true)
-                    }}
-                     type="text" placeholder="Enter your phone." />
+                    <section className={style.userInputContainer}>
+                        <label htmlFor="userInput" >Phone</label>
+                        <input className={clsx(style.userInput, {[style.invalidBorder] : !isPhone}) }
+                        onBlur={handlePhoneBlur}
+                        onFocus={() => {
+                            setIsPhone(true)
+                        }}
+                        type="text" placeholder="Enter your phone." />
 
-                    <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
-                    </div>
-                </section>
+                        <div className= {style.errContainer}>
+                            <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
+                        </div>
+                    </section>
 
-                <section className={style.passInputContainer}>
-                    <label htmlFor="passInput">Password</label>
-                    <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
-                    type="password" placeholder="Enter your password" 
-                    onBlur={handlePassBlur}
-                    onFocus={() => {
-                        setIsPass(true)
-                    }}/>
-                    <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
-                        onClick={handleHide}
-                    ></i>
+                    <section className={style.passInputContainer}>
+                        <label htmlFor="passInput">Password</label>
+                        <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
+                        type="password" placeholder="Enter your password" 
+                        onBlur={handlePassBlur}
+                        onFocus={() => {
+                            setIsPass(true)
+                        }}/>
+                        <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
+                            onClick={handleHide}
+                        ></i>
 
-                    <div className= {style.errContainer}>
-                        <p className= {clsx({[style.errMessage] : isPass} )}>Invalid Password</p>
-                    </div>
-                </section>
+                        <div className= {style.errContainer}>
+                            <p className= {clsx({[style.errMessage] : isPass} )}>Invalid Password</p>
+                        </div>
+                    </section>
 
-                <button className={style.submitSignInBtn}>Sign In</button>
+                    <button className={style.submitSignInBtn}>Sign In</button>
 
-                <p className={style.moveSignUp}>
-                    Do not have account yet?
-                    <Link to ="/register" > Sign Up</Link>
-                </p>
+                    <p className={style.moveSignUp}>
+                        Do not have account yet?
+                        <Link to ="/register" > Sign Up</Link>
+                    </p>
+                </div>
+                
+                <div className={style.logo}>
+                    <img className= {style.WCLogo} src={WCLogo} alt="" />
+                </div>
             </div>
-            
-            <div className={style.logo}>
-
-        </div>
-
-
-        </div>
     </div>
     );
 }

@@ -1,7 +1,7 @@
 .container {
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(to right, #85009f, #480057);
+    background-image: linear-gradient(to right, #9c00bb, #370042);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -10,8 +10,9 @@
   .loginContainer {
     width: 70%;
     height: 70%;
-    background-color: #333;
+    background-color: #550065;
     display: inline-flex;
+    box-shadow: 5px 5px #000;
   }
 
   .loginContent {
@@ -98,4 +99,12 @@
   .logo {
     width: 50%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .WCLogo {
+    height: 80%;
+    
   }
