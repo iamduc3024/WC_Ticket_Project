@@ -32,40 +32,69 @@ function Register() {
     
     
     function handleUserBlur() {
-        if(userInp.value) {
-            setIsUser(true)
+        
+        if(userInp) {
+            if(userInp.value) {
+                setIsUser(true)
+            }
+            else {
+                setIsUser(false)
+            }
         }
         else {
-            setIsUser(false)
+            userInp = document.querySelector('.' + style.userInput)
+            handleUserBlur();
         }
     }
 
     function handlePhoneBlur() {
-        var phoneno = /^\d{10}$/;
-        if(phoneInp.value.match(phoneno)) {
-            setIsPhone(true)
+        if(phoneInp) {
+
+            var phoneno = /^\d{10}$/;
+            if(phoneInp.value.match(phoneno)) {
+                setIsPhone(true)
+            }
+            else {
+                setIsPhone(false)
+            }
         }
         else {
-            setIsPhone(false)
+            phoneInp = document.querySelector('.' + style.phoneInput)
+            handlePhoneBlur()
         }
     }
 
     function handlePassBlur() {
-        if(passInp.value.length >= 6) {
-            setIsPass(true)
+        if(passInp) {
+
+            if(passInp.value.length >= 6) {
+                setIsPass(true)
+            }
+            else {
+                setIsPass(false)
+            }
         }
         else {
-            setIsPass(false)
+            passInp = document.querySelector('.' + style.passInput)
+            handlePassBlur()
         }
     }
 
     function handlePassCheckBlur() {
-        let passInput = document.querySelector('.' + style.passInput)
-        if(isPass && passCheckInp.value.match(passInput.value)) {
-            setIsPassCheck(true)
+        
+        if(passCheckInp) {
+            let passInput = document.querySelector('.' + style.passInput)
+            if(isPass && passCheckInp.value.match(passInput.value) && passCheckInp.value) {
+                setIsPassCheck(true)
+            }
+            else {
+                setIsPassCheck(false)
+            }
+
         }
         else {
-            setIsPassCheck(false)
+            passCheckInp = document.querySelector('.' + style.passInputCheck)
+            handlePassCheckBlur()
         }
     }
 
@@ -128,6 +157,10 @@ function Register() {
                     onBlur={handleUserBlur}
                     onFocus={() => {
                         setIsUser(true)
+                    }}
+                    onClick={() => {
+                        console.log(isUser)
+                        setIsUser(true);
                     }}
                     onChange={handleChange}/>
                     <div className= {style.errContainer}>

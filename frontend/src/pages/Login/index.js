@@ -7,11 +7,46 @@ function Login() {
 
     const [passHide, setPassHide] = useState(false)
 
+    let phoneInp = document.querySelector('.' + style.userInput)
     let passInp = document.querySelector('.' + style.passInput)
     
-    useEffect( () => {
-        passInp = document.querySelector('.' + style.passInput)
-    }, [passHide] )
+    const [isPhone, setIsPhone] = useState(true)
+    const [isPass, setIsPass] = useState(true)
+
+    function handlePhoneBlur() {
+        if(phoneInp) {
+
+            var phoneno = /^\d{10}$/;
+            if(phoneInp.value.match(phoneno)) {
+                setIsPhone(true)
+            }
+            else {
+                setIsPhone(false)
+            }
+        }
+        else {
+            phoneInp = document.querySelector('.' + style.userInput)
+            handlePhoneBlur()
+        }
+    }
+
+    function handlePassBlur() {
+        console.log(passInp);
+
+        if(passInp) {
+            console.log(123);
+            if(passInp.value.length >= 6) {
+                setIsPass(true)
+            }
+            else {
+                setIsPass(false)
+            }
+        }
+        else {
+            passInp = document.querySelector('.' + style.passInput)
+            handlePassBlur()
+        }
+    }
 
     function handleHide() {
         
@@ -36,16 +71,31 @@ function Login() {
                 <h1>Login</h1>
 
                 <section className={style.userInputContainer}>
-                    <label htmlFor="userInput" >Phone/Email</label>
-                    <input className={style.userInput} type="text" placeholder="Enter your phone/email." />
+                    <label htmlFor="userInput" >Phone</label>
+                    <input className={clsx(style.userInput, {[style.invalidBorder] : !isPhone}) }
+                    onBlur={handlePhoneBlur}
+                    onFocus={() => {
+                        setIsPhone(true)
+                    }}
+                     type="text" placeholder="Enter your phone." />
+
+                    <div className= {style.errContainer}>
+                        <p className= {clsx({[style.errMessage] : isPhone} )}>Username is already existed</p>
+                    </div>
                 </section>
 
                 <section className={style.passInputContainer}>
                     <label htmlFor="passInput">Password</label>
-                    <input className={style.passInput} type="password" placeholder="Enter your password" />
+                    <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
+                    type="password" placeholder="Enter your password" 
+                    onBlur={handlePassBlur}/>
                     <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
                         onClick={handleHide}
                     ></i>
+
+                    <div className= {style.errContainer}>
+                        <p className= {clsx({[style.errMessage] : isPass} )}>Invalid Password</p>
+                    </div>
                 </section>
 
                 <button className={style.submitSignInBtn}>Sign In</button>
