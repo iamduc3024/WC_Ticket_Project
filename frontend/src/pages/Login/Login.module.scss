@@ -59,6 +59,22 @@
     }
   }
 
+  .errContainer {
+    color: red;
+    font-size: 14px;
+    margin: 2px;
+    height: 19px;
+  }
+  
+  .errContainer .errMessage {
+    display: none;
+  }
+
+  .invalidBorder {
+    color: red;
+    border-bottom: solid red;
+  }
+
 
   .submitSignInBtn {
     margin-top: 36px;
