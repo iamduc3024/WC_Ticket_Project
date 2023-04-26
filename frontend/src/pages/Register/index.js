@@ -128,7 +128,9 @@ function Register() {
         e.preventDefault();
         try {
             console.log(inputs);
-            await axios.post("http://localhost:8080/customer/create", inputs);
+            if (isUser && isPassCheck && isPhone) {
+                await axios.post("http://localhost:8080/customer/create", inputs);
+            }
         } catch (err) {
             setError(err.response.data);
         }
