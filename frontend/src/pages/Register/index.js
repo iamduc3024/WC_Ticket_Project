@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import style from './Register.module.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
@@ -26,15 +26,21 @@ function Register() {
     let phoneInp = document.querySelector('.' + style.phoneInput)
     let passInp = document.querySelector('.' + style.passInput)
     let passCheckInp = document.querySelector('.' + style.passInputCheck)
+
     const [isUser, setIsUser] = useState(true)
     const [isPhone, setIsPhone] = useState(true)
     const [isPass, setIsPass] = useState(true)
     const [isPassCheck, setIsPassCheck] = useState(true)
+
+    let userIndex = 0
+    let phoneIndex = 0
+    let passCheckIndex = 0
     
     
     function handleUserBlur() {
         
         if(userInp) {
+            userIndex++
             if(userInp.value) {
                 setIsUser(true)
             }
@@ -49,8 +55,9 @@ function Register() {
     }
 
     function handlePhoneBlur() {
+        
         if(phoneInp) {
-
+            phoneIndex++
             var phoneno = /^\d{10}$/;
             if(phoneInp.value.match(phoneno)) {
                 setIsPhone(true)
@@ -84,6 +91,7 @@ function Register() {
     function handlePassCheckBlur() {
         
         if(passCheckInp) {
+            passCheckIndex++
             let passInput = document.querySelector('.' + style.passInput)
             console.log(passCheckInp.value , " " , passInput.value);
             if(isPass && (passCheckInp.value === passInput.value) && passCheckInp.value) {
@@ -127,20 +135,21 @@ function Register() {
 
     const handleSubmit = async (e) => {
         try {
-            console.log(inputs);
-            if (isUser && isPassCheck && isPhone) {
+            console.log(inputs)
                 await axios.post("http://localhost:8080/customer/create", inputs);
-            }
         } catch (err) {
             setError(err.response.data);
         }
     };
 
     function handlePassReplicationPassCheck() {
+        console.log(userIndex , " " , phoneIndex);
         handleUserBlur() 
         handlePhoneBlur()
         handlePassBlur()
         handlePassCheckBlur()
+        console.log(userIndex , " " , phoneIndex);
+        if(userIndex > 1 && phoneIndex > 1 && passCheckIndex > 1)
         if (isUser && isPhone && isPassCheck) {
             handleSubmit();
         }
