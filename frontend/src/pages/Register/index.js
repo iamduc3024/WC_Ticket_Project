@@ -148,6 +148,7 @@ function Register() {
         handlePhoneBlur()
         handlePassBlur()
         handlePassCheckBlur()
+        if(userIndex > 1 && phoneIndex > 1 && passCheckIndex > 1)
         if (isUser && isPhone && isPassCheck) {
             handleSubmit();
         }
