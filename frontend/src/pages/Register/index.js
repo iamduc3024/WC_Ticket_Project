@@ -141,7 +141,7 @@ function Register() {
         handlePhoneBlur()
         handlePassBlur()
         handlePassCheckBlur()
-        if (isUser && isPhone && isPassCheck) {
+        if (isUser && isPhone && isPassCheck && inputs.name !== "" && inputs.password !== "" && inputs.phone !== "") {
             handleSubmit();
         }
     }
