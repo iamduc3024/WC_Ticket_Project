@@ -8,17 +8,17 @@ function Login() {
 
     const [passHide, setPassHide] = useState(false)
 
-    let phoneInp = document.querySelector('.' + style.phoneInput)
-    let passInp = document.querySelector('.' + style.passInput)
+    let phoneIn = document.querySelector('.' + style.phoneNumberInput)
+    let passIn = document.querySelector('.' + style.passInput)
     
     const [isPhone, setIsPhone] = useState(true)
     const [isPass, setIsPass] = useState(true)
 
     function handlePhoneBlur() {
-        if(phoneInp) {
+        if(phoneIn) {
 
             var phoneno = /^\d{10}$/;
-            if(phoneInp.value.match(phoneno)) {
+            if(phoneIn.value.match(phoneno)) {
                 setIsPhone(true)
             }
             else {
@@ -26,15 +26,15 @@ function Login() {
             }
         }
         else {
-            phoneInp = document.querySelector('.' + style.phoneInput)
+            phoneIn = document.querySelector('.' + style.phoneNumberInput)
             handlePhoneBlur()
         }
     }
 
     function handlePassBlur() {
-        if(passInp) {
+        if(passIn) {
             
-            if(passInp.value.length >= 6) {
+            if(passIn.value.length >= 6) {
                 setIsPass(true)
             }
             else {
@@ -42,22 +42,22 @@ function Login() {
             }
         }
         else {
-            passInp = document.querySelector('.' + style.passInput)
+            passIn = document.querySelector('.' + style.passInput)
             handlePassBlur()
         }
     }
 
     function handleHide() {
         
-        console.log(passInp);
+        console.log(passIn);
         
         setPassHide(!passHide);
         if(!passHide)
         {
-            passInp.type = "text"
+            passIn.type = "text"
         }
         else {
-            passInp.type = "password"
+            passIn.type = "password"
         }
     }
 
@@ -70,8 +70,8 @@ function Login() {
                     <h1>Login</h1>
 
                     <section className={style.userInputContainer}>
-                        <label htmlFor="phoneInput" >Phone</label>
-                        <input className={clsx(style.phoneInput, {[style.invalidBorder] : !isPhone}) }
+                        <label htmlFor="phoneNumberInput" >Phone</label>
+                        <input className={clsx(style.phoneNumberInput, {[style.invalidBorder] : !isPhone}) }
                         onBlur={handlePhoneBlur}
                         onFocus={() => {
                             setIsPhone(true)
