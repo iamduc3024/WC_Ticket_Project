@@ -8,7 +8,7 @@ function Login() {
 
     const [passHide, setPassHide] = useState(false)
 
-    let phoneInp = document.querySelector('.' + style.userInput)
+    let phoneInp = document.querySelector('.' + style.phoneInput)
     let passInp = document.querySelector('.' + style.passInput)
     
     const [isPhone, setIsPhone] = useState(true)
@@ -26,7 +26,7 @@ function Login() {
             }
         }
         else {
-            phoneInp = document.querySelector('.' + style.userInput)
+            phoneInp = document.querySelector('.' + style.phoneInput)
             handlePhoneBlur()
         }
     }
@@ -70,8 +70,8 @@ function Login() {
                     <h1>Login</h1>
 
                     <section className={style.userInputContainer}>
-                        <label htmlFor="userInput" >Phone</label>
-                        <input className={clsx(style.userInput, {[style.invalidBorder] : !isPhone}) }
+                        <label htmlFor="phoneInput" >Phone</label>
+                        <input className={clsx(style.phoneInput, {[style.invalidBorder] : !isPhone}) }
                         onBlur={handlePhoneBlur}
                         onFocus={() => {
                             setIsPhone(true)

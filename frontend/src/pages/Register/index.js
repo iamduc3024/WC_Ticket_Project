@@ -25,7 +25,7 @@ function Register() {
     let userInp = document.querySelector('.' + style.userInput)
     let phoneInp = document.querySelector('.' + style.phoneInput)
     let passInp = document.querySelector('.' + style.passInput)
-    let passCheckInp = document.querySelector('.' + style.passInputCheck)
+    let passCheckInp = document.querySelector('.' + style.passwInputCheck)
 
     const [isUser, setIsUser] = useState(true)
     const [isPhone, setIsPhone] = useState(true)
@@ -104,7 +104,7 @@ function Register() {
 
         }
         else {
-            passCheckInp = document.querySelector('.' + style.passInputCheck)
+            passCheckInp = document.querySelector('.' + style.passwInputCheck)
             handlePassCheckBlur()
         }
     }
@@ -148,8 +148,8 @@ function Register() {
         handlePhoneBlur()
         handlePassBlur()
         handlePassCheckBlur()
-        if(userIndex > 1 && phoneIndex > 1 && passCheckIndex > 1)
-        if (isUser && isPhone && isPassCheck) {
+        
+        if (isUser && isPhone && isPassCheck && inputs.name !== "" && inputs.password !== "" && inputs.phone !== "") {
             handleSubmit();
         }
     }
@@ -228,9 +228,9 @@ function Register() {
                         </div>
                     </section>
 
-                    <section className= {style.passInputCheckContainer}>
-                        <label htmlFor="passInputCheck">Retype Password</label>
-                        <input className= {clsx(style.passInputCheck, {[style.invalidBorder] : !isPassCheck})} 
+                    <section className= {style.passwInputCheckContainer}>
+                        <label htmlFor={style.passwInputCheck}>Retype Password</label>
+                        <input className= {clsx(style.passwInputCheck, {[style.invalidBorder] : !isPassCheck})} 
                         type="password" placeholder="Confirm your password" 
                         name='passCheck'
                         onBlur={handlePassCheckBlur}
