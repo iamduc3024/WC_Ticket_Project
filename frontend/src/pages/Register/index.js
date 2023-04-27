@@ -86,7 +86,6 @@ function Register() {
         
         if(passCheckInp) {
             let passInput = document.querySelector('.' + style.passInput)
-            console.log(passCheckInp.value , " " , passInput.value);
             if(isPass && (passCheckInp.value === passInput.value) && passCheckInp.value) {
                 setIsPassCheck(true)
                 
@@ -179,7 +178,6 @@ function Register() {
                             setIsUser(true)
                         }}
                         onClick={() => {
-                            console.log(isUser)
                             setIsUser(true);
                         }}
                         onChange={handleChange}/>
