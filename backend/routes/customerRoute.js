@@ -11,7 +11,7 @@ router.get("/showCountPhone", customerController.showCountCustomerPhone);
 router.get("/show", customerController.showCustomer);
 
 // Get customer by id
-router.get("/showbyid", customerController.showCustomerById);
+router.post("/showByPhoneAndPassword", customerController.showCustomerByPhoneAndPassword);
 
 // // Create New Customer
 router.post("/create", customerController.createCustomer);

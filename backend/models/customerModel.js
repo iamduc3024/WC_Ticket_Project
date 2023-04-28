@@ -30,9 +30,11 @@ class customerModel {
     });
   }
 
-  //Query single customers
-  getCustomerById = (id, result) => {
-    db.query("SELECT * FROM customer WHERE customer_id = ?", [id], (err, results) => {
+  //Query single customers by phone and password
+  getCustomerByPhoneAndPassword = (data, result) => {
+    db.query("SELECT * FROM customer WHERE phone = ? AND password = ?", 
+    [data.phone, data.password], 
+    (err, results) => {
       if (err) {
         console.log(err);
         result(err, null);

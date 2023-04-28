@@ -3,10 +3,20 @@ import style from './Login.module.scss'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
+import axios from 'axios';
 
 function Login() {
 
     const [passHide, setPassHide] = useState(false)
+
+    const [inputs, setInputs] = useState({
+        phone: "",
+        password: "",
+    });
+
+    let [message, setMessage] = useState('')
+
+    //const[err, setError] = useState(null);
 
     let phoneIn = document.querySelector('.' + style.phoneNumberInput)
     let passIn = document.querySelector('.' + style.passInput)
@@ -61,6 +71,32 @@ function Login() {
         }
     }
 
+    const handleChange = (e) => {
+        setInputs((prev) => {
+            return {
+              ...prev,
+                [e.target.name]: e.target.value
+            }
+        });
+    }
+
+    const handleSubmit = async (e) => {
+        try {
+            console.log(inputs);
+            await axios.post("http://localhost:8080/customer/showByPhoneAndPassword", inputs)
+            .then((response) => {
+                message = response.data.message;
+                alert(message);
+            })
+            .catch((err) => {
+                console.log(err);
+                message = 'Server error!';
+            });
+        } catch (err) {
+            console.log(err.respone.data);
+        }
+    }
+
 
 
     return (
@@ -77,7 +113,9 @@ function Login() {
                         onFocus={() => {
                             setIsPhone(true)
                         }}
-                        type="text" placeholder="Enter your phone." />
+                        type="text" placeholder="Enter your phone." 
+                        name='phone'
+                        onChange={handleChange}/>
 
                         <div className= {style.errContainer}>
                             <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
@@ -88,10 +126,12 @@ function Login() {
                         <label htmlFor="passInput">Password</label>
                         <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
                         type="password" placeholder="Enter your password" 
+                        name='password'
                         onBlur={handlePassBlur}
                         onFocus={() => {
                             setIsPass(true)
-                        }}/>
+                        }}
+                        onChange={handleChange}/>
                         <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
                             onClick={handleHide}
                         ></i>
@@ -101,7 +141,15 @@ function Login() {
                         </div>
                     </section>
 
-                    <button className={style.submitSignInBtn}>Sign In</button>
+                    <Link to ="/" >
+                    <button className={style.submitSignInBtn}
+                    onClick={(e) => {
+                        handleSubmit();
+                        if(message !== "Login successful") {
+                            e.preventDefault();
+                        }
+                    }}>Sign In</button>
+                    </Link>
 
                     <p className={style.moveSignUp}>
                         Do not have account yet?
