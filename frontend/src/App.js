@@ -13,6 +13,12 @@ import PaymentPage from './pages/Payment';
 import AdminPage from './pages/Admin'
 
 function App() {
+    let x = 1
+    setTimeout(() => {
+        x = 2
+        console.log(x);
+    }, 2000)
+    console.log(x);
     return (
         <div className="App">
             <Routes>

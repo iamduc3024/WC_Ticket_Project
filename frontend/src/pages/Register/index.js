@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import style from './Register.module.scss'
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
@@ -40,6 +40,12 @@ function Register() {
 
     function getCountPhoneNumber(e) {
     }
+
+    useEffect(() => {
+        if(message === "Success") {
+            window.location.href = "/login"
+        }
+    })
 
     function handleUserBlur() {
         
@@ -280,7 +286,7 @@ function Register() {
                     </section>
 
                     <div className= {clsx(style.serverMessage)}>
-                        <p className= {clsx(style.paraErr, {[style.invalid] : (message === "Duplicate")})}>Duplicate phone number</p>
+                        <p className= {clsx(style.paraErr, {[style.invalid] : !(message === "Duplicate")})}>Duplicate phone number</p>
                     </div>
 
                     
@@ -288,9 +294,11 @@ function Register() {
                         <button className= {style.submitSignInBtn}
                         onClick={(e) => {
                             handlePassReplicationPassCheck();
+                            
                             if(message !== "Success") {
                                 e.preventDefault()
                             }
+                            
                         }
                         }>Sign Up</button>
                         </Link>
