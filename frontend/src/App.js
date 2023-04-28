@@ -25,6 +25,8 @@ function App() {
                 <Route path='/payment' element = {<PaymentPage />}/>
                 <Route path='/register' element = {<RegisterPage />}/>
             </Routes>
+
+            
         </div>
     );
 }

@@ -3,9 +3,10 @@ const db = require('../configdb/db')
 
 class customerModel {
   // Count phone number
-  countPhone = (phone_number, callback) => {
+  countPhone = (phoneNumber, callback) => {
   const countPhoneQuery = "SELECT COUNT(customer.phone) FROM customer WHERE customer.phone = ?";
-  db.query(countPhoneQuery, [phone_number], (err, results) => {
+  db.query(countPhoneQuery, [phoneNumber], (err, results) => {
+    console.log("Phone1:  " , phoneNumber);
     if (err) {
       console.log(err);
       callback(err, null);

@@ -10,7 +10,7 @@
 
   .registerContainer {
     width: 70%;
-    height: 70%;
+    height: 80%;
     background-color: #550065;
     display: inline-flex;
     box-shadow: 5px 5px #000;
@@ -132,5 +132,23 @@
   .WCLogo {
     height: 80%;
     
+  }
+
+  .serverMessage {
+    height: 48px;
+    color: red;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .paraErr {
+    display: block;
+  }
+
+
+  .invalid {
+    display: none;
   }
 

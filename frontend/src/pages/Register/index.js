@@ -1,15 +1,17 @@
 import clsx from 'clsx';
 import style from './Register.module.scss'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
+import { wait } from '@testing-library/user-event/dist/utils';
+
 
 
 function Register() {
-
+    
     const [passHide, setPassHide] = useState(false)
 
     const [passCheckHide, setPassCheckHide] = useState(false)
@@ -20,8 +22,9 @@ function Register() {
         password: "",
     });
 
-    const [phone_number, setPhoneNumber] = useState('');
-    const [message, setMessage] = useState('');
+    let [message, setMessage] = useState('')
+
+    
 
     const [err, setError] = useState(null);
 
@@ -36,7 +39,6 @@ function Register() {
     const [isPassCheck, setIsPassCheck] = useState(true)
 
     function getCountPhoneNumber(e) {
-        setPhoneNumber(e.target.value);
     }
 
     function handleUserBlur() {
@@ -132,21 +134,44 @@ function Register() {
     }
 
     const handleMessageIfPhoneDuplicate = async (e) => {
-        axios.get("http://localhost:8080/customer/showCountPhone/${phone_number}")
-        .then((response) => {
-            setMessage(response.data.message);
-        })
-        .catch((err) => {
-            console.log(err);
-            setMessage('Lỗi server, vui lòng thử lại sau.');
-        })
+        
     }
 
     const handleSubmit = async (e) => {
         try {
-            //console.log(inputs)
-            handleMessageIfPhoneDuplicate();
-            await axios.post("http://localhost:8080/customer/create", inputs);
+            axios.get("http://localhost:8080/customer/showCountPhone" , {params : {
+                phoneNumber : inputs.phone
+            }})
+            .then((response) => {
+                setMessage(response.data.message);
+                message = response.data.message
+                console.log("Mes   " + message);
+            })
+            .then (() => {
+                if(message) {
+                    if(message === "Success") {
+                        console.log("post");
+                        axios.post("http://localhost:8080/customer/create", inputs);
+                        
+                        console.log("mess " , message);
+
+                        
+                    }
+                    else {
+                         console.log(message);
+                    }
+                }
+                else {
+                    console.log(123);
+                    //handleSubmit();
+                }
+            } )
+            .catch((err) => {
+                console.log(err);
+                message = 'Server error!';
+            })
+            
+            
         } catch (err) {
             setError(err.response.data);
         }
@@ -227,6 +252,7 @@ function Register() {
                         onBlur={handlePassBlur}
                         onClick={() => {
                             setIsPass(true)
+                            
                         }}
                         onChange={handleChange}/>
                         <i className= {clsx(style.hiddenPass , "ti-eye")}
@@ -253,8 +279,21 @@ function Register() {
                         </div>
                     </section>
 
-                    <button className= {style.submitSignInBtn}
-                    onClick={handlePassReplicationPassCheck}>Sign Up</button>
+                    <div className= {clsx(style.serverMessage)}>
+                        <p className= {clsx(style.paraErr, {[style.invalid] : (message === "Duplicate")})}>Duplicate phone number</p>
+                    </div>
+
+                    
+                        <Link to ="/login" >
+                        <button className= {style.submitSignInBtn}
+                        onClick={(e) => {
+                            handlePassReplicationPassCheck();
+                            if(message !== "Success") {
+                                e.preventDefault()
+                            }
+                        }
+                        }>Sign Up</button>
+                        </Link>
 
                     <p className={style.moveSignUp}>
                         I have an account.
