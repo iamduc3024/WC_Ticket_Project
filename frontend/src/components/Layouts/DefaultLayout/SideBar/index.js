@@ -1,7 +1,7 @@
-import stationImg from '../../../../assets/images/station-image.jpg';
-import nation1 from '../../../../assets/images/nations/VietNam-flag.png';
-//Chua doc duoc file.svg
-import nation2 from '../../../../assets/images/nations/VietNam-flag.png';
+import banner1 from '../../../../assets/images/slidesBanner/slideB1.png'
+import banner2 from '../../../../assets/images/slidesBanner/slideB2.png'
+import banner3 from '../../../../assets/images/slidesBanner/slideB3.png'
+import banner4 from '../../../../assets/images/slidesBanner/slideB4.png'
 import style from './SlideBar.module.scss';
 import clsx from 'clsx';
 const { Fragment, useState, useEffect, useMemo, useRef } = require("react");
@@ -15,6 +15,7 @@ function SideBar() {
     let autoIndex = 0;
     const MAX_INDEX = 4;
     let timerSet = useRef();
+
 
     useEffect(() => {
         timerSet.current = setTimeout(() => {
@@ -59,69 +60,20 @@ function SideBar() {
             <div className={style.matchesSliderContainer}>
                 
                 <div className={clsx(style.matchSlider, style.fadeAnimation, {[style.hidden] : (index !== 0)})} >
-                    <div className={style.nen}></div>
-                    <div className={style.matchInfo}>
-                        <h3>Ten 2 doi bong</h3>
-                        <p>lich thi dau</p>
-                        <p>dia diem</p>
-                        <a href="#">Book now!!!</a>
-                    </div>
-
-                    <div className={style.matchImg}>
-                        <img className={style.homeFlag} src={nation1} alt="" />
-                        <img className={style.awayFlag} src={nation2} alt="" />
-                        <img className={style.stationImg} src={stationImg} alt="" />
-                    </div>
+                        <img className={style.matchImg} src={banner1} alt="" />
                 </div>
 
                 <div className={clsx(style.matchSlider, style.fadeAnimation, {[style.hidden] : (index !== 1)})} >
-                    <div className={style.nen}></div>
-                    <div className={style.matchInfo}>
-                        <h3>Ten 2 doi bong</h3>
-                        <p>lich thi dau</p>
-                        <p>dia diem</p>
-                        <a href="#">Book now!!!</a>
-                    </div>
-
-                    <div className={style.matchImg}>
-                        <img className={style.homeFlag} src={nation1} alt="" />
-                        <img className={style.awayFlag} src={nation2} alt="" />
-                        <img className={style.stationImg} src={stationImg} alt="" />
-                    </div>
+                        <img className={style.matchImg} src={banner2} alt="" />
                 </div>
 
                 <div className={clsx(style.matchSlider, style.fadeAnimation, {[style.hidden] : (index !== 2)})} >
-                    <div className={style.nen}></div>
-                    <div className={style.matchInfo}>
-                        <h3>Ten 2 doi bong</h3>
-                        <p>lich thi dau</p>
-                        <p>dia diem</p>
-                        <a href="#">Book now!!!</a>
-                    </div>
-
-                    <div className={style.matchImg}>
-                        <img className={style.homeFlag} src={nation1} alt="" />
-                        <img className={style.awayFlag} src={nation2} alt="" />
-                        <img className={style.stationImg} src={stationImg} alt="" />
-                    </div>
+                        <img className={style.matchImg} src={banner3} alt="" />
                 </div>
 
                 <div className={clsx(style.matchSlider, style.fadeAnimation, {[style.hidden] : (index !== 3)})} >
-                    <div className={style.nen}></div>
-                    <div className={style.matchInfo}>
-                        <h3>Ten 2 doi bong</h3>
-                        <p>lich thi dau</p>
-                        <p>dia diem</p>
-                        <a href="#">Book now!!!</a>
-                    </div>
-
-                    <div className={style.matchImg}>
-                        <img className={style.homeFlag} src={nation1} alt="" />
-                        <img className={style.awayFlag} src={nation2} alt="" />
-                        <img className={style.stationImg} src={stationImg} alt="" />
-                    </div>
+                        <img className={style.matchImg} src={banner4} alt="" />
                 </div>
-
                 <a className={style.prevBtn} onClick={showPrevSlide}><i className="ti-angle-left"></i></a>
                 <a className={style.nextBtn} onClick={showNextSlide}><i className="ti-angle-right"></i></a>
 
