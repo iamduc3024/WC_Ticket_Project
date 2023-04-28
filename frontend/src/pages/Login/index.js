@@ -105,6 +105,22 @@ function Login() {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter') {
+            handlePassReplication()
+        }
+    }
+
+    function handlePassReplication() {
+        handlePhoneBlur()
+        handlePassBlur()
+        {
+            if(isPass && isPhone && inputs.phone !== '' && inputs.password !== '') {
+                handleSubmit()
+            }
+        }
+    }
+
 
 
     return (
@@ -118,6 +134,7 @@ function Login() {
                         <label htmlFor="phoneNumberInput" >Phone</label>
                         <input className={clsx(style.phoneNumberInput, {[style.invalidBorder] : !isPhone}) }
                         onBlur={handlePhoneBlur}
+                        onKeyDown={handleKeyDown}
                         onFocus={() => {
                             setIsPhone(true)
                         }}
@@ -136,6 +153,7 @@ function Login() {
                         type="password" placeholder="Enter your password" 
                         name='password'
                         onBlur={handlePassBlur}
+                        onKeyDown={handleKeyDown}
                         onFocus={() => {
                             setIsPass(true)
                         }}
@@ -152,7 +170,7 @@ function Login() {
                     <Link to ="/" >
                     <button className={style.submitSignInBtn}
                     onClick={(e) => {
-                        handleSubmit();
+                        handlePassReplication();
                         if(message !== "Login successful") {
                             e.preventDefault();
                         }

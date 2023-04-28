@@ -208,6 +208,12 @@ function Register() {
         }
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter') {
+            handlePassReplicationPassCheck()
+        }
+    }
+
 
 
     return (
@@ -223,6 +229,7 @@ function Register() {
                         type="text" placeholder="Enter your name." 
                         name='name'
                         onBlur={handleUserBlur}
+                        onKeyDown={handleKeyDown}
                         onFocus={() => {
                             setIsUser(true)
                         }}
@@ -241,6 +248,7 @@ function Register() {
                         type="text" placeholder="Enter your phone." 
                         name='phone'
                         onBlur={handlePhoneBlur}
+                        onKeyDown={handleKeyDown}
                         onClick={() => {
                             setIsPhone(true)
                         }}
@@ -256,6 +264,7 @@ function Register() {
                         type="password" placeholder="Enter your password" 
                         name='password'
                         onBlur={handlePassBlur}
+                        onKeyDown={handleKeyDown}
                         onClick={() => {
                             setIsPass(true)
                             
@@ -274,6 +283,7 @@ function Register() {
                         type="password" placeholder="Confirm your password" 
                         name='passCheck'
                         onBlur={handlePassCheckBlur}
+                        onKeyDown={handleKeyDown}
                         onClick={() => {
                             setIsPassCheck(true)
                         }}

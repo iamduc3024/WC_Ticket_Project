@@ -1,9 +1,11 @@
 import style from './Filter.module.scss'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
 
 function Filter(props) {
+
+    
     return (
         <div className={style.filterContainer}>
         <label htmlFor="filterContainer">Filter</label>
