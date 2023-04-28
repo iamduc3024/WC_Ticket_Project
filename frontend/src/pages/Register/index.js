@@ -20,6 +20,9 @@ function Register() {
         password: "",
     });
 
+    const [phone_number, setPhoneNumber] = useState('');
+    const [message, setMessage] = useState('');
+
     const [err, setError] = useState(null);
 
     let userInp = document.querySelector('.' + style.userInput)
@@ -32,7 +35,10 @@ function Register() {
     const [isPass, setIsPass] = useState(true)
     const [isPassCheck, setIsPassCheck] = useState(true)
 
-    
+    function getCountPhoneNumber(e) {
+        setPhoneNumber(e.target.value);
+    }
+
     function handleUserBlur() {
         
         if(userInp) {
@@ -125,10 +131,22 @@ function Register() {
         )
     }
 
+    const handleMessageIfPhoneDuplicate = async (e) => {
+        axios.get("http://localhost:8080/customer/showCountPhone/${phone_number}")
+        .then((response) => {
+            setMessage(response.data.message);
+        })
+        .catch((err) => {
+            console.log(err);
+            setMessage('Lỗi server, vui lòng thử lại sau.');
+        })
+    }
+
     const handleSubmit = async (e) => {
         try {
-            console.log(inputs)
-                await axios.post("http://localhost:8080/customer/create", inputs);
+            //console.log(inputs)
+            handleMessageIfPhoneDuplicate();
+            await axios.post("http://localhost:8080/customer/create", inputs);
         } catch (err) {
             setError(err.response.data);
         }

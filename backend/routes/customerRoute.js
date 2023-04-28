@@ -5,7 +5,7 @@ const router = express.Router();
 
 const customerController = require('../controllers/customerController');
 
-
+router.get("/showCountPhone", customerController.showCountCustomerPhone);
 
 // Get customer
 router.get("/show", customerController.showCustomer);

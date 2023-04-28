@@ -1,8 +1,22 @@
 const customerModel = require('../models/customerModel')
 
 class customerController {
+    showCountCustomerPhone = (req, res) => {
+        customerModel.countPhone(req.params.phone_number, (err, result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({error: "Internal server error"})
+            } else {
+                if (result > 0) {
+                    res.json({message: "Số điện thoại này đã được đăng ký"});
+                } else {
+                    res.json({message: "Số điện thoại này chưa được đăng ký"});
+                }
+            }
+        })
+    }
 
-    //Show all customers
+    // Show all customers
     showCustomer = (req, res) => {
         customerModel.getCustomer((err, result) => {
             if (err) {
