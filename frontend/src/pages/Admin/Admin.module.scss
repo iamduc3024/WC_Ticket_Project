@@ -1,0 +1,119 @@
+.container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    display: flex;
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .contentContainer {
+    width: 70%;
+    background-color: #fff;
+    border-radius: 50px;
+    padding: 20px;
+    color: #333;
+  }
+
+  .Btns {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .customerBtn {
+    min-width: 300px;
+    background-color: #550065;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 4px;
+
+    &:hover {
+      background-color: #007BFF;
+      cursor: pointer;
+    }
+  }
+
+  .matchesBtn {
+    min-width: 300px;
+    background-color: #550065;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 4px;
+
+    &:hover {
+        background-color: #007BFF;
+        cursor: pointer;
+      }
+  }
+
+  .activeBtn {
+    min-width: 600px;
+    background-color: #007BFF;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 4px;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .customerList {
+    margin-top: 24px;
+  }
+
+  .customerInfoContainer {
+    width: 100%;
+    background-color: #550065;
+    padding: 24px;
+    color: #fff;
+    text-align: left;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    align-items: center;
+  }
+
+  .customerInfo {
+    display: block;
+  }
+
+  .matchInfoContainer {
+    width: 100%;
+    background-color: #550065;
+    padding: 24px;
+    color: #fff;
+    text-align: left;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    align-items: center;
+  }
+
+  .matchInfo {
+    display: block;
+  }
+
+  .deleteIcon {
+    position: relative;
+    padding: 8px;
+    font-size: 24px;
+    background-color: red;
+    border-radius: 12px;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+  }
+
+  .invalid {
+    display: none;
+  }
+  

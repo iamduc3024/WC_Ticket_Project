@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `customer` (
   `customer_id` smallint(5) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `phone` int(10) DEFAULT NULL,
+  `phone` varchar(10) DEFAULT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

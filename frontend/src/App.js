@@ -9,7 +9,8 @@ import OrderPage from './pages/Order';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import ProfilesPage from './pages/Profiles';
-import Payment from './pages/Payment';
+import PaymentPage from './pages/Payment';
+import AdminPage from './pages/Admin'
 
 function App() {
     return (
@@ -20,8 +21,8 @@ function App() {
                 <Route path='/login' element = {<LoginPage />}/>
                 <Route path='/register' element = {<RegisterPage />}/>
                 <Route path='/profiles' element = {<ProfilesPage />}/>
-                <Route path='/login' element = {<LoginPage />}/>
-                <Route path='/payment' element = {<Payment />}/>
+                <Route path='/admin' element = {<AdminPage />}/>
+                <Route path='/payment' element = {<PaymentPage />}/>
                 <Route path='/register' element = {<RegisterPage />}/>
             </Routes>
         </div>
