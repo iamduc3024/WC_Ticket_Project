@@ -28,13 +28,20 @@ class customerController {
         });
     }
 
-    //Show customer by ID
-    showCustomerById = (req, res) => {
-        customerModel.getCustomerById(req.params.id, (err, result) => {
+    //Show customer by phone and password
+    showCustomerByPhoneAndPassword = (req, res) => {
+        const data = req.body;
+        customerModel.getCustomerByPhoneAndPassword(data, (err, result) => {
             if (err) {
-                res.send(err);
+                console.log(err);
+                res.status(500).json({error: "Internal Server Error"});
             } else {
-                res.json(result);
+                if(result.length > 0) {
+                    res.json({message: "Login successful"});
+                } else {
+                    res.json({message: "Wrong phone/password"});
+                    // res.json(result);
+                }
             }
         });
     }
