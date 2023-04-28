@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import style from './Login.module.scss'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
 import axios from 'axios';
@@ -23,6 +23,13 @@ function Login() {
     
     const [isPhone, setIsPhone] = useState(true)
     const [isPass, setIsPass] = useState(true)
+
+    useEffect(() => {
+        console.log("useEffect   " , message);
+        if(message === 'Login successful') {
+            window.location.href = "/"
+        }
+    },[message])
 
     function handlePhoneBlur() {
         if(phoneIn) {
@@ -85,8 +92,9 @@ function Login() {
             console.log(inputs);
             await axios.post("http://localhost:8080/customer/showByPhoneAndPassword", inputs)
             .then((response) => {
-                message = response.data.message;
-                alert(message);
+                setMessage(response.data.message);
+                console.log(message);
+                //alert(message);
             })
             .catch((err) => {
                 console.log(err);
