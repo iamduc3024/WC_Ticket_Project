@@ -1,12 +1,16 @@
 import clsx from 'clsx';
 import style from './Login.module.scss'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
 import axios from 'axios';
+import { LoginContext } from '../../App'
+
+let clickI = 0;
 
 function Login() {
-
+    const { isLogin, setIsLogin } = useContext(LoginContext)
+    
     const [passHide, setPassHide] = useState(false)
 
     const [inputs, setInputs] = useState({
@@ -21,28 +25,33 @@ function Login() {
 
     let phoneIn = document.querySelector('.' + style.phoneNumberInput)
     let passIn = document.querySelector('.' + style.passInput)
+    let loginBtnRef = useRef()
     
     const [isPhone, setIsPhone] = useState(true)
     const [isPass, setIsPass] = useState(true)
 
     useEffect(() => {
-        console.log("useEffect   " , message);
+        console.log("log ", isLogin);
         if (message === 'Login successful') {
-            if (isAdmin === 1) {
-                //alert(message);
-                window.location.href = "/admin";
+            setIsLogin(prev =>{
+                prev = true
+                return true
+            } );
+            if(isLogin === true) {
                 
-            } else {
-                //alert(message);
-                window.location.href = "/";
+                loginBtnRef.current.click();
             }
+            else {
+                setIsLogin(true);
+            }
+            
         } else {
             if (message !== '') {
                 alert(message);
                 setMessage('');
             }
         }
-    }, [message])
+    }, [message, isLogin])
 
     function handlePhoneBlur() {
         if(phoneIn) {
@@ -179,16 +188,26 @@ function Login() {
                         </div>
                     </section>
 
-                    <Link to ="/" >
-                    <button className={style.submitSignInBtn}
-                    onClick={(e) => {
-                        handlePassReplication();
-                        if (message !== "Login successful") {
-                            //alert(message);
-                            e.preventDefault();
-                        }
-                    }}>Sign In</button>
-                    </Link>
+                        <Link to = '/'>
+                            <button className={style.submitSignInBtn}
+                            ref={loginBtnRef}
+                            onClick={(e) => {
+                                handlePassReplication();
+                                if (message !== "Login successful") {
+                                    //alert(message);
+                                    e.preventDefault();
+                                   
+                                }
+                                else {
+                                    if(isAdmin == 1) {
+                                        
+                                        window.location.href = "/admin";
+                                    }
+                                    
+                                }
+                            }}>Sign In</button>
+                        </Link>
+
 
                     <p className={style.moveSignUp}>
                         Do not have account yet?
@@ -203,5 +222,6 @@ function Login() {
     </div>
     );
 }
+
 
 export default Login;

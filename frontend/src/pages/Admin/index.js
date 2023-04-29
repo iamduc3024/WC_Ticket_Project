@@ -46,7 +46,7 @@ function Admin() {
 
     return (
         <>
-            <Header /> 
+            <Header isAdminLogin = {true}/> 
             <Slider />
 
             <div className = {style.container}>

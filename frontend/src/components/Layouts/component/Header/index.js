@@ -1,10 +1,14 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import style from './Header.module.scss'
 import {Link} from 'react-router-dom'
 import themifiIcon from 'src/assets/icons/themify-icons/themify-icons.css'
 import clsx from "clsx";
 
-function Header() {
+import { LoginContext } from "src/App"; 
+
+function Header({isAdminLogin = false}) {
+    const {isLogin, setIsLogin} = useContext(LoginContext)
+    console.log(isLogin)
     return(
         <Fragment>
         <div className={style.headerContainer}>
@@ -15,16 +19,17 @@ function Header() {
             </div>
             
             <i className={clsx(style.cartIcon, 'ti-shopping-cart')}></i>
-            <ul>
-            <Link to = "/login">
-                <li className={style.loginBtn}>
-                    Login
-                </li>
-            </Link>
-            <Link to = "/register">
-                <li className={style.registerBtn}>Register</li> 
-            </Link>
+            <ul className= {clsx({[style.invalid] : (isLogin || isAdminLogin)})}>
+                <Link to = "/login">
+                    <li className={style.loginBtn}>
+                        Login
+                    </li>
+                </Link>
+                <Link to = "/register">
+                    <li className={style.registerBtn}>Register</li> 
+                </Link>
             </ul>
+            <ul className= {clsx(style.userIcon ,"ti-user", {[style.invalid] : !(isLogin || isAdminLogin)})}></ul>
         </div>
         </Fragment>
     ) ;
