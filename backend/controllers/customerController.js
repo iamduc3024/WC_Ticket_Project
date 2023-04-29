@@ -3,7 +3,7 @@ const customerModel = require('../models/customerModel')
 class customerController {
     showCountCustomerPhone = (req, res) => {
         customerModel.countPhone(req.query.phoneNumber, (err, result) => {
-            console.log("Phone: " , req.query.phoneNumber);
+            //console.log("Phone: " , req.query.phoneNumber);
             if (err) {
                 console.log(err);
                 res.status(500).json({error: "Internal server error"})
