@@ -1,4 +1,8 @@
 import style from './Footer.module.scss'
+import instagramLogo from '../../../../assets/logos/InstagramLogo.png'
+import facebookLogo from '../../../../assets/logos/FacebookLogo.png'
+import twitterLogo from '../../../../assets/logos/TwitterLogo.jpg'
+import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -32,18 +36,17 @@ function Footer() {
                     </ul>
                 </div>
                 <div className={style.contactContainer}>
-                    <a href="#" className={style.logo}>Logo</a>
+                    <Link href="#" className={style.logo}>Logo</Link>
                     <div className={style.listContact}>
-                        <a href="#" className={style.instagram}>
-                            <img src="" alt="" />
-                            in
-                        </a>
-                        <a href="#" className={style.facebook}>
-                            fb
-                        </a>
-                        <a href="#" className={style.twitter}>
-                            tw
-                        </a>
+                        <Link href="#" >
+                            <img className={style.instagram} src= {instagramLogo} alt="" />
+                        </Link>
+                        <Link href="#" >
+                            <img className={style.facebook} src= {facebookLogo} alt="" /> 
+                        </Link>
+                        <Link href="#" >
+                            <img className={style.twitter} src= {twitterLogo} alt="" />
+                        </Link>
                     </div>
                 </div>
             </div>

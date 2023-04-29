@@ -1,0 +1,44 @@
+  .filterAndMatches {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+
+  .filterContainer {
+
+  }
+
+  .matchesContainer {
+    width: 78vw;
+    margin-top: 20px;
+    height: 800px;
+    overflow-y: scroll;
+  }
+  
+  .matchContainer {
+    width: 100%;
+    background-color: #550065;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 48px;
+  }
+
+  .nation1 {
+    width: 25%;
+    object-fit: cover;
+  }
+
+  .matchInfo {
+    width: 40%;
+    text-align: center;
+    color: #fff;
+  }
+
+  .nation2 {
+    width: 25%;
+    object-fit: cover;
+  }

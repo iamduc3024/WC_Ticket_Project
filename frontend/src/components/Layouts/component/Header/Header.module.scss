@@ -98,6 +98,13 @@
   .userIcon {
     font-size: 30px;
     margin-right: 48px;
+    color: #fff;
+
+    &:hover {
+      cursor: pointer;
+      opacity:.8;
+      
+    }
   }
 
   .invalid {

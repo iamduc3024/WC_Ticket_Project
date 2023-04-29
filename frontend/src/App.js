@@ -18,9 +18,25 @@ export const LoginContext = createContext()
 function App() {
 
     const [isLogin, setIsLogin] = useState(false)
+
+    let userInfo = {
+        uId : "",
+        uName : "",
+        uPhone : "",
+        uPassword : ""
+    }
+
+    let matchInfo = {
+        mId : "",
+        mTeamA : "",
+        mTeamB : "",
+        mTime : "",
+        mDate : "",
+        mStadium : ""
+    }
     
     return (
-        <LoginContext.Provider value = {{isLogin , setIsLogin}}>
+        <LoginContext.Provider value = {{isLogin , setIsLogin, userInfo}}>
             <div className="App">
                 <Routes>
                     <Route path='/' element = {<HomePage />}/>

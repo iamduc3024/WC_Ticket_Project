@@ -38,7 +38,9 @@ class customerController {
             } else {
                 if(result.length > 0) {
                     res.json({message: "Login successful",
-                            isAdmin: result[0].isAdmin});
+                            isAdmin: result[0].isAdmin,
+                            id : result[0].customer_id,
+                            name : result[0].name});
                 } else {
                     res.json({message: "Wrong phone/password"});
                     // res.json(result);

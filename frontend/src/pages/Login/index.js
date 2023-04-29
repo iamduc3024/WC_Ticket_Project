@@ -9,7 +9,7 @@ import { LoginContext } from '../../App'
 let clickI = 0;
 
 function Login() {
-    const { isLogin, setIsLogin } = useContext(LoginContext)
+    const { isLogin, setIsLogin, userInfo } = useContext(LoginContext)
     
     const [passHide, setPassHide] = useState(false)
 
@@ -114,6 +114,10 @@ function Login() {
             console.log(inputs);
             await axios.post("http://localhost:8080/customer/showByPhoneAndPassword", inputs)
             .then((response) => {
+                userInfo.uId = response.data.id;
+                userInfo.uName = response.data.name;
+                userInfo.uPhone = inputs.phone;
+                userInfo.uPassword = inputs.password;
                 setIsAdmin(response.data.isAdmin);
                 setMessage(response.data.message);
                 console.log(response.data.isAdmin);

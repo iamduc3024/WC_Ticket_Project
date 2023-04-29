@@ -7,8 +7,9 @@ import clsx from "clsx";
 import { LoginContext } from "src/App"; 
 
 function Header({isAdminLogin = false}) {
-    const {isLogin, setIsLogin} = useContext(LoginContext)
+    const {isLogin, setIsLogin, userInfo} = useContext(LoginContext)
     console.log(isLogin)
+    console.log("userInfo" , userInfo)
     return(
         <Fragment>
         <div className={style.headerContainer}>
@@ -29,7 +30,9 @@ function Header({isAdminLogin = false}) {
                     <li className={style.registerBtn}>Register</li> 
                 </Link>
             </ul>
-            <ul className= {clsx(style.userIcon ,"ti-user", {[style.invalid] : !(isLogin || isAdminLogin)})}></ul>
+            <Link to = "/profiles">
+                <ul className= {clsx(style.userIcon ,"ti-user", {[style.invalid] : !(isLogin || isAdminLogin)})}></ul>
+            </Link>
         </div>
         </Fragment>
     ) ;
