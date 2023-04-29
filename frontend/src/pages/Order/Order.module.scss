@@ -3,3 +3,199 @@
     width: 100%;
     margin-top: 100px;
   }
+
+  .contentContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .orderContainer {
+    margin-top: 20px;
+    width: 78vw;
+    padding: 36px;
+    background-color: #fff;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .matchInfoContainer {
+    width: 100%;
+  }
+
+  .standChooseContainer {
+    background-color: #550065;
+    padding: 12px;
+    border-radius: 20px;
+    width: 70%;
+    color: #fff;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .allStandContainer {
+    
+    display: flex;
+    margin-top: 8px;
+  }
+
+  .standACointainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 12px;
+    color: #333;
+    margin: 8px;
+    border-radius: 20px;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #28a745;
+      color: #fff;
+    }
+
+  }
+
+  .standBCointainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 12px;
+    color: #333;
+    margin: 8px;
+    border-radius: 20px;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #28a745;
+      color: #fff;
+    }
+  }
+
+  .standCCointainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 12px;
+    color: #333;
+    margin: 8px;
+    border-radius: 20px;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #28a745;
+      color: #fff;
+    }
+  }
+
+  .standDCointainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 12px;
+    color: #333;
+    margin: 8px;
+    border-radius: 20px;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #28a745;
+      color: #fff;
+    }
+  }
+
+  .activeStand {
+    background-color: #129330;
+    color: #fff;
+  }
+
+  .quantityChoose label {
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  .quantityInput {
+    padding: 4px;
+    font-size: 24px;
+    border-radius: 20px;
+    padding-left: 24px;
+    width: 100px ;
+    border: 1px solid #333;
+  }
+
+  .drinkFoodContainer {
+    margin: 12px;
+    width: 50%;
+    text-align: center;
+  }
+
+  .foodDrinkChoose {
+    display: flex;
+  }
+
+  .foodContainer {
+    flex: 1;
+    border-radius: 12px;
+    padding: 4px;
+    margin-right: 8px;
+    text-align: center;
+    border: solid 1px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(255, 242, 0);
+    }
+  }
+
+  .foodActive {
+    background-color: rgb(255, 157, 0);
+  }
+
+  .drinkContainer {
+    flex: 1;
+    border-radius: 12px;
+    padding: 4px;
+    margin-left: 8px;
+    color: #333;
+    text-align: center;
+    border: solid 1px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(38, 95, 174);
+      color: #fff;
+    }
+  }
+
+  .drinkActive {
+    background-color: rgb(22, 73, 145);
+    color: #fff;
+  }
+
+  .paymentContainer {
+    width: 70%;
+    display: inline-flex;
+    justify-content: space-between;
+    background-color: #550065;
+    padding: 12px 60px;
+    border-radius: 24px;
+    color: #fff;
+    margin: 12px;
+  }
+
+  .paymentBtn {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 4px 24px;
+    border-radius: 36px;
+    min-width: 200px;
+    color: #fff;
+    background-color: #2853C2;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #1440ad;
+    }
+  }
