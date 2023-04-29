@@ -15,6 +15,7 @@ function Login() {
     });
 
     let [message, setMessage] = useState('')
+    let [isAdmin, setIsAdmin] = useState(false);
 
     //const[err, setError] = useState(null);
 
@@ -26,10 +27,22 @@ function Login() {
 
     useEffect(() => {
         console.log("useEffect   " , message);
-        if(message === 'Login successful') {
-            window.location.href = "/"
+        if (message === 'Login successful') {
+            if (isAdmin === 1) {
+                //alert(message);
+                window.location.href = "/admin";
+                
+            } else {
+                //alert(message);
+                window.location.href = "/";
+            }
+        } else {
+            if (message !== '') {
+                alert(message);
+                setMessage('');
+            }
         }
-    },[message])
+    }, [message])
 
     function handlePhoneBlur() {
         if(phoneIn) {
@@ -92,8 +105,9 @@ function Login() {
             console.log(inputs);
             await axios.post("http://localhost:8080/customer/showByPhoneAndPassword", inputs)
             .then((response) => {
+                setIsAdmin(response.data.isAdmin);
                 setMessage(response.data.message);
-                console.log(message);
+                console.log(response.data.isAdmin);
                 //alert(message);
             })
             .catch((err) => {
@@ -120,8 +134,6 @@ function Login() {
             }
         }
     }
-
-
 
     return (
         <div className={style.container}>
@@ -171,7 +183,8 @@ function Login() {
                     <button className={style.submitSignInBtn}
                     onClick={(e) => {
                         handlePassReplication();
-                        if(message !== "Login successful") {
+                        if (message !== "Login successful") {
+                            //alert(message);
                             e.preventDefault();
                         }
                     }}>Sign In</button>

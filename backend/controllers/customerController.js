@@ -37,7 +37,8 @@ class customerController {
                 res.status(500).json({error: "Internal Server Error"});
             } else {
                 if(result.length > 0) {
-                    res.json({message: "Login successful"});
+                    res.json({message: "Login successful",
+                            isAdmin: result[0].isAdmin});
                 } else {
                     res.json({message: "Wrong phone/password"});
                     // res.json(result);
