@@ -11,6 +11,17 @@ class standController {
         })
     }
 
+    showStandByMatchId = (req, res) => {
+        const mId = req.query.mId;
+        standModel.getStandByMatchId(mId, (err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(result);
+            }
+        })
+    }
+
     showAllStandInfoByName = (req, res) => {
         standModel.getAllStandInfoByName(req.params.standName, (err, result) => {
             if (err) {

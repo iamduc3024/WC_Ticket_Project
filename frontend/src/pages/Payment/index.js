@@ -2,12 +2,18 @@ import style from './Payment.module.scss'
 import visaLogo from '../../assets/logos/visaLogo.png'
 import momoLogo from '../../assets/logos/momoLogo.png'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { crrPrice, crrId, quan, amount } from '../Order'
+import { Link } from 'react-router-dom'
+import { LoginContext } from 'src/App'
+import Order from '../Order'
+import axios from 'axios'
 
 function Payment() {
-
+    const {userInfo} = useContext(LoginContext)
+    console.log(crrId, " " , crrPrice, " " , quan, " ", amount);
     let nameCardInput = document.querySelector('.' + style.nameCardInp)
-    let cardNumberInput = document.querySelector('.' + style.cardNumberInp)
+    let cardNumberInput = document.querySelector('.' + style.cardNumberInpt)
     let exDateInput = document.querySelector('.' + style.exDateInp)
     let momoNumberInput = document.querySelector('.' + style.momoNumberInp)
 
@@ -84,6 +90,20 @@ function Payment() {
         }
     }
 
+
+    const handlePaymentSubmit = () => {
+
+        console.log(crrId);
+        axios.post("http://localhost:8080/transaction/createNewTransaction", {
+            customer_id : userInfo.uId,
+            stand_id : crrId,
+            quantity_of_tickets : quan,
+            amount : amount,
+            date_time : new Date()
+        })
+        alert("Payment Successful!!!")
+    }
+
     return (
         <div className= {style.container}>
             <div className= {style.paymentCointainer}>
@@ -116,7 +136,7 @@ function Payment() {
                             setIsNameCard(true)
                         }}/>
 
-                        <input className= {clsx(style.cardNumberInp, {[style.invalidInput] : !isCardNumber})} 
+                        <input className= {clsx(style.cardNumberInpt, {[style.invalidInput] : !isCardNumber})} 
                         type="text" placeholder="Card Number"
                         onBlur={handleCardNumberBlur}
                         onFocus={() => {
@@ -142,8 +162,13 @@ function Payment() {
                     </section>
 
                     <section className= {style.buttons}>
-                        <button className= {style.backBtn}>Back</button>
-                        <button className= {style.cfBtn}>Confirm Payment</button>
+                        <Link to = '/order'>
+                            <button className= {style.backBtn}>Back</button>
+                        </Link>
+                        <Link to = '/'>
+                            <button className= {style.cfBtn}
+                            onClick={handlePaymentSubmit}>Confirm Payment</button>
+                        </Link>
                     </section>
 
                 </div>

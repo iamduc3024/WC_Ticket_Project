@@ -111,10 +111,12 @@
     color: #fff;
   }
 
-  .quantityChoose label {
-    font-weight: bold;
-    font-size: 30px;
+  .quantityChoose {
+    display: flex;
+    direction: row;
+    align-items: center;
   }
+
 
   .quantityInput {
     padding: 4px;
@@ -123,7 +125,44 @@
     padding-left: 24px;
     width: 100px ;
     border: 1px solid #333;
+    text-align: center;
   }
+
+  .quantitiesLabel {
+    margin-right: 24px;
+  }
+
+
+  .handleBtnContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .increaseBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: solid 1px #333;
+    margin-bottom: 8px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
+  }
+
+  .decreaseBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: solid 1px #333;
+
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
+  }
+
 
   .drinkFoodContainer {
     margin: 12px;
@@ -183,6 +222,8 @@
     border-radius: 24px;
     color: #fff;
     margin: 12px;
+    justify-self: center;
+    align-items: center;
   }
 
   .paymentBtn {
@@ -193,9 +234,16 @@
     min-width: 200px;
     color: #fff;
     background-color: #2853C2;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 
     &:hover {
       cursor: pointer;
       background-color: #1440ad;
     }
+  }
+
+  .invalid {
+    display: none;
   }

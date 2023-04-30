@@ -2,22 +2,26 @@
 import Header from 'src/components/Layouts/component/Header';
 import Following from '../Following';
 import SlideBar from 'src/components/Layouts/DefaultLayout/SideBar'
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import Footer from 'src/components/Layouts/component/Footer';
 import Filter from 'src/components/Layouts/component/Filter';
 import axios from 'axios';
 import style from './Home.module.scss'
 import anh from '../../assets/images/nations/VietNam-flag.jpg'
-
+import {LoginContext} from '../../App'
+import { Link } from 'react-router-dom';
 
 
 function Home() {
+
+    const {currMatchInfo, isLogin} = useContext(LoginContext)
 
     const [change, setChange] = useState(true)
 
     const [matches, setMatches] = useState([]);
     
-    
+    console.log("Login   " ,isLogin);
+
     const getMatchesInfo = async (e) => {
         try {
             await axios.get("http://localhost:8080/match/show")
@@ -57,7 +61,19 @@ function Home() {
                     {
                         matches.map((match, index) => {
                             return (
-                                <section key={index} className= {style.matchContainer}>
+                                <Link to = '/order' key={index} className= {style.matchContainer}
+                                onClick={(e) => {
+                                    if(!isLogin) {
+                                        e.preventDefault();
+                                        window.location.href = "/login";
+                                    }
+                                    currMatchInfo.mId = match.match_id
+                                    currMatchInfo.mTeamA = match.team_A
+                                    currMatchInfo.mTeamB = match.team_B
+                                    currMatchInfo.mStadium = match.stadium
+                                    currMatchInfo.mTime = match.time
+                                    currMatchInfo.mDate = match.date
+                                }}>
                                     <img src= {anh} alt="" className= {style.nation1} />
                                     <section className= {style.matchInfo}>
                                         <h2 className= {style.matchName}>Match: {match.team_A} VS {match.team_B}</h2>
@@ -66,7 +82,7 @@ function Home() {
                                         <h3 className= {style.matchStadium}>Stadium: {match.stadium}</h3>
                                     </section>
                                     <img src= {anh} alt="" className= {style.nation2} />
-                                </section>
+                                </Link>
                             )
                         })
                     }

@@ -14,6 +14,20 @@ class standModel {
         })
     }
 
+    getStandByMatchId = (mId, result) => {
+        const getStandByMatchIdQuery = "SELECT * FROM stand WHERE match_id = ?";
+        console.log("be 1: ",mId);
+        db.query(getStandByMatchIdQuery, [mId] ,(err, results) => {
+            
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
+
     // Query all information from stand by name
     getAllStandInfoByName = (standName, result) => {
         const getAllStandInfoByNameQuery = "SELECT * FROM stand WHERE stand_name = ?";

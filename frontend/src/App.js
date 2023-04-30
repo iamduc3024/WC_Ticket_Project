@@ -26,7 +26,7 @@ function App() {
         uPassword : ""
     }
 
-    let matchInfo = {
+    let currMatchInfo = {
         mId : "",
         mTeamA : "",
         mTeamB : "",
@@ -34,9 +34,10 @@ function App() {
         mDate : "",
         mStadium : ""
     }
+
     
     return (
-        <LoginContext.Provider value = {{isLogin , setIsLogin, userInfo}}>
+        <LoginContext.Provider value = {{isLogin , setIsLogin, userInfo, currMatchInfo}}>
             <div className="App">
                 <Routes>
                     <Route path='/' element = {<HomePage />}/>
