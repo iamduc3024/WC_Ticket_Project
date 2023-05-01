@@ -10,9 +10,15 @@ import style from './Home.module.scss'
 import anh from '../../assets/images/nations/VietNam-flag.jpg'
 import {LoginContext} from '../../App'
 import { Link } from 'react-router-dom';
+// import Argentina_flag from '../../assets/images/nations_png/Argentina.png';
+
+// const nation_flag = 'WC_Ticket_Project/frontend/src/assets/images/nations_png/';
 
 
 function Home() {
+    // console.log(`${nation_flag}Argentina.png`);
+    // const country = 'Argentina';
+    // console.log(`${nation_flag}${country}.png`);
 
     const {currMatchInfo, isLogin} = useContext(LoginContext)
 
