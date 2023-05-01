@@ -168,20 +168,20 @@ function Order() {
                         </h1>
                         <section className= {style.handleBtnContainer}>
 
-                            <button className= {style.increaseBtn}
+                            <button className= {clsx(style.increaseBtn, "ti-angle-up")}
                             onClick={() => {
                                 setQuantity(quantity+1)
                                 quan = quantity + 1
                                 console.log(crrId, "   " , crrPrice);
-                            }}>I</button> 
-                            <button className= {style.decreaseBtn}
+                            }}></button> 
+                            <button className= {clsx(style.decreaseBtn, "ti-angle-down")}
                             onClick={() => {
                                 if(quantity > 1)
                                 {
                                     setQuantity(quantity-1)
                                     quan = quantity - 1
                                 }
-                            }}>D</button>
+                            }}></button>
                         </section>
                     </section>
                 
