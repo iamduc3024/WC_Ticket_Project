@@ -16,6 +16,8 @@ router.post("/showByPhoneAndPassword", customerController.showCustomerByPhoneAnd
 // // Create New Customer
 router.post("/create", customerController.createCustomer);
 
+// Show customer Profile
+router.get("/customerProfile", customerController.showCustomerProfile);
 // // Update Customer
 // router.put("/update/:id", updateCustomer);
 

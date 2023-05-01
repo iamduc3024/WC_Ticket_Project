@@ -1,6 +1,18 @@
 const customerModel = require('../models/customerModel')
 
 class customerController {
+    // Show customer profile and transaction
+    showCustomerProfile = (req, res) => {
+        customerModel.getCustomerProfile((err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(result);
+            }
+        });
+    }
+
+
     showCountCustomerPhone = (req, res) => {
         customerModel.countPhone(req.query.phoneNumber, (err, result) => {
             //console.log("Phone: " , req.query.phoneNumber);
