@@ -10,15 +10,10 @@ import style from './Home.module.scss'
 import anh from '../../assets/images/nations/VietNam-flag.jpg'
 import {LoginContext} from '../../App'
 import { Link } from 'react-router-dom';
-// import Argentina_flag from '../../assets/images/nations_png/Argentina.png';
-
-// const nation_flag = 'WC_Ticket_Project/frontend/src/assets/images/nations_png/';
+import images from 'src/assets/images/nations_png/nation_image';
 
 
 function Home() {
-    // console.log(`${nation_flag}Argentina.png`);
-    // const country = 'Argentina';
-    // console.log(`${nation_flag}${country}.png`);
 
     const {currMatchInfo, isLogin} = useContext(LoginContext)
 
@@ -80,14 +75,14 @@ function Home() {
                                     currMatchInfo.mTime = match.time
                                     currMatchInfo.mDate = match.date
                                 }}>
-                                    <img src= {anh} alt="" className= {style.nation1} />
+                                    <img src= {images[match.team_A]} alt="" className= {style.nation1} />
                                     <section className= {style.matchInfo}>
                                         <h2 className= {style.matchName}>Match: {match.team_A} VS {match.team_B}</h2>
                                         <h3 className= {style.matchTime}>Time: {match.time}</h3>
                                         <h3 className= {style.matchDate}>Date: {match.date}</h3>
                                         <h3 className= {style.matchStadium}>Stadium: {match.stadium}</h3>
                                     </section>
-                                    <img src= {anh} alt="" className= {style.nation2} />
+                                    <img src= {images[match.team_B]} alt="" className= {style.nation2} />
                                 </Link>
                             )
                         })
