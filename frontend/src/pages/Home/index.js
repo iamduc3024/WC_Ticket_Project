@@ -11,6 +11,7 @@ import anh from '../../assets/images/nations/VietNam-flag.jpg'
 import {LoginContext} from '../../App'
 import { Link } from 'react-router-dom';
 import images from 'src/assets/images/nations_png/nation_image';
+import { matchesId } from 'src/components/Layouts/component/Filter';
 
 
 function Home() {
@@ -22,6 +23,8 @@ function Home() {
     const [matches, setMatches] = useState([]);
     
     console.log("Login   " ,isLogin);
+
+    console.log(" saddddddddd       " + matchesId);
 
     const getMatchesInfo = async (e) => {
         try {
@@ -40,9 +43,16 @@ function Home() {
         }
     }
 
+    if(matchesId.length !== 0) {
+        setMatches(matchesId);
+        console.log("Thay doi");
+    }
+
     useEffect(() => {
         getMatchesInfo();
     },[change])
+
+    
 
     return(
         <Fragment>
@@ -61,7 +71,7 @@ function Home() {
                 <section className= {style.matchesContainer}>
                     {
                         matches.map((match, index) => {
-                            console.log(match.team_A.replace(' ', '_'));
+                            // if (matchesId.length === 0 || matchesId.includes(match.match_id))
                             return (
                                 <Link to = '/order' key={index} className= {style.matchContainer}
                                 onClick={(e) => {
