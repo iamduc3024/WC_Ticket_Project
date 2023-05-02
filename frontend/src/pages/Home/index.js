@@ -61,6 +61,7 @@ function Home() {
                 <section className= {style.matchesContainer}>
                     {
                         matches.map((match, index) => {
+                            console.log(match.team_A.replace(' ', '_'));
                             return (
                                 <Link to = '/order' key={index} className= {style.matchContainer}
                                 onClick={(e) => {
@@ -75,14 +76,14 @@ function Home() {
                                     currMatchInfo.mTime = match.time
                                     currMatchInfo.mDate = match.date
                                 }}>
-                                    <img src= {images[match.team_A]} alt="" className= {style.nation1} />
+                                    <img src= {images[(match.team_A.includes(' ')? (match.team_A.replace(' ', '_')) : match.team_A)]} alt="" className= {style.nation1} />
                                     <section className= {style.matchInfo}>
                                         <h2 className= {style.matchName}>Match: {match.team_A} VS {match.team_B}</h2>
                                         <h3 className= {style.matchTime}>Time: {match.time}</h3>
                                         <h3 className= {style.matchDate}>Date: {match.date}</h3>
                                         <h3 className= {style.matchStadium}>Stadium: {match.stadium}</h3>
                                     </section>
-                                    <img src= {images[match.team_B]} alt="" className= {style.nation2} />
+                                    <img src= {images[match.team_B.includes(' ')? (match.team_B.replace(' ', '_')) : match.team_B]} alt="" className= {style.nation2} />
                                 </Link>
                             )
                         })
