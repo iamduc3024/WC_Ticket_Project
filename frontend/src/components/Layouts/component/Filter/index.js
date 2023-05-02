@@ -1,11 +1,17 @@
 import style from './Filter.module.scss'
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
+import Home from 'src/pages/Home';
+import { LoginContext } from 'src/App';
+import { Link, useNavigate } from 'react-router-dom';
 
-export let matchesId = [];
+
+export const filterBtn = document.querySelector('.' + style.filterSubmitBtn) 
 
 function Filter(props) {
+    const navigate = useNavigate()
+    const {matchesFilter} = useContext(LoginContext)
     let abc = document.querySelector('.' + style.dateFromInput)
     
     const [team_name_A, setTeam_name_A] = useState("")
@@ -46,9 +52,10 @@ function Filter(props) {
 
                 console.log(response.data);
                 for(let i=0; i<response.data.length; i++) {
-                    matchesId[i] = response.data[i].match_id;
+                    matchesFilter[i] = response.data[i].match_id;
                 }
-                console.log(matchesId);
+                console.log(matchesFilter);
+                navigate('/')
             })
             .catch(err => {
                 console.log(err)
@@ -104,7 +111,8 @@ function Filter(props) {
             onChange={handleChange}/>
             <br />
         </section>
-        <button onClick={handleFilter} className={style.filterSubmitBtn}>Filter</button>
+
+        <Link to = '/home' onClick={handleFilter} className={style.filterSubmitBtn}>Filter</Link>
     </div>
     )
 }

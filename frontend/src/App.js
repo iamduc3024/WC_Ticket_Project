@@ -11,6 +11,7 @@ import RegisterPage from './pages/Register';
 import ProfilesPage from './pages/Profiles';
 import PaymentPage from './pages/Payment';
 import AdminPage from './pages/Admin'
+import Filter from './components/Layouts/component/Filter';
 
 
 export const LoginContext = createContext()
@@ -35,12 +36,14 @@ function App() {
         mStadium : ""
     }
 
+    let matchesFilter = []
     
     return (
-        <LoginContext.Provider value = {{isLogin , setIsLogin, userInfo, currMatchInfo}}>
+        <LoginContext.Provider value = {{isLogin , setIsLogin, userInfo, currMatchInfo, matchesFilter}}>
             <div className="App">
                 <Routes>
                     <Route path='/' element = {<HomePage />}/>
+                    <Route path='/home' element = {<HomePage />}/>
                     <Route path='/order' element = {<OrderPage />}/>
                     <Route path='/login' element = {<LoginPage />}/>
                     <Route path='/register' element = {<RegisterPage />}/>
@@ -48,6 +51,7 @@ function App() {
                     <Route path='/admin' element = {<AdminPage />}/>
                     <Route path='/payment' element = {<PaymentPage />}/>
                     <Route path='/register' element = {<RegisterPage />}/>
+                    <Route path='/filter' element = {<Filter />}/>
                 </Routes>
 
                 
