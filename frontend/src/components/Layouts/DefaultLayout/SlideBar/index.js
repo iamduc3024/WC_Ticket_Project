@@ -7,7 +7,7 @@ import clsx from 'clsx';
 const { Fragment, useState, useEffect, useMemo, useRef } = require("react");
 
 
-function SideBar() {
+function SlideBar() {
 
     const cst = 1;
     let slides = document.getElementsByClassName(style.matchSlider);
@@ -101,4 +101,4 @@ function SideBar() {
 
 }
 
-export default SideBar;
+export default SlideBar;

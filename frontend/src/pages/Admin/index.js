@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Header from '../../components/Layouts/component/Header'
-import Slider from '../../components/Layouts/DefaultLayout/SideBar'
+import Slider from '../../components/Layouts/DefaultLayout/SlideBar'
 import style from './Admin.module.scss'
 import axios from 'axios';
 import clsx from 'clsx';

@@ -1,7 +1,7 @@
 //import Header from '.../components/Layouts/component/Header'
 import Header from 'src/components/Layouts/component/Header';
 import Following from '../Following';
-import SlideBar from 'src/components/Layouts/DefaultLayout/SideBar'
+import SlideBar from 'src/components/Layouts/DefaultLayout/SlideBar'
 import { Fragment, useContext, useEffect, useState } from 'react';
 import Footer from 'src/components/Layouts/component/Footer';
 import Filter from 'src/components/Layouts/component/Filter';
