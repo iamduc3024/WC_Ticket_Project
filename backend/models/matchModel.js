@@ -26,6 +26,18 @@ class matchModel {
         });
     }
 
+    getMatchFilter = (team_name_A, team_name_B, stadium_name, date_from, date_to, result) => {
+        const getMatchFilterQuery = "SELECT * FROM `match` WHERE IF (team_A LIKE ? OR team_B LIKE ?, IF (stadium LIKE ?, IF (`date` BETWEEN ? AND ?, true, false), false), false)";
+        db.query(getMatchFilterQuery, [team_name_A, team_name_B, stadium_name, date_from, date_to], (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
+
     //Update match
     updateMatchById = (id, data, result) => {
         db.query("UPDATE `match` SET date = ?, time = ?, group_name = ?, team_A = ?, team_B = ?, stadium = ? WHERE match_id = ?",
