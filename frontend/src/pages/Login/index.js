@@ -6,32 +6,41 @@ import WCLogo from '../../assets/logos/WCLogo.png'
 import axios from 'axios';
 import { LoginContext } from '../../App'
 
-let clickI = 0;
 
 function Login() {
+    // Nhận các thông tin được truyền xuống từ App
+    // isLogin để lưu trữ thông tin xem người dùng đã đăng nhập hay chưa
+    // setIsLogin là hàm thay đổi trạng thái true/false của isLogin
+    // userInfo dùng để lưu thông tin của người dùng khi đăng nhập
     const { isLogin, setIsLogin, userInfo } = useContext(LoginContext)
     
-    const [passHide, setPassHide] = useState(false)
+    const [passHide, setPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu
 
+    // Thông tin về phone và password dùng để làm tham số khi call API
     const [inputs, setInputs] = useState({
         phone: "",
         password: "",
     });
 
-    let [message, setMessage] = useState('')
-    let [isAdmin, setIsAdmin] = useState(false);
+    let [message, setMessage] = useState('') //Tthông báo đã đăng nhập thành công hay chưa. Đây là thông báo khi call API
+    let [isAdmin, setIsAdmin] = useState(false); // Kiểm tra xem có phải admin hay không
 
     //const[err, setError] = useState(null);
 
-    let phoneIn = document.querySelector('.' + style.phoneNumberInput)
-    let passIn = document.querySelector('.' + style.passInput)
+    let phoneIn = document.querySelector('.' + style.phoneNumberInput) // Element: input điền số điện thoại
+    let passIn = document.querySelector('.' + style.passInput) // Element: input điền mật khẩu
     let loginBtnRef = useRef()
     
-    const [isPhone, setIsPhone] = useState(true)
-    const [isPass, setIsPass] = useState(true)
+    // Kiểm tra xem có đúng là số điện thoại không. Dùng để hiển thị lỗi khi blur ra ngoài vùng nhập
+    const [isPhone, setIsPhone] = useState(true) 
+    // Kiểm tra xem có đúng là mật khẩu không. Dùng để hiển thị lỗi khi blur ra ngoài vùng nhập
+    const [isPass, setIsPass] = useState(true) 
 
+    // Khi message thay đổi thì kiểm tra xem message là gì
+    // Nếu message là 'Login successful' nghĩa là đăng nhập thành công
+    // Khi đó thay đổi trạng thái đăng nhập isLogin = true
+    // Ngược lại hiển thị ra lỗi
     useEffect(() => {
-        console.log("log ", isLogin);
         if (message === 'Login successful') {
             setIsLogin(prev =>{
                 prev = true
@@ -53,6 +62,9 @@ function Login() {
         }
     }, [message, isLogin])
 
+    // Sau khi blur ra ngoài vùng điền điện thoại thì kiểm tra xem có đúng là số điện thoại hay không
+    // Nếu đúng thì isPhone = true tương đương với đây là số điện thoại
+    // Ngược lại thì đây không phải số điện thoại
     function handlePhoneBlur() {
         if(phoneIn) {
 
@@ -70,6 +82,9 @@ function Login() {
         }
     }
 
+    // Sau khi blur ra ngoài vùng điền mật khẩu thì kiểm tra xem có đúng là mật khẩu hay không
+    // Nếu đúng thì isPass = true tương đương với đây là mật khẩu hợp lệ
+    // Ngược lại thì đây không phải mật khẩu hợp lệ
     function handlePassBlur() {
         if(passIn) {
             
@@ -86,9 +101,8 @@ function Login() {
         }
     }
 
+    // Xử lý khi bấm vào ẩn/hiện mật khẩu
     function handleHide() {
-        
-        console.log(passIn);
         
         setPassHide(!passHide);
         if(!passHide)
@@ -100,6 +114,7 @@ function Login() {
         }
     }
 
+    // Xử lý khi thay đổi lúc nhập các ô input
     const handleChange = (e) => {
         setInputs((prev) => {
             return {
@@ -109,9 +124,10 @@ function Login() {
         });
     }
 
+    // Xử lý khi nhấn nút submit xác nhận đăng nhập
+    // Đầu tiên call API để nhận về các thông tin cần thiết của người dùng và message khi đăng nhập
     const handleSubmit = async (e) => {
         try {
-            console.log(inputs);
             await axios.post("http://localhost:8080/customer/showByPhoneAndPassword", inputs)
             .then((response) => {
                 userInfo.uId = response.data.id;
@@ -120,7 +136,6 @@ function Login() {
                 userInfo.uPassword = inputs.password;
                 setIsAdmin(response.data.isAdmin);
                 setMessage(response.data.message);
-                console.log(response.data.isAdmin);
                 //alert(message);
             })
             .catch((err) => {
@@ -132,20 +147,21 @@ function Login() {
         }
     }
 
+    // Xử lý khi enter ở các input
     const handleKeyDown = (e) => {
         if(e.key === 'Enter') {
             handlePassReplication()
         }
     }
 
+    // Dùng để kiểm tra xem các input có lỗi gì không. Nếu có thì không xử lý kiểm tra đăng nhập
     function handlePassReplication() {
         handlePhoneBlur()
         handlePassBlur()
-        {
-            if(isPass && isPhone && inputs.phone !== '' && inputs.password !== '') {
-                handleSubmit()
-            }
+        if(isPass && isPhone && inputs.phone !== '' && inputs.password !== '') {
+            handleSubmit()
         }
+        
     }
 
     return (
@@ -203,7 +219,7 @@ function Login() {
                                    
                                 }
                                 else {
-                                    if(isAdmin == 1) {
+                                    if(isAdmin === 1) {
                                         
                                         window.location.href = "/admin";
                                     }

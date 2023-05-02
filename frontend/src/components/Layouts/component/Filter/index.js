@@ -1,24 +1,19 @@
 import style from './Filter.module.scss'
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
 import React from 'react';
-import Home from 'src/pages/Home';
 import { LoginContext } from 'src/App';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 export const filterBtn = document.querySelector('.' + style.filterSubmitBtn) 
 
-function Filter(props) {
+
+// Component Filter dùng trong các page như Home, Order
+function Filter() {
     const navigate = useNavigate()
     const {matchesFilter} = useContext(LoginContext)
-    let abc = document.querySelector('.' + style.dateFromInput)
     
-    const [team_name_A, setTeam_name_A] = useState("")
-    const [team_name_B, setTeam_name_B] = useState("")
-    const [stadium_name, setStadium_name] = useState("")
-    const [date_from, setDate_from] = useState("")
-    const [date_to, setDate_to] = useState("")
     const [form_input, setForm_input] = useState({
         team_name_A: '',
         team_name_B: '',
@@ -29,6 +24,7 @@ function Filter(props) {
         price_to: '',
     });
 
+    //xử lý khi nhập thay đổi ở các input như nation input hay date input ...
     const handleChange = (e) => {
         setForm_input((prev) => {
                 return { ...prev, [e.target.name]: e.target.value }
@@ -36,9 +32,10 @@ function Filter(props) {
         )
     }
 
+    //Xử lý khi nhấn nút Filter
     const handleFilter = async (e) => {
         try {
-            console.log(form_input);
+            //Nhận thông tin các trận đấu hợp lệ với Filter
             await axios.get("http://localhost:8080/match/showFilter", {params : {
                 team_name_A : form_input.team_name_A,
                 team_name_B: form_input.team_name_A,
@@ -50,11 +47,9 @@ function Filter(props) {
             }})
             .then(response => {
 
-                console.log(response.data);
                 for(let i=0; i<response.data.length; i++) {
                     matchesFilter[i] = response.data[i].match_id;
                 }
-                console.log(matchesFilter);
                 navigate('/')
             })
             .catch(err => {

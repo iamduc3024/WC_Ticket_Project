@@ -43,7 +43,6 @@ class matchController {
         if(price_to === "") {
             price_to = '100000';
         }
-        console.log("BBBBBBBB   " + date_from + " BBB    " + date_to);
         matchModel.getMatchFilter(team_name_A, team_name_B, stadium_name, date_from, date_to, price_from, price_to, (err, result) => {
             if (err) {
                 res.send(err);

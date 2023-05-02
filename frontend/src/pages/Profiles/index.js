@@ -1,7 +1,7 @@
 import style from './Profiles.module.scss'
 import images from 'src/assets/images/nations_png/nation_image'
 import Header from 'src/components/Layouts/component/Header'
-import SlideBar from 'src/components/Layouts/DefaultLayout/SlideBar'
+import SlideBar from 'src/components/Layouts/component/SlideBar'
 import Footer from 'src/components/Layouts/component/Footer'
 import { LoginContext } from 'src/App'
 import { useContext } from 'react'
@@ -25,7 +25,7 @@ const matches = [{
 
 function Profiles() {
 
-    const {userInfo} = useContext(LoginContext)
+    const {userInfo} = useContext(LoginContext) // Lưu thông tin người dùng
     
     return (
         <>

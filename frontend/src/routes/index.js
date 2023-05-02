@@ -1,10 +1,8 @@
 import Home from '../pages/Home';
 import Following from '../pages/Following';
 import Profiles from '../pages/Profiles';
-import LoginRegister from '../pages/Login';
 
 // Layout
-import HeaderLayoutOnly from '../components/Layouts/HeaderLayoutOnly';
 
 import Register from '../pages/Register'
 
@@ -20,7 +18,7 @@ const publicRoutes = [
     { path: '/register', component: Register},
     { path: '/order', component: Order },
     { path: '/payment', component: Payment },
-    { path: '/login', component: Login, layout: HeaderLayoutOnly },
+    { path: '/login', component: Login },
 ];
 
 const privateRoutes = [];

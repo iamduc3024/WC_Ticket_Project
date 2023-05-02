@@ -1,35 +1,35 @@
 //import Header from '.../components/Layouts/component/Header'
 import Header from 'src/components/Layouts/component/Header';
-import Following from '../Following';
-import SlideBar from 'src/components/Layouts/DefaultLayout/SlideBar'
+import SlideBar from 'src/components/Layouts/component/SlideBar'
 import { Fragment, useContext, useEffect, useState } from 'react';
 import Footer from 'src/components/Layouts/component/Footer';
 import Filter from 'src/components/Layouts/component/Filter';
 import axios from 'axios';
 import style from './Home.module.scss'
-import anh from '../../assets/images/nations/VietNam-flag.jpg'
 import {LoginContext} from '../../App'
 import { Link } from 'react-router-dom';
 import images from 'src/assets/images/nations_png/nation_image';
-import { filterBtn } from 'src/components/Layouts/component/Filter';
-
 
 function Home() {
 
+    // Nhận những thông tin chung của cả web
+    // currMatchInfo dùng để lưu thông tin trận đấu để sau đó đọc được ở Order Page
+    // isLogin dùng để lưu trạng thái xem đã đăng nhập hay chưa
+    // matchesFilter lưu trữ mảng các id trận đấu được lọc
     const {currMatchInfo, isLogin, matchesFilter} = useContext(LoginContext)
 
-    const [change, setChange] = useState(true)
+    const [change] = useState(true) // Lưu trạng thái thay đổi của page
 
-    const [matches, setMatches] = useState([]);
+    const [matches, setMatches] = useState([]); // Lưu thông tin toàn bộ các trận đấu
     
 
+    // Lấy thông tin của tất cả các trận đấu được lưu trong database sau đó lưu vào trong mảng matches
     const getMatchesInfo = async (e) => {
         try {
             await axios.get("http://localhost:8080/match/show")
             .then((response) => {
                 
                 setMatches(response.data)
-                console.log(matches);
             })
             .catch((err) => {
                 console.log(err);
@@ -40,7 +40,8 @@ function Home() {
         }
     }
 
-
+    // Gọi lại hàm getMatchesInfo khi change thay đổi
+    // Nhưng ơ đây change không đổi nên hàm chỉ được gọi khi bắt đầu chạy trang Home lần đầu tiên
     useEffect(() => {
         getMatchesInfo();
     },[change])
@@ -53,10 +54,7 @@ function Home() {
             <div className='space'></div>
 
             <SlideBar />
-            <section className= {style.filterAndMatches}
-            onClick={ () => {
-                console.log(matches);
-            }}>
+            <section className= {style.filterAndMatches}>
                 <div className= {style.filterContainer}>
                     <Filter />
                 </div>
@@ -88,7 +86,8 @@ function Home() {
                                     </section>
                                     <img src= {images[match.team_B.includes(' ')? (match.team_B.replace(' ', '_')) : match.team_B]} alt="" className= {style.nation2} />
                                 </Link>
-                            )
+                            ) 
+                            else return (<></>)
                         })
                     }
                 </section>

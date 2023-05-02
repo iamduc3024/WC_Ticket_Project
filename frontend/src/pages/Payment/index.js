@@ -3,28 +3,28 @@ import visaLogo from '../../assets/logos/visaLogo.png'
 import momoLogo from '../../assets/logos/momoLogo.png'
 import clsx from 'clsx'
 import { useContext, useState } from 'react'
-import { crrPrice, crrId, quan, amount } from '../Order'
+import {  crrId, quan, amount } from '../Order'
 import { Link } from 'react-router-dom'
 import { LoginContext } from 'src/App'
-import Order from '../Order'
 import axios from 'axios'
 
 function Payment() {
-    const {userInfo} = useContext(LoginContext)
-    console.log(crrId, " " , crrPrice, " " , quan, " ", amount);
-    let nameCardInput = document.querySelector('.' + style.nameCardInp)
-    let cardNumberInput = document.querySelector('.' + style.cardNumberInpt)
-    let exDateInput = document.querySelector('.' + style.exDateInp)
-    let momoNumberInput = document.querySelector('.' + style.momoNumberInp)
+    const {userInfo} = useContext(LoginContext) // Lưu trữ thông tin người dùng
+    let nameCardInput = document.querySelector('.' + style.nameCardInp) //Element: Ô điền tên chủ thẻ
+    let cardNumberInput = document.querySelector('.' + style.cardNumberInpt) //Element: Ô điền số thẻ
+    let exDateInput = document.querySelector('.' + style.exDateInp) //Element: Ô điền ngày 
+    let momoNumberInput = document.querySelector('.' + style.momoNumberInp) //Element: Ô điền số MOMO
 
 
-    const [isMomo, setIsMomo] = useState(true)
-    const [isNameCard, setIsNameCard] = useState(true)
-    const [isCardNumber, setIsCardNumber]= useState(true)
+    const [isMomo, setIsMomo] = useState(true) // Kiểm tra xem có phải thẻ MOMO hay không
+
+    //Kiểm tra xem có phải các thông tin hợp lệ không
+    const [isNameCard, setIsNameCard] = useState(true) 
+    const [isCardNumber, setIsCardNumber]= useState(true) 
     const [isValidDate, setIsValidDate]= useState(true)
     const [isMomoValid, setIsMomoValid]= useState(true)
 
-    
+    // Kiểm tra thông tin sau khi blur các input elements
     function handleNameCardBlur() {
         if(nameCardInput) {
             if(nameCardInput.value) {
@@ -41,7 +41,6 @@ function Payment() {
     }
 
     function handleCardNumberBlur() {
-        //console.log(cardNumberInput);
         if(cardNumberInput) {
             if(cardNumberInput.value) {
                 setIsCardNumber(true)
@@ -68,10 +67,7 @@ function Payment() {
             
         }
         else {
-            //console.log('.' + style.exDateInp);
             exDateInput = document.querySelector('.' + style.exDateInp)
-            console.log(exDateInput);
-            //handleExpireDateBlur()
         }
     }
 
@@ -91,9 +87,11 @@ function Payment() {
     }
 
 
+    // Xử lý khi nhấn nút Thanh toán
+    // Đầu tiên kiểm tra rồi đẩy lên database
+    // Nếu thành công hiển thị cho người dùng biết
     const handlePaymentSubmit = () => {
 
-        console.log(crrId);
         axios.post("http://localhost:8080/transaction/createNewTransaction", {
             customer_id : userInfo.uId,
             stand_id : crrId,

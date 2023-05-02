@@ -16,7 +16,6 @@ class standModel {
 
     getStandByMatchId = (mId, result) => {
         const getStandByMatchIdQuery = "SELECT * FROM stand WHERE match_id = ?";
-        console.log("be 1: ",mId);
         db.query(getStandByMatchIdQuery, [mId] ,(err, results) => {
             
             if (err) {

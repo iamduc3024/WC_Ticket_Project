@@ -1,52 +1,51 @@
 import clsx from 'clsx';
 import style from './Register.module.scss'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
-import { wait } from '@testing-library/user-event/dist/utils';
-
 
 
 function Register() {
     
+    // Các cò kiểm tra trạng thái hiển thị của password và confirm password
     const [passHide, setPassHide] = useState(false)
-
     const [passCheckHide, setPassCheckHide] = useState(false)
     
+    // Lưu trữ thông tin người dùng đăng kí
     const [inputs, setInputs] = useState({
         name: "",
         phone: "",
         password: "",
     });
 
+    // Thông báo khi đăng kí thành công hay khi trùng số điện thoại
     let [message, setMessage] = useState('')
-
-    
 
     const [err, setError] = useState(null);
 
+    // Các Elements input
     let userInp = document.querySelector('.' + style.userInput)
     let phoneInp = document.querySelector('.' + style.phoneInput)
     let passInp = document.querySelector('.' + style.passInput)
     let passCheckInp = document.querySelector('.' + style.passwInputCheck)
 
+    // Các cờ kiểm tra xem có phải số điện thaoị không, có phải mật khẩu hợp lệ không...
     const [isUser, setIsUser] = useState(true)
     const [isPhone, setIsPhone] = useState(true)
     const [isPass, setIsPass] = useState(true)
     const [isPassCheck, setIsPassCheck] = useState(true)
 
-    function getCountPhoneNumber(e) {
-    }
-
+    // Nếu đăng kí thành công thì chuyển đến đăng nhập
     useEffect(() => {
         if(message === "Success") {
             window.location.href = "/login"
         }
-    })
+    }, [message])
 
+    // Xử lí khi blur khỏi vùng của các input
     function handleUserBlur() {
         
         if(userInp) {
@@ -115,9 +114,9 @@ function Register() {
         }
     }
 
+    // Xử lí khi ẩn/hiện mật khẩu
     function handlePassHide() {
         
-        //console.log(passInp);
         
         setPassHide(!passHide);
         if(!passHide)
@@ -129,6 +128,20 @@ function Register() {
         }
     }
 
+    function handlePassCheckHide() {
+        
+        
+        setPassCheckHide(!passCheckHide);
+        if(!passCheckHide)
+        {
+            passCheckInp.type = "text"
+        }
+        else {
+            passCheckInp.type = "password"
+        }
+    }
+
+    // Xử lý khi nhập thông tin người dùng khi đăng kí
     const handleChange = (e) => {
         setInputs((prev) => {
                 if (e.target.name === 'passCheck') {
@@ -139,10 +152,9 @@ function Register() {
         )
     }
 
-    const handleMessageIfPhoneDuplicate = async (e) => {
-        
-    }
-
+    // Xử lý khi người dùng nhập đúng tất cả các input
+    // Nhận thông tin từ database xem có bị trùng không
+    // Nếu không thì truyền đến cho database để thêm vào database
     const handleSubmit = async (e) => {
         try {
             axios.get("http://localhost:8080/customer/showCountPhone" , {params : {
@@ -151,25 +163,13 @@ function Register() {
             .then((response) => {
                 setMessage(response.data.message);
                 message = response.data.message
-                console.log("Mes   " + message);
             })
             .then (() => {
                 if(message) {
                     if(message === "Success") {
-                        console.log("post");
                         axios.post("http://localhost:8080/customer/create", inputs);
                         
-                        console.log("mess " , message);
-
-                        
                     }
-                    else {
-                         console.log(message);
-                    }
-                }
-                else {
-                    console.log(123);
-                    //handleSubmit();
                 }
             } )
             .catch((err) => {
@@ -183,6 +183,7 @@ function Register() {
         }
     };
 
+    // Kiểm tra xem người dùng đã ghi đúng tất cả các ô input chưa
     function handlePassReplicationPassCheck() {
         handleUserBlur() 
         handlePhoneBlur()
@@ -194,27 +195,12 @@ function Register() {
         }
     }
 
-    function handlePassCheckHide() {
-        
-        //console.log(passInp);
-        
-        setPassCheckHide(!passCheckHide);
-        if(!passCheckHide)
-        {
-            passCheckInp.type = "text"
-        }
-        else {
-            passCheckInp.type = "password"
-        }
-    }
-
+    // Xử lý khi người dùng bấm enter ở các ô input
     const handleKeyDown = (e) => {
         if(e.key === 'Enter') {
             handlePassReplicationPassCheck()
         }
     }
-
-
 
     return (
         <div className= {style.container}>

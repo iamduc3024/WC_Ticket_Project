@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Header from '../../components/Layouts/component/Header'
-import Slider from '../../components/Layouts/DefaultLayout/SlideBar'
+import Slider from '../../components/Layouts/component/SlideBar'
 import style from './Admin.module.scss'
 import axios from 'axios';
 import clsx from 'clsx';
@@ -9,10 +9,12 @@ import clsx from 'clsx';
 
 function Admin() {
 
-    const [customers, setCustomers] = useState([])
-    const [matches, setMatches] = useState([])
-    const [state, setState] = useState("")
+    const [customers, setCustomers] = useState([]) // Dùng để lấy ra danh sách người dùng
+    const [matches, setMatches] = useState([]) // Dùng để lấy ra danh sách các trận đấu
+    const [state, setState] = useState("") //State là customers hay matches để hiển thị 1 trong 2 thông tin
     
+    // xử lý lấy thông tin người dùng
+    // Đầu tiên call API lấy thông tin người dùng trong database sau đó lưu vào mảng customers ở trên
     const handleGetCustomers = async (e) => {
         try {
             await axios.get("http://localhost:8080/customer/show")
@@ -28,6 +30,8 @@ function Admin() {
         }
     }
 
+    // xử lý lấy thông tin trận đấu
+    // Đầu tiên call API lấy thông tin trận đấu trong database sau đó lưu vào mảng matches ở trên
     const handleGetMatches = async (e) => {
         try {
             await axios.get("http://localhost:8080/match/show")

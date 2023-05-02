@@ -21,6 +21,9 @@
   }
 
   .prevBtn, .nextBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 50%;
     width: auto;
@@ -33,6 +36,8 @@
     border-radius: 0 3px 3px 0;
     user-select: none;
     cursor: pointer;
+    height: 60px;
+    z-index: 1;
   }
 
   .prevBtn {
@@ -43,8 +48,10 @@
     right: 0;
   }
 
+
   .prevBtn:hover , .nextBtn:hover {
     background-color: #333;
+    color: #fff;
   }
 
   .dot {

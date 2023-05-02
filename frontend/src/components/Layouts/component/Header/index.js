@@ -1,15 +1,14 @@
 import { Fragment, useContext } from "react";
 import style from './Header.module.scss'
 import {Link} from 'react-router-dom'
-import themifiIcon from 'src/assets/icons/themify-icons/themify-icons.css'
 import clsx from "clsx";
 
 import { LoginContext } from "src/App"; 
 
+//isAdminLogin để kiểm tra nếu đã đăng nhập vào bằng quyền admin chưa
 function Header({isAdminLogin = false}) {
-    const {isLogin, setIsLogin, userInfo} = useContext(LoginContext)
-    console.log(isLogin)
-    console.log("userInfo" , userInfo)
+    //isLogin dùng để kiểm tra xem người dùng đã đăng nhập được vào chưa
+    const {isLogin} = useContext(LoginContext)
     return(
         <Fragment>
         <div className={style.headerContainer}>

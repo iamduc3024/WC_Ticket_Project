@@ -3,7 +3,6 @@ import { Fragment, createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './routes';
 
-import { DefaultLayout } from './components/Layouts';
 import HomePage from './pages/Home';
 import OrderPage from './pages/Order';
 import LoginPage from './pages/Login';
@@ -12,14 +11,17 @@ import ProfilesPage from './pages/Profiles';
 import PaymentPage from './pages/Payment';
 import AdminPage from './pages/Admin'
 import Filter from './components/Layouts/component/Filter';
+import themifiIcon from './assets/icons/themify-icons/themify-icons.css'
 
-
+// Tạo Context để truyền dữ liệu xuống dưới
 export const LoginContext = createContext()
 
 function App() {
 
-    const [isLogin, setIsLogin] = useState(false)
+    // Khai báo các thông tin chung cần dùng của cả trang web
+    const [isLogin, setIsLogin] = useState(false) //Trạng thái đăng nhập
 
+    // Lưu trữ thông tin người đăng nhập
     let userInfo = {
         uId : "",
         uName : "",
@@ -27,6 +29,7 @@ function App() {
         uPassword : ""
     }
 
+    // Lưu trữ thông tin trận đấu người dùng vừa bấm vào
     let currMatchInfo = {
         mId : "",
         mTeamA : "",
@@ -36,9 +39,11 @@ function App() {
         mStadium : ""
     }
 
+    // Lưu trữ id các trận đấu được lọc
     let matchesFilter = []
     
     return (
+        // Provider để truyền các value xuống các Element con để chúng nhận những thông tin chung
         <LoginContext.Provider value = {{isLogin , setIsLogin, userInfo, currMatchInfo, matchesFilter}}>
             <div className="App">
                 <Routes>
@@ -53,8 +58,6 @@ function App() {
                     <Route path='/register' element = {<RegisterPage />}/>
                     <Route path='/filter' element = {<Filter />}/>
                 </Routes>
-
-                
             </div>
         </LoginContext.Provider>
 

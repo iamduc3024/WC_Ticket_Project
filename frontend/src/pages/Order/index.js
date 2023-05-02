@@ -6,14 +6,17 @@ import style from './Order.module.scss'
 import clsx from "clsx";
 import { LoginContext } from "src/App"; 
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
+// Lưu trữ thông tin các giá của các chỗ ngồi tương ứng với trận đấu đã chọn
  const standPrice = {
     standA : '',
     standB : '',
     standC : '',
     standD : ''
 }
+
+// Lưu trữ thông tin các id của chỗ ngồi của các sân
 const standId = {
     standA : '',
     standB : '',
@@ -21,25 +24,26 @@ const standId = {
     standD : ''
 }
 
-export let crrPrice = 0;
-export let crrId = 0;
-export let quan = 0
-export let amount = 0;
+export let crrPrice = 0; // Giá hiện tại của chỗ ngồi đang chọn
+export let crrId = 0; // Id của chỗ ngồi đang chọn
+export let quan = 0 // Số lượng chỗ ngồi đang chọn
+export let amount = 0; // Tổng giá trị của bill
 
 
 function Order() {
 
-    const navigate = useNavigate();
-
-    const {currMatchInfo, userInfo} = useContext(LoginContext)
-    console.log("Match info", currMatchInfo);
+    // currMatchInfo để lưu trữ thông tin trận đấu đang chọn
+    const {currMatchInfo} = useContext(LoginContext)
     
 
-    const [stand, setStand] = useState('Stand A')
-    const [chooseFood, setChooseFood] = useState(false)
-    const [chooseDrink, setChooseDrink] = useState(false)
+    const [stand, setStand] = useState('Stand A') // Lưu tên chỗ ngồi
+    const [chooseFood, setChooseFood] = useState(false) // Có chọn mua thêm đồ ăn hay không
+    const [chooseDrink, setChooseDrink] = useState(false) // Có chọn mua thêm nước hay không
     let [quantity, setQuantity] = useState(0)
 
+    // Nhận thông tin chỗ ngồi bằng id trận đấu
+    // Đầu tiên call API lấy thông tin tất cả chỗ ngồi của trận từ database
+    // Sau đó lưu thông tin các chỗ ngồi
     const getStandInfo = async (e) => {
         try {
             await axios.get("http://localhost:8080/stand/showStandByMatchId", {params : {
@@ -67,10 +71,9 @@ function Order() {
     }
 
 
-
+    //Xử lý khi chọn 1 chỗ ngồi
     const handleStandClick = (e) => {
         
-        console.log(standPrice);
         if(stand === e.target.innerText) {
             
         }
@@ -86,16 +89,11 @@ function Order() {
     }
 
     
-
+    // Đọc thông tin các chỗ ngồi của trận đấu khi 1 thay đổi
+    // Như vậy chỉ khi render lần đầu tiên thì mới gọi hàm
     useEffect(() => {
         getStandInfo();
-        
-        
     }, [1])
-
-    
-
-
 
     return (
 
@@ -126,7 +124,6 @@ function Order() {
                                 handleStandClick(e)
                                 crrPrice = standPrice.standA
                                 crrId = standId.standA
-                                console.log(standPrice);
                             }}>
                                 Stand A
                             </div>
@@ -143,7 +140,6 @@ function Order() {
                             <div className= {clsx(style.standCCointainer, {[style.activeStand] : (stand === 'Stand C')})}
                             onClick={(e) => {
                                 handleStandClick(e)
-                                console.log(standPrice.standC);
                                 crrPrice = standPrice.standC
                                 crrId = standId.standC
                             }}>
@@ -172,7 +168,6 @@ function Order() {
                             onClick={() => {
                                 setQuantity(quantity+1)
                                 quan = quantity + 1
-                                console.log(crrId, "   " , crrPrice);
                             }}></button> 
                             <button className= {clsx(style.decreaseBtn, "ti-angle-down")}
                             onClick={() => {
