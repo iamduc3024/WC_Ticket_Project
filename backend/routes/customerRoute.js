@@ -22,6 +22,6 @@ router.get("/customerProfile", customerController.showCustomerProfile);
 // router.put("/update/:id", updateCustomer);
 
 // // Delete Customer
-// router.delete("/delete/:id", deleteCustomer);
+router.delete("/deleteCustomer/:id", customerController.deleteCustomer);
 
 module.exports = router;

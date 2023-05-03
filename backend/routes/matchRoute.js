@@ -10,5 +10,6 @@ router.get("/show", matchController.showMatch);
 router.get("/showbyid", matchController.showMatchById);
 router.get("/showFilter", matchController.showMatchFilter);
 router.put("/update", matchController.updateMatch);
+router.delete("/deleteMatch/:id", matchController.deleteMatch);
 
 module.exports = router;

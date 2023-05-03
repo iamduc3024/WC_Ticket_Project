@@ -64,6 +64,17 @@ class matchController {
             }
         });
     }
+
+    deleteMatch = (req, res) => {
+        const id = req.params.id;
+        matchModel.deleteMatchById(id, (err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.json(result);
+            }
+        })
+    }
 }
 
 module.exports = new matchController();
