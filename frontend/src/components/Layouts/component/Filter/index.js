@@ -12,7 +12,7 @@ export const filterBtn = document.querySelector('.' + style.filterSubmitBtn)
 // Component Filter dùng trong các page như Home, Order
 function Filter() {
     const navigate = useNavigate()
-    const {matchesFilter} = useContext(LoginContext)
+    let {matchesFilter} = useContext(LoginContext)
     
     const [form_input, setForm_input] = useState({
         team_name_A: '',
@@ -34,6 +34,7 @@ function Filter() {
 
     //Xử lý khi nhấn nút Filter
     const handleFilter = async (e) => {
+        console.log(form_input);
         try {
             //Nhận thông tin các trận đấu hợp lệ với Filter
             await axios.get("http://localhost:8080/match/showFilter", {params : {
@@ -46,7 +47,7 @@ function Filter() {
                 price_to: form_input.price_to,
             }})
             .then(response => {
-
+                matchesFilter.splice(response.data.length, matchesFilter.length)
                 for(let i=0; i<response.data.length; i++) {
                     matchesFilter[i] = response.data[i].match_id;
                 }
