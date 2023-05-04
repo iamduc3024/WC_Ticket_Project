@@ -24,6 +24,13 @@ const standId = {
     standD : ''
 }
 
+const capacity = {
+    standA : '',
+    standB : '',
+    standC : '',
+    standD : ''
+}
+
 export let crrPrice = 0; // Giá hiện tại của chỗ ngồi đang chọn
 export let crrId = 0; // Id của chỗ ngồi đang chọn
 export let quan = 0 // Số lượng chỗ ngồi đang chọn
@@ -50,14 +57,22 @@ function Order() {
                 mId : currMatchInfo.mId
             }})
             .then((response) => {
+                console.log(response.data);
                 standPrice.standA = response.data[0].price;
                 standPrice.standB = response.data[1].price;
                 standPrice.standC = response.data[2].price;
                 standPrice.standD = response.data[3].price;
+
                 standId.standA = response.data[0].stand_id
                 standId.standB = response.data[1].stand_id
                 standId.standC = response.data[2].stand_id
                 standId.standD = response.data[3].stand_id
+                
+                capacity.standA = response.data[0].capacity
+                capacity.standB = response.data[1].capacity
+                capacity.standC = response.data[2].capacity
+                capacity.standD = response.data[3].capacity
+
                 crrPrice = standPrice.standA
                 crrId = standId.standA
             })
@@ -145,7 +160,7 @@ function Order() {
                             }}>
                                 Stand C
                             </div>
-                    
+                            
                             <div className= {clsx(style.standDCointainer, {[style.activeStand] : (stand === 'Stand D')})}
                             onClick={(e) => {
                                 handleStandClick(e)

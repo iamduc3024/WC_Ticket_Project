@@ -31,7 +31,7 @@ const images = {
     Tunisia : require('../nations_png/Tunisia.png'),
     USA : require('../nations_png/USA.png'),
     Uruguay : require('../nations_png/Uruguay.png'),
-    Wales : require('../nations_png/Senegal.png'),
+    Wales : require('../nations_png/Wales.png'),
 };
 
 export default images;

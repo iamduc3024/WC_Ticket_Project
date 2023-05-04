@@ -3,7 +3,8 @@ const customerModel = require('../models/customerModel')
 class customerController {
     // Show customer profile and transaction
     showCustomerProfile = (req, res) => {
-        customerModel.getCustomerProfile((err, result) => {
+        console.log(req.query.id);
+        customerModel.getCustomerProfile(req.query.id, (err, result) => {
             if (err) {
                 res.send(err);
             } else {
@@ -76,8 +77,9 @@ class customerController {
     //Update customer
     updateCustomer = (req, res) => {
         const data = req.body;
-        const id = req.params.id;
-        customerModel.updateCustomerById(data, id, (err, results) => {
+        //const id = req.body.id;
+        console.log(data.new_password);
+        customerModel.updateCustomerById(data.new_password, data.customer_id, (err, results) => {
             if (err) {
                 res.send(err);
             } else {

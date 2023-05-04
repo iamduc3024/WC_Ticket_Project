@@ -4,25 +4,12 @@ import Header from 'src/components/Layouts/component/Header'
 import SlideBar from 'src/components/Layouts/component/SlideBar'
 import Footer from 'src/components/Layouts/component/Footer'
 import { LoginContext } from 'src/App'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import clsx from 'clsx'
+import axios from 'axios'
 
 
-const matches = [{
-    team_A: 'Los Angeles',
-    team_B: 'San Francisco',
-    time: '12:00 AM',
-    date: '12/12/2020',
-    stadium: 'Los Angeles'
-},
-{
-    team_A: 'Los Angeles',
-    team_B: 'San Francisco',
-    time: '12:00 AM',
-    date: '12/12/2020',
-    stadium: 'Los Angeles'
-}
-]
+let transactions = []
 
 function Profiles() {
 
@@ -35,7 +22,7 @@ function Profiles() {
     const [newPassHide, setNewPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu mới
     const [oldPassHide, setOldPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu cũ
     const [inputs, setInputs] = useState({
-        phone: userInfo.uPhone,
+        customer_id : userInfo.uId,
         new_password: "",
     });
 
@@ -119,8 +106,19 @@ function Profiles() {
         });
     }
 
-    const handleChangePassSubmit2 = () => {
-
+    const handleChangePassSubmit2 = async(e) => {
+        try {
+            await axios.post("http://localhost:8080/customer/update", inputs)
+            .then((response) => {
+                userInfo.uPassword = inputs.new_password
+                //alert(message);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        } catch (err) {
+            console.log(err.respone.data);
+        }
     }
 
     const handleChangePassSubmit1 = () => {
@@ -131,6 +129,28 @@ function Profiles() {
             handleChangePassSubmit2()
         }
     }
+
+    const getTransactions = async (e) => {
+        try {
+            await axios.get("http://localhost:8080/customer/customerProfile", {params : {
+                id : userInfo.uId
+            }})
+            .then((response) => {
+
+                transactions = response.data
+                console.log(transactions);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        } catch (err) {
+            console.log(err.respone.data);
+        }
+    }
+
+    useEffect(() => {
+        getTransactions()
+    })
     
     return (
         <>
@@ -196,16 +216,17 @@ function Profiles() {
 
                 <div className = {style.matchesContainer}>
                 {
-                    matches.map((match, index) => {
+                    transactions.map((match, index) => {
+                        console.log(match);
                         return (
                             <div key={index} className= {style.matchContainer}>
                                 <img alt="" className= {style.nation1} src= {images[(match.team_A.includes(' ')? (match.team_A.replace(' ', '_')) : match.team_A)]}/>
                                 <section className= {style.matchInfo}>
                                     <h2 className= {style.matchName}>Match: {match.team_A} VS {match.team_B}</h2>
-                                    <h3 className= {style.matchTime}>Time: {match.time}</h3>
-                                    <h3 className= {style.matchDate}>Date: {match.date}</h3>
+                                    <h3 className= {style.matchTime}>Time: {match.mTime}</h3>
+                                    <h3 className= {style.matchDate}>Date: {match.mDate}</h3>
                                     <h3 className= {style.matchStadium}>Stadium: {match.stadium}</h3>
-                                    <h3 className= {style.transactionQuantities}>Quantities: </h3>
+                                    <h3 className= {style.transactionQuantities}>Quantities: {match.quantity_of_tickets}</h3>
                                 </section>
                                 <img src= {images[match.team_B.includes(' ')? (match.team_B.replace(' ', '_')) : match.team_B]} alt="" className= {style.nation2} />
                             </div>

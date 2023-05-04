@@ -3,9 +3,9 @@ const db = require('../configdb/db')
 
 class customerModel {
   // Get customer profile and all transactions    
-  getCustomerProfile = (result) => {
-    const customerProfileQuery = "SELECT c.name,c.phone, DATE_FORMAT(m.date, '%d/%m/%Y') AS mDate, DATE_FORMAT(m.time, '%H:%i:%s') AS mTime, m.group_name, m.team_A, m.team_B, m.stadium, s.stand_name, t.quantity_of_tickets, t.amount, DATE_FORMAT(t.date_time, '%d/%m/%y %H:%i:%s') AS transaction_time from customer c INNER JOIN `transaction` t on c.customer_id = t.customer_id INNER JOIN stand s ON t.stand_id = s.stand_id INNER JOIN `match` m ON s.match_id = m.match_id GROUP BY c.customer_id";
-    db.query(customerProfileQuery, (err, results) => {
+  getCustomerProfile = (id, result) => {
+    const customerProfileQuery = "SELECT c.name,c.phone, DATE_FORMAT(m.date, '%d/%m/%Y') AS mDate, DATE_FORMAT(m.time, '%H:%i:%s') AS mTime, m.group_name, m.team_A, m.team_B, m.stadium, s.stand_name, t.quantity_of_tickets, t.amount, DATE_FORMAT(t.date_time, '%d/%m/%y %H:%i:%s') AS transaction_time from customer c INNER JOIN `transaction` t on c.customer_id = t.customer_id INNER JOIN stand s ON t.stand_id = s.stand_id INNER JOIN `match` m ON s.match_id = m.match_id WHERE c.customer_id = ?";
+    db.query(customerProfileQuery, [id], (err, results) => {
       if (err) {
         console.log(err);
         result(err, null);
@@ -68,9 +68,9 @@ class customerModel {
   }
 
   //Update customer
-  updateCustomerById = (data, id, result) => {
-    db.query("UPDATE customer SET name = ?, phone = ?, password = ? WHERE customer_id =?",
-      [data.name, data.phone, data.password, id], (err, results) => {
+  updateCustomerById = (password, id, result) => {
+    db.query("UPDATE customer SET password = ? WHERE customer_id =?",
+      [password, id], (err, results) => {
         if (err) {
           console.log(err);
           result(err, null);

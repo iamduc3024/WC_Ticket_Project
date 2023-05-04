@@ -19,7 +19,7 @@ router.post("/create", customerController.createCustomer);
 // Show customer Profile
 router.get("/customerProfile", customerController.showCustomerProfile);
 // // Update Customer
-// router.put("/update/:id", updateCustomer);
+router.post("/update", customerController.updateCustomer);
 
 // // Delete Customer
 router.delete("/deleteCustomer/:id", customerController.deleteCustomer);
