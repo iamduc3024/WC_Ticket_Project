@@ -18,7 +18,6 @@ function Header({isAdminLogin = false}) {
                 <label htmlFor={style.searchBar} className={clsx(style.searchIcon, 'ti-search')}></label>
             </div>
             
-            <i className={clsx(style.cartIcon, 'ti-shopping-cart')}></i>
             <ul className= {clsx({[style.invalid] : (isLogin || isAdminLogin)})}>
                 <Link to = "/login">
                     <li className={style.loginBtn}>

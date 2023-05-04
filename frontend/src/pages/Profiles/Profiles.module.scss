@@ -1,6 +1,6 @@
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-top: 72px;
@@ -8,24 +8,28 @@
 
   .userContainer {
     background-color: #550065;
-    width: 70%;
     padding: 24px;
     border-radius: 24px;
     color: #fff;
     font-weight: bold;
     font-size: 24px;
     margin: 12px;
+    flex: 5;
+    height: 80vh;
   }
 
   .matchesContainer {
-    background-color: #550065;
-    width: 90%;
+    flex: 15;
+    height: 80vh;
+    background-color: #fff;
     padding: 24px;
     border-radius: 24px;
     color: #fff;
     font-weight: bold;
     font-size: 24px;
     margin: 12px;
+    overflow-y: scroll;
+    border: solid 2px #333
   }
 
   .matchContainer {
@@ -37,6 +41,11 @@
     padding: 24px;
     margin-bottom: 24px;
     border-radius: 48px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
   }
 
   .nation1 {
