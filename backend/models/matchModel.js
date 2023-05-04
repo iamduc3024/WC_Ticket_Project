@@ -40,6 +40,19 @@ class matchModel {
         })
     }
 
+    // Delete match
+    deleteMatchById = (id, result) => {
+        const deleteMatchByIdQuery = "DELETE FROM `match` WHERE match_id = ?";
+        db.query(deleteMatchByIdQuery, [id], (err, results) => {
+            if (err) {
+                console.log(err);
+                result(err, null);
+            } else {
+                result(null, results);
+            }
+        })
+    }
+
     //Update match
     updateMatchById = (id, data, result) => {
         db.query("UPDATE `match` SET date = ?, time = ?, group_name = ?, team_A = ?, team_B = ?, stadium = ? WHERE match_id = ?",
