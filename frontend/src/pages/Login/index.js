@@ -189,7 +189,7 @@ function Login() {
                     </section>
 
                     <section className={style.passInputContainer}>
-                        <label htmlFor="passInput">Password</label>
+                        <label htmlFor= {style.passInput}>Password</label>
                         <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
                         type="password" placeholder="Enter your password" 
                         name='password'

@@ -7,6 +7,7 @@
   }
 
   .userContainer {
+    display: flex;
     background-color: #550065;
     padding: 24px;
     border-radius: 24px;
@@ -16,6 +17,118 @@
     margin: 12px;
     flex: 5;
     height: 80vh;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userName {
+    margin-top: 48px;
+  }
+
+  .phoneNumber {
+    margin-bottom: 24px;
+  }
+
+  .changePasswordBtn {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #00a9ec;
+    justify-content: center;
+    text-align: center;
+    border-radius: 24px;
+    padding: 4px 8px;
+    min-width: 300px;
+
+    &:hover {
+      background-color: #21c0ff;
+      cursor: pointer;
+    }
+  }
+
+  .changPassConatiner {
+    animation: fadeIn 1s ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  .oldPassInputContainer {
+    text-align: left;
+    margin-bottom: 4px;
+    margin-top: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .oldPassInputContainer label {
+    font-size: 16px;
+  }
+
+  .oldPassInput {
+    width: 90%;
+    border: none;
+    border-radius: 8px;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    padding-left: 12px;
+  }
+
+  .hiddenOldPass {
+    color: #fff;
+    margin-left: 8px;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+  }
+
+  .newPassInputContainer {
+    text-align: left;
+    margin-bottom: 4px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .newPassInputContainer label {
+    font-size: 16px;
+  }
+
+  .newPassInput {
+    width: 90%;
+    border: none;
+    border-radius: 8px;
+    border-bottom: 2px solid #000;
+    padding: 2px;
+    padding-left: 12px;
+  }
+
+  .hiddenNewPass {
+    color: #fff;
+    margin-left: 8px;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+  }
+
+  .newPassErrMes {
+    display: block;
+  }
+
+  .errContainer {
+    color: red;
+    font-size: 14px;
+    margin: 2px;
+    height: 19px;
+  }
+  
+  .errContainer .errMessage {
+    visibility: hidden;
+  }
+
+  .invalidBorder {
+    color: red;
+    border-bottom: solid red;
   }
 
   .matchesContainer {
@@ -62,4 +175,19 @@
   .nation2 {
     width: 25%;
     object-fit: cover;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .invalid {
+    display: none;
   }

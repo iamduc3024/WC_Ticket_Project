@@ -4,7 +4,8 @@ import Header from 'src/components/Layouts/component/Header'
 import SlideBar from 'src/components/Layouts/component/SlideBar'
 import Footer from 'src/components/Layouts/component/Footer'
 import { LoginContext } from 'src/App'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import clsx from 'clsx'
 
 
 const matches = [{
@@ -26,6 +27,110 @@ const matches = [{
 function Profiles() {
 
     const {userInfo} = useContext(LoginContext) // Lưu thông tin người dùng
+
+    // Kiểm tra xem có đúng là mật khẩu không. Dùng để hiển thị lỗi khi blur ra ngoài vùng nhập
+    const [isOldPass, setIsOldPass] = useState(true) 
+    const [isNewPass, setIsNewPass] = useState(true) 
+
+    const [newPassHide, setNewPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu mới
+    const [oldPassHide, setOldPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu cũ
+    const [inputs, setInputs] = useState({
+        phone: userInfo.uPhone,
+        new_password: "",
+    });
+
+    const [isChangePass, setIsChangePass] = useState(false)
+
+    let oldPassIn = document.querySelector('.' + style.oldPassInput) // Element: input điền mật khẩu cũ
+    let newPassIn = document.querySelector('.' + style.newPassInput) // Element: input điền mật khẩu mới
+    let newPassMes = document.querySelector('.' + style.newPassErrMes) // Element: message of new password
+
+    // Xử lý khi blur khỏi input
+    function handleOldPassBlur() {
+        if(oldPassIn) {
+            
+            if(oldPassIn.value.length >= 6 && oldPassIn.value === userInfo.uPassword) {
+                setIsOldPass(true)
+            }
+            else {
+                setIsOldPass(false)
+            }
+        }
+        else {
+            console.log(1);
+            oldPassIn = document.querySelector('.' + style.oldPassInput)
+            handleOldPassBlur()
+        }
+    }
+
+    function handleNewPassBlur() {
+        if(newPassIn && newPassMes) {
+            if(newPassIn.value.length >= 6 && newPassIn.value !== userInfo.uPassword) {
+                setIsNewPass(true)
+            }
+            else if(newPassIn.value === userInfo.uPassword) {
+                newPassMes.textContent = 'The new password must be different from the old one'
+                setIsNewPass(false)
+            }
+            else {
+                setIsNewPass(false)
+            }
+        }
+        else {
+            console.log(1);
+            newPassIn = document.querySelector('.' + style.newPassInput)
+            newPassMes = document.querySelector('.' + style.newPassErrMes)
+            handleNewPassBlur()
+        }
+    }
+
+    // Xử lý khi bấm vào ẩn/hiện mật khẩu
+    function handleOldPassHide() {
+        
+        setOldPassHide(!oldPassHide);
+        if(!oldPassHide)
+        {
+            oldPassIn.type = "text"
+        }
+        else {
+            oldPassIn.type = "password"
+        }
+    }
+
+    function handleNewPassHide() {
+        
+        setNewPassHide(!newPassHide);
+        if(!newPassHide)
+        {
+            newPassIn.type = "text"
+        }
+        else {
+            newPassIn.type = "password"
+        }
+    }
+
+    // Xử lý khi thay đổi lúc nhập các ô input
+    const handleChange = (e) => {
+        setInputs((prev) => {
+            return {
+              ...prev,
+                [e.target.name]: e.target.value
+            }
+        });
+    }
+
+    const handleChangePassSubmit2 = () => {
+
+    }
+
+    const handleChangePassSubmit1 = () => {
+        handleOldPassBlur()
+        handleNewPassBlur()
+        console.log(inputs);
+        if(isOldPass && isNewPass) {
+            handleChangePassSubmit2()
+        }
+    }
     
     return (
         <>
@@ -36,6 +141,57 @@ function Profiles() {
                 <div className = {style.userContainer}>
                     <div className = {style.userName}>Name: {userInfo.uName}</div>
                     <div className = {style.phoneNumber}>Phone Number: {userInfo.uPhone}</div>
+                    <div className= {style.changePasswordBtn}
+                    onClick={(e) => {
+                        if(!isChangePass) {
+                            setIsChangePass(!isChangePass)
+                            e.target.textContent = 'Change Password'
+                        }
+                        else {
+                            handleChangePassSubmit1()
+                        }
+                    }}>You wanna change password?</div>
+                    <section className= {clsx(style.changPassConatiner, {[style.invalid] : !isChangePass})}>
+                        
+                        <section className={style.oldPassInputContainer}>
+                            <label htmlFor= {style.oldPassInput}>Old Password</label>
+                            <input className={clsx(style.oldPassInput, {[style.invalidBorder] : !isOldPass}) } 
+                            type="password" placeholder="Enter your old password" 
+                            name='old_password'
+                            onBlur={handleOldPassBlur}
+                            onFocus={() => {
+                                setIsOldPass(true)
+                            }}/>
+                            <i className={ clsx(style.hiddenOldPass, "ti-eye", ) } 
+                                onClick={handleOldPassHide}
+                            ></i>
+
+                            <div className= {style.errContainer}>
+                                <p className= {clsx(style.oldPassErrMes, {[style.errMessage] : isOldPass} )}>Invalid Old Password</p>
+                            </div>
+                        </section>
+
+                        <section className={style.newPassInputContainer}>
+                            <label htmlFor= {style.newPassInput}>New Password</label>
+                            <input className={clsx(style.newPassInput, {[style.invalidBorder] : !isNewPass}) } 
+                            type="password" placeholder="Enter your new password" 
+                            name='new_password'
+                            onBlur={handleNewPassBlur}
+                            onFocus={() => {
+                                setIsNewPass(true)
+                            }}
+                            onChange={handleChange}/>
+                            <i className={ clsx(style.hiddenNewPass, "ti-eye", ) } 
+                                onClick={handleNewPassHide}
+                            ></i>
+
+                            <div className= {style.errContainer}>
+                                <p className= {clsx(style.newPassErrMes, {[style.errMessage] : isNewPass} )}>Invalid New Password</p>
+                            </div>
+                        </section>
+
+                    </section>
+                    
                 </div>
 
                 <div className = {style.matchesContainer}>

@@ -28,9 +28,25 @@ function Header({isAdminLogin = false}) {
                     <li className={style.registerBtn}>Register</li> 
                 </Link>
             </ul>
-            <Link to = "/profiles">
-                <ul className= {clsx(style.userIcon ,"ti-user", {[style.invalid] : !(isLogin || isAdminLogin)})}></ul>
-            </Link>
+
+            <ul className= {clsx({[style.invalid] : !(isLogin || isAdminLogin)})}>
+                <i className= {clsx(style.userIcon ,"ti-user")}
+                onClick={() => {
+                    let toggleUserIcon = document.querySelector('.' + style.ProfileOrLogOut)
+                    if(toggleUserIcon) {
+                        toggleUserIcon.classList.toggle(style.invalid)
+                    }
+                }}></i>
+                <section className= {clsx(style.ProfileOrLogOut, style.invalid)}>
+                    <Link to = "/profiles">
+                        <li>Profiles</li>
+                    </Link>
+                    <li onClick={() => {
+                        window.location.href = '/';
+                    }}>Log out</li>
+                </section>
+            </ul>
+            
         </div>
         </Fragment>
     ) ;
