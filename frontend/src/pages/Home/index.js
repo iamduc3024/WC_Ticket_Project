@@ -7,10 +7,11 @@ import Filter from 'src/components/Layouts/component/Filter';
 import axios from 'axios';
 import style from './Home.module.scss'
 import {LoginContext} from '../../App'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import images from 'src/assets/images/nations_png/nation_image';
 
 function Home() {
+    
 
     // Nhận những thông tin chung của cả web
     // currMatchInfo dùng để lưu thông tin trận đấu để sau đó đọc được ở Order Page
@@ -28,7 +29,7 @@ function Home() {
         try {
             await axios.get("http://localhost:8080/match/show")
             .then((response) => {
-                
+                console.log(response.data);
                 setMatches(response.data)
             })
             .catch((err) => {
@@ -46,7 +47,6 @@ function Home() {
         getMatchesInfo();
     },[change])
 
-    console.log("Filter " + matchesFilter);
 
     return(
         <Fragment>
@@ -77,6 +77,7 @@ function Home() {
                                         currMatchInfo.mStadium = match.stadium
                                         currMatchInfo.mTime = match.time
                                         currMatchInfo.mDate = match.date
+                                        currMatchInfo.mStandACapacity = match.capacity
                                     }}>
                                         <img src= {images[(match.team_A.includes(' ')? (match.team_A.replace(' ', '_')) : match.team_A)]} alt="" className= {style.nation1} />
                                         <section className= {style.matchInfo}>

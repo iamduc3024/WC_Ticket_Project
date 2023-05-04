@@ -36,7 +36,8 @@ function App() {
         mTeamB : "",
         mTime : "",
         mDate : "",
-        mStadium : ""
+        mStadium : "",
+        mStandACapacity : ""
     }
 
     // Lưu trữ id các trận đấu được lọc

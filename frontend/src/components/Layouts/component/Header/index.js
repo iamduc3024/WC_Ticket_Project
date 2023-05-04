@@ -2,6 +2,8 @@ import { Fragment, useContext } from "react";
 import style from './Header.module.scss'
 import {Link} from 'react-router-dom'
 import clsx from "clsx";
+import WCLogo from '../../../../assets/logos/WCLogo.png'
+import WCLogo1 from '../../../../assets/logos/WCLogo2.png'
 
 import { LoginContext } from "src/App"; 
 
@@ -12,7 +14,9 @@ function Header({isAdminLogin = false}) {
     return(
         <Fragment>
         <div className={style.headerContainer}>
-            <Link to ="/" className={style.logo}>Logo</Link>
+            <Link to ="/" className={style.logo}>
+                <img src= {WCLogo1} alt="" className={style.logo} />
+            </Link>
             <div className={style.searchContainer}>
                 <input className={style.searchBar} type="text" placeholder="Search..." />
                 <label htmlFor={style.searchBar} className={clsx(style.searchIcon, 'ti-search')}></label>

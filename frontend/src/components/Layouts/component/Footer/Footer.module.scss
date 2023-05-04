@@ -50,12 +50,17 @@ li {
 
   .contactContainer .logo {
     margin-left: 36px;
+    height: 80px;
   }
 
   .listContact {
     position: relative;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+ 
 
   .instagram {
     padding: 0px 24px;

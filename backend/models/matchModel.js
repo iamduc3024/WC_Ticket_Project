@@ -3,7 +3,7 @@ const db = require('../configdb/db');
 class matchModel {
     //Query all match
     getMatch = (result) => {
-        const getAllMatchInfo = "SELECT DATE_FORMAT(`date`, '%d/%m/%Y') AS 'date', DATE_FORMAT(`time`, '%H:%i:%s') AS 'time', group_name, match_id, stadium, team_A, team_B FROM `match`";
+        const getAllMatchInfo = "SELECT DATE_FORMAT(`date`, '%d/%m/%Y') AS 'date', DATE_FORMAT(`time`, '%H:%i:%s') AS 'time', group_name, `match`.match_id, stadium, team_A, team_B, s.capacity FROM `match` JOIN `stand` s ON s.match_id = `match`.match_id WHERE s.stand_name = 'Category_A'";
         db.query(getAllMatchInfo, (err, results) => {
             if (err) {
                 console.log(err);

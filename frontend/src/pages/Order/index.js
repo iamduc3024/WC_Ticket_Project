@@ -6,7 +6,7 @@ import style from './Order.module.scss'
 import clsx from "clsx";
 import { LoginContext } from "src/App"; 
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Lưu trữ thông tin các giá của các chỗ ngồi tương ứng với trận đấu đã chọn
  const standPrice = {
@@ -41,8 +41,8 @@ function Order() {
 
     // currMatchInfo để lưu trữ thông tin trận đấu đang chọn
     const {currMatchInfo} = useContext(LoginContext)
-    
 
+    const [crrCapacity, setCrrCapacity] = useState(currMatchInfo.capacity)
     const [stand, setStand] = useState('Stand A') // Lưu tên chỗ ngồi
     const [chooseFood, setChooseFood] = useState(false) // Có chọn mua thêm đồ ăn hay không
     const [chooseDrink, setChooseDrink] = useState(false) // Có chọn mua thêm nước hay không
@@ -57,7 +57,6 @@ function Order() {
                 mId : currMatchInfo.mId
             }})
             .then((response) => {
-                console.log(response.data);
                 standPrice.standA = response.data[0].price;
                 standPrice.standB = response.data[1].price;
                 standPrice.standC = response.data[2].price;
@@ -73,8 +72,10 @@ function Order() {
                 capacity.standC = response.data[2].capacity
                 capacity.standD = response.data[3].capacity
 
+                setCrrCapacity(capacity.standA)
                 crrPrice = standPrice.standA
                 crrId = standId.standA
+                
             })
             .catch((err) => {
                 console.log(err);
@@ -88,7 +89,6 @@ function Order() {
 
     //Xử lý khi chọn 1 chỗ ngồi
     const handleStandClick = (e) => {
-        
         if(stand === e.target.innerText) {
             
         }
@@ -103,13 +103,15 @@ function Order() {
         setChooseDrink(!chooseDrink)
     }
 
+
     
     // Đọc thông tin các chỗ ngồi của trận đấu khi 1 thay đổi
     // Như vậy chỉ khi render lần đầu tiên thì mới gọi hàm
     useEffect(() => {
         getStandInfo();
+        setCrrCapacity(currMatchInfo.mStandACapacity);
+        setStand('Stand A')
     }, [1])
-
     return (
 
         <Fragment>
@@ -133,12 +135,21 @@ function Order() {
                         <h1>Select Stand</h1>
 
                         <div className= {style.allStandContainer}>
-
+                            
                             <div className= {clsx(style.standACointainer, {[style.activeStand] : (stand === 'Stand A')})}
                             onClick={(e) => {
                                 handleStandClick(e)
-                                crrPrice = standPrice.standA
-                                crrId = standId.standA
+                                if(quantity > capacity.standA) {
+                                    setCrrCapacity(0)
+                                    setQuantity(capacity.standA)
+                                    e.target.click()
+                                }
+                                else {
+                                    
+                                    setCrrCapacity(capacity.standA - quantity)
+                                    crrPrice = standPrice.standA
+                                    crrId = standId.standA
+                                }
                             }}>
                                 Stand A
                             </div>
@@ -146,8 +157,17 @@ function Order() {
                             <div className= {clsx(style.standBCointainer, {[style.activeStand] : (stand === 'Stand B')})}
                             onClick={(e) => {
                                 handleStandClick(e)
-                                crrPrice = standPrice.standB
-                                crrId = standId.standB
+                                if(quantity > capacity.standB) {
+                                    setCrrCapacity(0)
+                                    setQuantity(capacity.standB)
+                                    e.target.click()
+                                }
+                                else {
+                                    
+                                    setCrrCapacity(capacity.standB - quantity)
+                                    crrPrice = standPrice.standB
+                                    crrId = standId.standB
+                                }
                             }}>
                                 Stand B
                             </div>
@@ -155,8 +175,17 @@ function Order() {
                             <div className= {clsx(style.standCCointainer, {[style.activeStand] : (stand === 'Stand C')})}
                             onClick={(e) => {
                                 handleStandClick(e)
-                                crrPrice = standPrice.standC
-                                crrId = standId.standC
+                                if(quantity > capacity.standC) {
+                                    setCrrCapacity(0)
+                                    setQuantity(capacity.standC)
+                                    e.target.click()
+                                }
+                                else {
+                                    
+                                    setCrrCapacity(capacity.standC - quantity)
+                                    crrPrice = standPrice.standC
+                                    crrId = standId.standC
+                                }
                             }}>
                                 Stand C
                             </div>
@@ -164,12 +193,23 @@ function Order() {
                             <div className= {clsx(style.standDCointainer, {[style.activeStand] : (stand === 'Stand D')})}
                             onClick={(e) => {
                                 handleStandClick(e)
-                                crrPrice = standPrice.standD
-                                crrId = standId.standD
+                                if(quantity > capacity.standD) {
+                                    setCrrCapacity(0)
+                                    setQuantity(capacity.standD)
+                                    e.target.click()
+                                }
+                                else {
+
+                                    setCrrCapacity(capacity.standD - quantity)
+                                    crrPrice = standPrice.standD
+                                    crrId = standId.standD
+                                }
                             }}>
                                 Stand D
                             </div>
                         </div>
+
+                        <h1>Capacity: {crrCapacity}</h1>
                 
                     </section>
 
@@ -181,13 +221,18 @@ function Order() {
 
                             <button className= {clsx(style.increaseBtn, "ti-angle-up")}
                             onClick={() => {
-                                setQuantity(quantity+1)
-                                quan = quantity + 1
+                                if(crrCapacity > 0) {
+                                    setCrrCapacity(crrCapacity - 1)
+                                    setQuantity(quantity+1)
+                                    quan = quantity + 1
+                                }
+                                
                             }}></button> 
                             <button className= {clsx(style.decreaseBtn, "ti-angle-down")}
                             onClick={() => {
                                 if(quantity > 1)
                                 {
+                                    setCrrCapacity(crrCapacity + 1)
                                     setQuantity(quantity-1)
                                     quan = quantity - 1
                                 }
