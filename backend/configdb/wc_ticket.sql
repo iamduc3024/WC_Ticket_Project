@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 29, 2023 at 10:00 AM
--- Server version: 10.4.24-MariaDB-log
--- PHP Version: 8.1.6
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 05, 2023 lúc 04:18 AM
+-- Phiên bản máy phục vụ: 10.4.24-MariaDB
+-- Phiên bản PHP: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wc_ticket`
+-- Cơ sở dữ liệu: `wc_ticket`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Cấu trúc bảng cho bảng `customer`
 --
 
 CREATE TABLE `customer` (
@@ -36,16 +36,17 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `customer`
+-- Đang đổ dữ liệu cho bảng `customer`
 --
 
 INSERT INTO `customer` (`customer_id`, `name`, `phone`, `password`, `isAdmin`) VALUES
-(2, 'Duc', '123', '', 0);
+(2, 'Duc', '123', '', 0),
+(3, 'Dat', '0822087979', '10112003', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `match`
+-- Cấu trúc bảng cho bảng `match`
 --
 
 CREATE TABLE `match` (
@@ -59,7 +60,7 @@ CREATE TABLE `match` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `match`
+-- Đang đổ dữ liệu cho bảng `match`
 --
 
 INSERT INTO `match` (`date`, `time`, `group_name`, `team_A`, `team_B`, `stadium`, `match_id`) VALUES
@@ -115,7 +116,7 @@ INSERT INTO `match` (`date`, `time`, `group_name`, `team_A`, `team_B`, `stadium`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stand`
+-- Cấu trúc bảng cho bảng `stand`
 --
 
 CREATE TABLE `stand` (
@@ -127,7 +128,7 @@ CREATE TABLE `stand` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `stand`
+-- Đang đổ dữ liệu cho bảng `stand`
 --
 
 INSERT INTO `stand` (`stand_id`, `stand_name`, `capacity`, `price`, `match_id`) VALUES
@@ -327,7 +328,7 @@ INSERT INTO `stand` (`stand_id`, `stand_name`, `capacity`, `price`, `match_id`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaction`
+-- Cấu trúc bảng cho bảng `transaction`
 --
 
 CREATE TABLE `transaction` (
@@ -340,30 +341,40 @@ CREATE TABLE `transaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Bẫy `transaction`
+--
+DELIMITER $$
+CREATE TRIGGER `updateCapacityWhenOrder` AFTER INSERT ON `transaction` FOR EACH ROW BEGIN
+	UPDATE stand SET stand.capacity = stand.capacity - NEW.quantity_of_tickets WHERE stand.stand_id = new.`stand_id`;
+END
+$$
+DELIMITER ;
+
+--
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `customer`
+-- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
 
 --
--- Indexes for table `match`
+-- Chỉ mục cho bảng `match`
 --
 ALTER TABLE `match`
   ADD PRIMARY KEY (`match_id`);
 
 --
--- Indexes for table `stand`
+-- Chỉ mục cho bảng `stand`
 --
 ALTER TABLE `stand`
   ADD PRIMARY KEY (`stand_id`),
   ADD KEY `fk_stands_matchs` (`match_id`);
 
 --
--- Indexes for table `transaction`
+-- Chỉ mục cho bảng `transaction`
 --
 ALTER TABLE `transaction`
   ADD PRIMARY KEY (`transaction_id`),
@@ -371,49 +382,49 @@ ALTER TABLE `transaction`
   ADD KEY `fk_stand_id` (`stand_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `customer_id` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `match`
+-- AUTO_INCREMENT cho bảng `match`
 --
 ALTER TABLE `match`
   MODIFY `match_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `stand`
+-- AUTO_INCREMENT cho bảng `stand`
 --
 ALTER TABLE `stand`
   MODIFY `stand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
--- AUTO_INCREMENT for table `transaction`
+-- AUTO_INCREMENT cho bảng `transaction`
 --
 ALTER TABLE `transaction`
   MODIFY `transaction_id` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `stand`
+-- Các ràng buộc cho bảng `stand`
 --
 ALTER TABLE `stand`
-  ADD CONSTRAINT `fk_stands_matchs` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`);
+  ADD CONSTRAINT `fk_stands_matchs` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `transaction`
+-- Các ràng buộc cho bảng `transaction`
 --
 ALTER TABLE `transaction`
-  ADD CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_stand_id` FOREIGN KEY (`stand_id`) REFERENCES `stand` (`stand_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_stand_id` FOREIGN KEY (`stand_id`) REFERENCES `stand` (`stand_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
