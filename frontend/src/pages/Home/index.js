@@ -9,6 +9,7 @@ import style from './Home.module.scss'
 import {LoginContext} from '../../App'
 import { Link, useNavigate } from 'react-router-dom';
 import images from 'src/assets/images/nations_png/nation_image';
+import $ from "jquery"
 
 function Home() {
     
@@ -66,6 +67,8 @@ function Home() {
                                 return (
                                     <Link to = '/order' key={index} className= {style.matchContainer}
                                     onClick={(e) => {
+                                        window.scrollTo(0,0)
+                                        $("html, body").animate({ scrollTop: 800 }, "slow");
                                         if(!isLogin) {
                                             e.preventDefault();
                                             window.location.href = "/login";

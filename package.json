@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jquery": "^3.6.4",
     "react-router-dom": "^6.11.0",
     "react-sticky": "^6.0.3"
   }

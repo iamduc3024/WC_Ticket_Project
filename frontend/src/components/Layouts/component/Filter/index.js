@@ -69,7 +69,14 @@ function Filter() {
             <label htmlFor= {style.standNameInput}>Team name:</label>
             <br />
             <input className={style.standNameInput} type="text" name="team_name_A" placeholder="Team name..." 
-            onChange={handleChange}/>
+            onChange={handleChange}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    handleFilter()
+                    navigate('/home')
+                }
+                
+            }}/>
             <br />
         </section>
 
@@ -77,7 +84,14 @@ function Filter() {
             <label htmlFor= {style.stationInput}>Stadium name:</label>
             <br />
             <input className={style.stationInput} type="text" name="stadium_name" placeholder="Stadium name..." 
-            onChange={handleChange}/>
+            onChange={handleChange}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    handleFilter()
+                    navigate('/home')
+                }
+                
+            }}/>
             <br />
         </section>
 
@@ -85,12 +99,26 @@ function Filter() {
             <label htmlFor= {style.dateFromInput}>Date from:</label>
             <br />
             <input className={style.dateFromInput} type="date" name="date_from" 
-            onChange={handleChange}/>
+            onChange={handleChange}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    handleFilter()
+                    navigate('/home')
+                }
+                
+            }}/>
             <br />
             <label htmlFor= {style.dateToInput}>To:</label>
             <br />
             <input className={style.dateToInput} type="date" name='date_to' 
-            onChange={handleChange}/>
+            onChange={handleChange}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    handleFilter()
+                    navigate('/home')
+                }
+                
+            }}/>
             <br />
         </section>
         
@@ -98,12 +126,26 @@ function Filter() {
             <label htmlFor= {style.priceFromInput}>Price from:</label>
             <br />
             <input className={style.priceFromInput} type="text" name="price_from"
-            onChange={handleChange}/>
+            onChange={handleChange}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    handleFilter()
+                    navigate('/home')
+                }
+                
+            }}/>
             <br />
             <label htmlFor= {style.priceToInput}>To:</label>
             <br />
             <input className={style.priceToInput} type="text" name="price_to"
-            onChange={handleChange}/>
+            onChange={handleChange}
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    handleFilter()
+                    navigate('/home')
+                }
+                
+            }}/>
             <br />
         </section>
 

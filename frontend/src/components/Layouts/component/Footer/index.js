@@ -4,6 +4,7 @@ import facebookLogo from '../../../../assets/logos/FacebookLogo.png'
 import twitterLogo from '../../../../assets/logos/TwitterLogo.png'
 import { Link } from 'react-router-dom';
 import WCLogo1 from '../../../../assets/logos/WCLogo2.png'
+import $ from "jquery"
 
 function Footer() {
     return (
@@ -37,17 +38,29 @@ function Footer() {
                     </ul>
                 </div>
                 <div className={style.contactContainer}>
-                    <Link href="#" className={style.logo}>
+                    <Link to ="#" className={style.logo}
+                    onClick={() => {
+                        $("html, body").animate({ scrollTop: 1 }, "slow");
+                    }}>
                         <img src= {WCLogo1} alt="" className={style.logo} />    
                     </Link>
                     <div className={style.listContact}>
-                        <Link href="#" >
+                        <Link to ="/" 
+                        onClick={() => {
+                            $("html, body").animate({ scrollTop: 1 }, "slow");
+                        }}>
                             <img className={style.instagram} src= {instagramLogo} alt="" />
                         </Link>
-                        <Link href="#" >
+                        <Link to ="/" 
+                        onClick={() => {
+                            $("html, body").animate({ scrollTop: 1 }, "slow");
+                        }}>
                             <img className={style.facebook} src= {facebookLogo} alt="" /> 
                         </Link>
-                        <Link href="#" >
+                        <Link to ="/" 
+                        onClick={() => {
+                            $("html, body").animate({ scrollTop: 1 }, "slow");
+                        }}>
                             <img className={style.twitter} src= {twitterLogo} alt="" />
                         </Link>
                     </div>

@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { LoginContext } from "src/App"; 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "src/components/Layouts/component/Footer";
 
 // Lưu trữ thông tin các giá của các chỗ ngồi tương ứng với trận đấu đã chọn
  const standPrice = {
@@ -272,6 +273,8 @@ function Order() {
 
                 </div>
             </section>
+
+            <Footer />
         </Fragment>
     );
 }

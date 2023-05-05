@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import clsx from "clsx";
 import WCLogo from '../../../../assets/logos/WCLogo.png'
 import WCLogo1 from '../../../../assets/logos/WCLogo2.png'
+import $ from "jquery"
 
 import { LoginContext } from "src/App"; 
 
@@ -14,7 +15,10 @@ function Header({isAdminLogin = false}) {
     return(
         <Fragment>
         <div className={style.headerContainer}>
-            <Link to ="/" className={style.logo}>
+            <Link to ="/" className={style.logo}
+            onClick={() => {
+                $("html, body").animate({ scrollTop: 1 }, "slow");
+            }}>
                 <img src= {WCLogo1} alt="" className={style.logo} />
             </Link>
             <div className={style.searchContainer}>
@@ -42,7 +46,10 @@ function Header({isAdminLogin = false}) {
                     }
                 }}></i>
                 <section className= {clsx(style.ProfileOrLogOut, style.invalid)}>
-                    <Link to = "/profiles">
+                    <Link to = "/profiles"
+                    onClick={() => {
+                        $("html, body").animate({ scrollTop: 1 }, "slow");
+                    }}>
                         <li>Profiles</li>
                     </Link>
                     <li onClick={() => {
