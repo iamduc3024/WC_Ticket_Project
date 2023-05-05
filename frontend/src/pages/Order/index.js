@@ -8,6 +8,7 @@ import { LoginContext } from "src/App";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "src/components/Layouts/component/Footer";
+import $ from "jquery"
 
 // Lưu trữ thông tin các giá của các chỗ ngồi tương ứng với trận đấu đã chọn
  const standPrice = {
@@ -265,8 +266,15 @@ function Order() {
                         <h1>Price: {crrPrice * quantity + chooseFood * 5 + chooseDrink * 5}</h1>
                         <Link to = '/payment' className= {style.paymentBtn}
                             onClick={(e) => {
-                                amount = crrPrice * quantity + chooseFood * 5 + chooseDrink * 5
-                                }}>
+                                if(quantity === 0) {
+                                    e.preventDefault()
+                                    $("html, body").animate({ scrollTop: 800 }, "slow");
+                                } 
+                                else {
+                                    window.scrollTo(0,0)
+                                    amount = crrPrice * quantity + chooseFood * 5 + chooseDrink * 5
+                                }
+                            }}>
                             Payment
                         </Link>
                     </section>

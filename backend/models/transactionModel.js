@@ -14,7 +14,7 @@ class transactionModel {
     }
 
     getAllTransactionByCustomerId = (customer_id, result) => {
-        const getAllTransactionByCustomerIdQuery = "SELECT `transaction`.transaction_id, `transaction`.customer_id, `transaction`.stand_id, `transaction`.quantity_of_tickets, `transaction`.amount, `transaction`.date_time FROM `transaction` JOIN customer ON customer.customer_id = `transaction`.customer_id WHERE customer.customer_id = ?";
+        const getAllTransactionByCustomerIdQuery = "SELECT `transaction`.transaction_id, `transaction`.customer_id, `transaction`.stand_id, SUM(`transaction`.quantity_of_tickets) AS quantity_of_tickets, SUM(`transaction`.amount) AS amount, `transaction`.date_time FROM `transaction` JOIN customer ON customer.customer_id = `transaction`.customer_id WHERE customer.customer_id = ? GROUP BY `transaction`.stand_id";
         db.query(getAllTransactionByCustomerIdQuery, [customer_id], (err, results) => {
             if (err) {
                 console.log(err);

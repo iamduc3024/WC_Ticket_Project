@@ -7,6 +7,7 @@ import {  crrId, quan, amount } from '../Order'
 import { Link } from 'react-router-dom'
 import { LoginContext } from 'src/App'
 import axios from 'axios'
+import $ from "jquery"
 
 function Payment() {
     const {userInfo} = useContext(LoginContext) // Lưu trữ thông tin người dùng
@@ -160,10 +161,16 @@ function Payment() {
                     </section>
 
                     <section className= {style.buttons}>
-                        <Link to = '/order'>
+                        <Link to = '/order'
+                        onClick={() => {
+                            $("html, body").animate({ scrollTop: 800 }, "slow");
+                        }}>
                             <button className= {style.backBtn}>Back</button>
                         </Link>
-                        <Link to = '/'>
+                        <Link to = '/'
+                        onClick={() => {
+                            $("html, body").animate({ scrollTop: 1 }, "slow");
+                        }}>
                             <button className= {style.cfBtn}
                             onClick={handlePaymentSubmit}>Confirm Payment</button>
                         </Link>

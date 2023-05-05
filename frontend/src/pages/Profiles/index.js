@@ -221,6 +221,7 @@ function Profiles() {
                                     <h3 className= {style.matchTime}>Time: {match.mTime}</h3>
                                     <h3 className= {style.matchDate}>Date: {match.mDate}</h3>
                                     <h3 className= {style.matchStadium}>Stadium: {match.stadium}</h3>
+                                    <h3 className= {style.matchStand}>Stand: {match.stand_name}</h3>
                                     <h3 className= {style.transactionQuantities}>Quantities: {match.quantity_of_tickets}</h3>
                                 </section>
                                 <img src= {images[match.team_B.includes(' ')? (match.team_B.replace(' ', '_')) : match.team_B]} alt="" className= {style.nation2} />
