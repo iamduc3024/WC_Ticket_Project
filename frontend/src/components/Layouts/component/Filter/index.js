@@ -34,7 +34,6 @@ function Filter() {
 
     //Xử lý khi nhấn nút Filter
     const handleFilter = async (e) => {
-        console.log(form_input);
         try {
             //Nhận thông tin các trận đấu hợp lệ với Filter
             await axios.get("http://localhost:8080/match/showFilter", {params : {
@@ -64,10 +63,10 @@ function Filter() {
 
     return (
         <div className={style.filterContainer}>
-        <label htmlFor="filterContainer">Filter</label>
+        <label htmlFor= {style.filterContainer}>Filter</label>
         <br />
         <section className={style.standInpContainer}>
-            <label htmlFor="standNameInput">Team name:</label>
+            <label htmlFor= {style.standNameInput}>Team name:</label>
             <br />
             <input className={style.standNameInput} type="text" name="team_name_A" placeholder="Team name..." 
             onChange={handleChange}/>
@@ -75,7 +74,7 @@ function Filter() {
         </section>
 
         <section className={style.stationInpContainer}>
-            <label htmlFor="stationInput">Stadium name:</label>
+            <label htmlFor= {style.stationInput}>Stadium name:</label>
             <br />
             <input className={style.stationInput} type="text" name="stadium_name" placeholder="Stadium name..." 
             onChange={handleChange}/>
@@ -83,12 +82,12 @@ function Filter() {
         </section>
 
         <section className={style.dateInpContainer}>
-            <label htmlFor="dateFromInput">Date from:</label>
+            <label htmlFor= {style.dateFromInput}>Date from:</label>
             <br />
             <input className={style.dateFromInput} type="date" name="date_from" 
             onChange={handleChange}/>
             <br />
-            <label htmlFor="dateToInput">To:</label>
+            <label htmlFor= {style.dateToInput}>To:</label>
             <br />
             <input className={style.dateToInput} type="date" name='date_to' 
             onChange={handleChange}/>
@@ -96,12 +95,12 @@ function Filter() {
         </section>
         
         <section className={style.priceInpContainer}>
-            <label htmlFor="priceFromInput">Price from:</label>
+            <label htmlFor= {style.priceFromInput}>Price from:</label>
             <br />
             <input className={style.priceFromInput} type="text" name="price_from"
             onChange={handleChange}/>
             <br />
-            <label htmlFor="priceToInput">To:</label>
+            <label htmlFor= {style.priceToInput}>To:</label>
             <br />
             <input className={style.priceToInput} type="text" name="price_to"
             onChange={handleChange}/>

@@ -9,8 +9,6 @@ import clsx from 'clsx'
 import axios from 'axios'
 
 
-let transactions = []
-
 function Profiles() {
 
     const {userInfo} = useContext(LoginContext) // Lưu thông tin người dùng
@@ -18,6 +16,8 @@ function Profiles() {
     // Kiểm tra xem có đúng là mật khẩu không. Dùng để hiển thị lỗi khi blur ra ngoài vùng nhập
     const [isOldPass, setIsOldPass] = useState(true) 
     const [isNewPass, setIsNewPass] = useState(true) 
+
+    const [transactions, setTransactions] = useState([])
 
     const [newPassHide, setNewPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu mới
     const [oldPassHide, setOldPassHide] = useState(false) // Trạng thái ẩn/hiện của mật khẩu cũ
@@ -44,7 +44,6 @@ function Profiles() {
             }
         }
         else {
-            console.log(1);
             oldPassIn = document.querySelector('.' + style.oldPassInput)
             handleOldPassBlur()
         }
@@ -64,7 +63,6 @@ function Profiles() {
             }
         }
         else {
-            console.log(1);
             newPassIn = document.querySelector('.' + style.newPassInput)
             newPassMes = document.querySelector('.' + style.newPassErrMes)
             handleNewPassBlur()
@@ -111,7 +109,8 @@ function Profiles() {
             await axios.post("http://localhost:8080/customer/update", inputs)
             .then((response) => {
                 userInfo.uPassword = inputs.new_password
-                //alert(message);
+                alert('Change password successfully')
+                window.location.href = '/'
             })
             .catch((err) => {
                 console.log(err);
@@ -124,7 +123,6 @@ function Profiles() {
     const handleChangePassSubmit1 = () => {
         handleOldPassBlur()
         handleNewPassBlur()
-        console.log(inputs);
         if(isOldPass && isNewPass) {
             handleChangePassSubmit2()
         }
@@ -136,9 +134,7 @@ function Profiles() {
                 id : userInfo.uId
             }})
             .then((response) => {
-
-                transactions = response.data
-                console.log(transactions);
+                setTransactions(response.data)
             })
             .catch((err) => {
                 console.log(err);
@@ -150,7 +146,7 @@ function Profiles() {
 
     useEffect(() => {
         getTransactions()
-    })
+    },[1])
     
     return (
         <>
@@ -217,7 +213,6 @@ function Profiles() {
                 <div className = {style.matchesContainer}>
                 {
                     transactions.map((match, index) => {
-                        console.log(match);
                         return (
                             <div key={index} className= {style.matchContainer}>
                                 <img alt="" className= {style.nation1} src= {images[(match.team_A.includes(' ')? (match.team_A.replace(' ', '_')) : match.team_A)]}/>

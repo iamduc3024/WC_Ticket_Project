@@ -172,7 +172,7 @@ function Login() {
                     <h1>Login</h1>
 
                     <section className={style.userInputContainer}>
-                        <label htmlFor="phoneNumberInput" >Phone</label>
+                        <label htmlFor= {style.phoneNumberInput} >Phone</label>
                         <input className={clsx(style.phoneNumberInput, {[style.invalidBorder] : !isPhone}) }
                         onBlur={handlePhoneBlur}
                         onKeyDown={handleKeyDown}

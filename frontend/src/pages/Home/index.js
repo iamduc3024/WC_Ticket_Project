@@ -29,7 +29,6 @@ function Home() {
         try {
             await axios.get("http://localhost:8080/match/show")
             .then((response) => {
-                console.log(response.data);
                 setMatches(response.data)
             })
             .catch((err) => {

@@ -3,7 +3,6 @@ const customerModel = require('../models/customerModel')
 class customerController {
     // Show customer profile and transaction
     showCustomerProfile = (req, res) => {
-        console.log(req.query.id);
         customerModel.getCustomerProfile(req.query.id, (err, result) => {
             if (err) {
                 res.send(err);
@@ -16,7 +15,6 @@ class customerController {
 
     showCountCustomerPhone = (req, res) => {
         customerModel.countPhone(req.query.phoneNumber, (err, result) => {
-            //console.log("Phone: " , req.query.phoneNumber);
             if (err) {
                 console.log(err);
                 res.status(500).json({error: "Internal server error"})
@@ -77,8 +75,6 @@ class customerController {
     //Update customer
     updateCustomer = (req, res) => {
         const data = req.body;
-        //const id = req.body.id;
-        console.log(data.new_password);
         customerModel.updateCustomerById(data.new_password, data.customer_id, (err, results) => {
             if (err) {
                 res.send(err);

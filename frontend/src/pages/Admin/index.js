@@ -48,7 +48,6 @@ function Admin() {
         try {
             await axios.delete(`http://localhost:8080/customer/deleteCustomer/${customerId}`)
             .then((response) => {
-                console.log(customerId);
                 handleGetCustomers();
             })
             .catch((err) => {
@@ -63,7 +62,6 @@ function Admin() {
         try {
             await axios.delete(`http://localhost:8080/match/deleteMatch/${matchId}`)
             .then((response) => {
-                console.log(matchId);
                 handleGetMatches();
             })
             .catch((err) => {

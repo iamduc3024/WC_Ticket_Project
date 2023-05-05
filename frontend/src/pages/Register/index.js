@@ -210,7 +210,7 @@ function Register() {
                     <h1>Register</h1>
 
                     <section className= {style.userInputContainer}>
-                        <label htmlFor="userInput" >Your Name</label>
+                        <label htmlFor= {style.userInput} >Your Name</label>
                         <input className= {clsx(style.userInput, {[style.invalidBorder] : !isUser})} 
                         type="text" placeholder="Enter your name." 
                         name='name'
@@ -229,7 +229,7 @@ function Register() {
                     </section>
 
                     <section className= {style.phoneInputContainer}>
-                        <label htmlFor="phoneInput" >Phone</label>
+                        <label htmlFor= {style.phoneInput} >Phone</label>
                         <input className= {clsx(style.phoneInput, {[style.invalidBorder] : !isPhone})} 
                         type="text" placeholder="Enter your phone." 
                         name='phone'
@@ -245,7 +245,7 @@ function Register() {
                     </section>
 
                     <section className= {style.passInputContainer}>
-                        <label htmlFor="passInput">Password</label>
+                        <label htmlFor= {style.passInput}>Password</label>
                         <input className= {clsx(style.passInput, {[style.invalidBorder] : !isPass})} 
                         type="password" placeholder="Enter your password" 
                         name='password'
@@ -264,7 +264,7 @@ function Register() {
                     </section>
 
                     <section className= {style.passwInputCheckContainer}>
-                        <label htmlFor={style.passwInputCheck}>Retype Password</label>
+                        <label htmlFor= {style.passwInputCheck}>Retype Password</label>
                         <input className= {clsx(style.passwInputCheck, {[style.invalidBorder] : !isPassCheck})} 
                         type="password" placeholder="Confirm your password" 
                         name='passCheck'
