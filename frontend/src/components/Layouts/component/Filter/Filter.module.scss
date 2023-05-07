@@ -31,6 +31,14 @@
     padding-top: 36px;
   }
 
+  .filterContainerLabel {
+    font-size: 36px;
+  }
+
+  .filterContainer label {
+    font-weight: bold;
+  }
+
   section {
     font-size: 20px !important;
     text-align: left;
@@ -39,7 +47,7 @@
   }
 
   .standInpContainer {
-    margin-top: 60px;
+    margin-top: 48px;
   }
 
   .filterSubmitBtn {

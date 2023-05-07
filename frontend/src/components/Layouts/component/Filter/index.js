@@ -4,6 +4,7 @@ import axios from 'axios';
 import React from 'react';
 import { LoginContext } from 'src/App';
 import { Link, useNavigate } from 'react-router-dom';
+import $ from "jquery"
 
 
 export const filterBtn = document.querySelector('.' + style.filterSubmitBtn) 
@@ -51,6 +52,8 @@ function Filter() {
                     matchesFilter[i] = response.data[i].match_id;
                 }
                 navigate('/')
+                window.scrollTo(0,0);
+                $("html, body").animate({ scrollTop: 800 }, "slow");
             })
             .catch(err => {
                 console.log(err)
@@ -63,94 +66,94 @@ function Filter() {
 
     return (
         <div className={style.filterContainer}>
-        <label htmlFor= {style.filterContainer}>Filter</label>
-        <br />
-        <section className={style.standInpContainer}>
-            <label htmlFor= {style.standNameInput}>Team name:</label>
+            <label className= {style.filterContainerLabel} htmlFor= {style.filterContainer}>Filter</label>
             <br />
-            <input className={style.standNameInput} type="text" name="team_name_A" placeholder="Team name..." 
-            onChange={handleChange}
-            onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                    handleFilter()
-                    navigate('/home')
-                }
-                
-            }}/>
-            <br />
-        </section>
+            <section className={style.standInpContainer}>
+                <label htmlFor= {style.standNameInput}>Team name:</label>
+                <br />
+                <input className={style.standNameInput} type="text" name="team_name_A" placeholder="Team name..." 
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        handleFilter()
+                        navigate('/home')
+                    }
+                    
+                }}/>
+                <br />
+            </section>
 
-        <section className={style.stationInpContainer}>
-            <label htmlFor= {style.stationInput}>Stadium name:</label>
-            <br />
-            <input className={style.stationInput} type="text" name="stadium_name" placeholder="Stadium name..." 
-            onChange={handleChange}
-            onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                    handleFilter()
-                    navigate('/home')
-                }
-                
-            }}/>
-            <br />
-        </section>
+            <section className={style.stationInpContainer}>
+                <label htmlFor= {style.stationInput}>Stadium name:</label>
+                <br />
+                <input className={style.stationInput} type="text" name="stadium_name" placeholder="Stadium name..." 
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        handleFilter()
+                        navigate('/home')
+                    }
+                    
+                }}/>
+                <br />
+            </section>
 
-        <section className={style.dateInpContainer}>
-            <label htmlFor= {style.dateFromInput}>Date from:</label>
-            <br />
-            <input className={style.dateFromInput} type="date" name="date_from" 
-            onChange={handleChange}
-            onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                    handleFilter()
-                    navigate('/home')
-                }
-                
-            }}/>
-            <br />
-            <label htmlFor= {style.dateToInput}>To:</label>
-            <br />
-            <input className={style.dateToInput} type="date" name='date_to' 
-            onChange={handleChange}
-            onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                    handleFilter()
-                    navigate('/home')
-                }
-                
-            }}/>
-            <br />
-        </section>
-        
-        <section className={style.priceInpContainer}>
-            <label htmlFor= {style.priceFromInput}>Price from:</label>
-            <br />
-            <input className={style.priceFromInput} type="text" name="price_from"
-            onChange={handleChange}
-            onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                    handleFilter()
-                    navigate('/home')
-                }
-                
-            }}/>
-            <br />
-            <label htmlFor= {style.priceToInput}>To:</label>
-            <br />
-            <input className={style.priceToInput} type="text" name="price_to"
-            onChange={handleChange}
-            onKeyDown={(e) => {
-                if(e.key === 'Enter') {
-                    handleFilter()
-                    navigate('/home')
-                }
-                
-            }}/>
-            <br />
-        </section>
+            <section className={style.dateInpContainer}>
+                <label htmlFor= {style.dateFromInput}>Date from:</label>
+                <br />
+                <input className={style.dateFromInput} type="date" name="date_from" 
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        handleFilter()
+                        navigate('/home')
+                    }
+                    
+                }}/>
+                <br />
+                <label htmlFor= {style.dateToInput}>To:</label>
+                <br />
+                <input className={style.dateToInput} type="date" name='date_to' 
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        handleFilter()
+                        navigate('/home')
+                    }
+                    
+                }}/>
+                <br />
+            </section>
+            
+            <section className={style.priceInpContainer}>
+                <label htmlFor= {style.priceFromInput}>Price from:</label>
+                <br />
+                <input className={style.priceFromInput} type="text" name="price_from" placeholder="$"
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        handleFilter()
+                        navigate('/home')
+                    }
+                    
+                }}/>
+                <br />
+                <label htmlFor= {style.priceToInput}>To:</label>
+                <br />
+                <input className={style.priceToInput} type="text" name="price_to" placeholder="$"
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter') {
+                        handleFilter()
+                        navigate('/home')
+                    }
+                    
+                }}/>
+                <br />
+            </section>
 
-        <Link to = '/home' onClick={handleFilter} className={style.filterSubmitBtn}>Filter</Link>
-    </div>
+            <Link to = '/home' onClick={handleFilter} className={style.filterSubmitBtn}>Filter</Link>
+        </div>
     )
 }
 
