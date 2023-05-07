@@ -11,7 +11,7 @@ import $ from "jquery"
 
 function Payment() {
     const {userInfo} = useContext(LoginContext) // Lưu trữ thông tin người dùng
-    let nameCardInput = document.querySelector('.' + style.nameCardInp) //Element: Ô điền tên chủ thẻ
+    let nameCardInpt = document.querySelector('.' + style.nameCardInput) //Element: Ô điền tên chủ thẻ
     let cardNumberInput = document.querySelector('.' + style.cardNumberInpt) //Element: Ô điền số thẻ
     let exDateInput = document.querySelector('.' + style.exDateInp) //Element: Ô điền ngày 
     let momoNumberInput = document.querySelector('.' + style.momoNumberInp) //Element: Ô điền số MOMO
@@ -27,8 +27,8 @@ function Payment() {
 
     // Kiểm tra thông tin sau khi blur các input elements
     function handleNameCardBlur() {
-        if(nameCardInput) {
-            if(nameCardInput.value) {
+        if(nameCardInpt) {
+            if(nameCardInpt.value) {
                 setIsNameCard(true)
             }
             else {
@@ -36,7 +36,7 @@ function Payment() {
             }
         }
         else {
-            nameCardInput = document.querySelector('.' + style.nameCardInp)
+            nameCardInpt = document.querySelector('.' + style.nameCardInput)
             handleNameCardBlur()
         }
     }
@@ -92,7 +92,7 @@ function Payment() {
     // Đầu tiên kiểm tra rồi đẩy lên database
     // Nếu thành công hiển thị cho người dùng biết
     const handlePaymentSubmit = () => {
-
+        
         axios.post("http://localhost:8080/transaction/createNewTransaction", {
             customer_id : userInfo.uId,
             stand_id : crrId,
@@ -128,7 +128,7 @@ function Payment() {
 
                     <section className= {clsx(style.paymentVisaDetails, {[style.invalidPay] : isMomo})}>
                         <h1>Payment Details</h1>
-                        <input className= {clsx(style.nameCardInp, {[style.invalidInput] : !isNameCard})} 
+                        <input className= {clsx(style.nameCardInput, {[style.invalidInput] : !isNameCard})} 
                         type="text" placeholder="Enter Name on Card" 
                         onBlur={handleNameCardBlur}
                         onFocus={() => {
@@ -172,8 +172,33 @@ function Payment() {
                             $("html, body").animate({ scrollTop: 1 }, "slow");
                         }}>
                             <button className= {style.cfBtn}
-                            onClick={handlePaymentSubmit}>Confirm Payment</button>
+                            onClick={(e) => {
+                                if(isMomo) {
+                                    handleMomoNumBlur()
+                                    if(isMomoValid && document.querySelector('.' + style.momoNumberInp).value.length !== 0) {
+                                        handlePaymentSubmit()
+                                    }
+                                    else {
+                                        e.preventDefault()
+                                    }
+                                }
+                                else {
+                                    handleCardNumberBlur()
+                                    handleDateBlur() 
+                                    handleNameCardBlur()
+                                    if(isCardNumber && isNameCard && isValidDate
+                                        && document.querySelector('.' + style.nameCardInput).value.length !== 0
+                                        && document.querySelector('.' + style.cardNumberInpt).value.length !== 0
+                                        && document.querySelector('.' + style.exDateInp).value.length !== 0) {
+                                        handlePaymentSubmit()
+                                    }
+                                    else {
+                                        e.preventDefault()
+                                    }
+                                }
+                            }}>Confirm Payment</button>
                         </Link>
+
                     </section>
 
                 </div>

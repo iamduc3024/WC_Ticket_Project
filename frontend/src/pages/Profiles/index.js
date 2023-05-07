@@ -123,7 +123,11 @@ function Profiles() {
     const handleChangePassSubmit1 = () => {
         handleOldPassBlur()
         handleNewPassBlur()
-        if(isOldPass && isNewPass) {
+        if(!oldPassIn) {
+            oldPassIn = document.querySelector('.' + style.oldPassInput)
+        }
+
+        if(isOldPass && isNewPass && inputs.new_password !== "" && oldPassIn.value.length !== 0) {
             handleChangePassSubmit2()
         }
     }
