@@ -1,13 +1,14 @@
 import clsx from 'clsx';
 import style from './Login.module.scss'
 import { useContext, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
 import axios from 'axios';
 import { LoginContext } from '../../App'
 
 
 function Login() {
+    const navigate = useNavigate()
     // Nhận các thông tin được truyền xuống từ App
     // isLogin để lưu trữ thông tin xem người dùng đã đăng nhập hay chưa
     // setIsLogin là hàm thay đổi trạng thái true/false của isLogin
@@ -220,8 +221,8 @@ function Login() {
                                 }
                                 else {
                                     if(isAdmin === 1) {
-                                        
-                                        window.location.href = "/admin";
+                                        e.preventDefault()
+                                        navigate('/admin')
                                     }
                                     
                                 }
