@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { LoginContext } from 'src/App'
 import axios from 'axios'
 import $ from "jquery"
+import WCLogo from '../../assets/logos/WCLogo.png'
 
 function Payment() {
     const {userInfo} = useContext(LoginContext) // Lưu trữ thông tin người dùng
@@ -205,6 +206,7 @@ function Payment() {
 
                 <div className= {style.logo}>
                     <div className= {style.triangle}></div>
+                    <img className= {style.WCLogo} src={WCLogo} alt="" />
                 </div>
             </div>
         </div>

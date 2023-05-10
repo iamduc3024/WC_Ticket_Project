@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
 
 
 function Register() {
+
+    const navigate = useNavigate()
     
     // Các cò kiểm tra trạng thái hiển thị của password và confirm password
     const [passHide, setPassHide] = useState(false)
@@ -41,7 +43,8 @@ function Register() {
     // Nếu đăng kí thành công thì chuyển đến đăng nhập
     useEffect(() => {
         if(message === "Success") {
-            window.location.href = "/login"
+            //window.location.href = "/login"
+            navigate('/login')
         }
     }, [message])
 
