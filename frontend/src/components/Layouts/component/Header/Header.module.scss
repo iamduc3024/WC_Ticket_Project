@@ -1,6 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
 
+  .chatGPTAns {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: gray, $alpha: 0.9);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .chatGPTAnsContainer {
+    width: 70%;
+    height: 50%;
+    background-color: white;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    border-radius: 48px;
+  }
+
+  .exitSearch {
+    width: 50%;
+    height: 100px;
+    background-color: red;
+    font-size: 48px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 24px;
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ff5959;
+    }
+
+  }
 
   .headerContainer {
     position: fixed;

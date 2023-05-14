@@ -9,6 +9,7 @@ import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import ProfilesPage from './pages/Profiles';
 import PaymentPage from './pages/Payment';
+import FollowingPage from './pages/Following';
 import AdminPage from './pages/Admin'
 import Filter from './components/Layouts/component/Filter';
 import themifiIcon from './assets/icons/themify-icons/themify-icons.css'
@@ -56,7 +57,7 @@ function App() {
                     <Route path='/profiles' element = {<ProfilesPage />}/>
                     <Route path='/admin' element = {<AdminPage />}/>
                     <Route path='/payment' element = {<PaymentPage />}/>
-                    <Route path='/register' element = {<RegisterPage />}/>
+                    <Route path='/following' element = {<FollowingPage />}/>
                     <Route path='/filter' element = {<Filter />}/>
                 </Routes>
             </div>

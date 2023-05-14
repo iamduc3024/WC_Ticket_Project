@@ -1,7 +1,8 @@
-function Following() {
+import axios from "axios";
 
-    
-    return <h2>Following page</h2>;
+
+function Following() {
+return <h1 >hi</h1>
 }
 
 export default Following;
