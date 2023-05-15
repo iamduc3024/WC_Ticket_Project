@@ -9,6 +9,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "src/components/Layouts/component/Footer";
 import $ from "jquery"
+import { Helmet } from "react-helmet";
 
 // Lưu trữ thông tin các giá của các chỗ ngồi tương ứng với trận đấu đã chọn
  const standPrice = {
@@ -117,6 +118,9 @@ function Order() {
     return (
 
         <Fragment>
+            <Helmet>
+                <title>WC_Ticket</title>
+            </Helmet>
             <Header />
             <img className= {style.stationSimulatorImg} src={stationSimulator} alt=""></img>
             <section className= {style.contentContainer}>

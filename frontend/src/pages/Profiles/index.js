@@ -7,6 +7,7 @@ import { LoginContext } from 'src/App'
 import { useContext, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import axios from 'axios'
+import { Helmet } from 'react-helmet'
 
 
 function Profiles() {
@@ -154,6 +155,9 @@ function Profiles() {
     
     return (
         <>
+            <Helmet>
+                <title>WC_Ticket</title>
+            </Helmet>
             <Header />
             <SlideBar />
 

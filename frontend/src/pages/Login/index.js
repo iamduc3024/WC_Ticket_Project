@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import WCLogo from '../../assets/logos/WCLogo.png'
 import axios from 'axios';
 import { LoginContext } from '../../App'
+import { Helmet } from 'react-helmet';
 
 
 function Login() {
@@ -166,81 +167,86 @@ function Login() {
     }
 
     return (
-        <div className={style.container}>
+        <>
+            <Helmet>
+                <title>WC_Ticket</title>
+            </Helmet>
+            <div className={style.container}>
 
-            <div className={style.loginContainer}>
-                <div className={style.loginContent}>
-                    <h1>Login</h1>
+                <div className={style.loginContainer}>
+                    <div className={style.loginContent}>
+                        <h1>Login</h1>
 
-                    <section className={style.userInputContainer}>
-                        <label htmlFor= {style.phoneNumberInput} >Phone</label>
-                        <input className={clsx(style.phoneNumberInput, {[style.invalidBorder] : !isPhone}) }
-                        onBlur={handlePhoneBlur}
-                        onKeyDown={handleKeyDown}
-                        onFocus={() => {
-                            setIsPhone(true)
-                        }}
-                        type="text" placeholder="Enter your phone." 
-                        name='phone'
-                        onChange={handleChange}/>
+                        <section className={style.userInputContainer}>
+                            <label htmlFor= {style.phoneNumberInput} >Phone</label>
+                            <input className={clsx(style.phoneNumberInput, {[style.invalidBorder] : !isPhone}) }
+                            onBlur={handlePhoneBlur}
+                            onKeyDown={handleKeyDown}
+                            onFocus={() => {
+                                setIsPhone(true)
+                            }}
+                            type="text" placeholder="Enter your phone." 
+                            name='phone'
+                            onChange={handleChange}/>
 
-                        <div className= {style.errContainer}>
-                            <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
-                        </div>
-                    </section>
+                            <div className= {style.errContainer}>
+                                <p className= {clsx({[style.errMessage] : isPhone} )}>Invalid phone number</p>
+                            </div>
+                        </section>
 
-                    <section className={style.passInputContainer}>
-                        <label htmlFor= {style.passInput}>Password</label>
-                        <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
-                        type="password" placeholder="Enter your password" 
-                        name='password'
-                        onBlur={handlePassBlur}
-                        onKeyDown={handleKeyDown}
-                        onFocus={() => {
-                            setIsPass(true)
-                        }}
-                        onChange={handleChange}/>
-                        <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
-                            onClick={handleHide}
-                        ></i>
+                        <section className={style.passInputContainer}>
+                            <label htmlFor= {style.passInput}>Password</label>
+                            <input className={clsx(style.passInput, {[style.invalidBorder] : !isPass}) } 
+                            type="password" placeholder="Enter your password" 
+                            name='password'
+                            onBlur={handlePassBlur}
+                            onKeyDown={handleKeyDown}
+                            onFocus={() => {
+                                setIsPass(true)
+                            }}
+                            onChange={handleChange}/>
+                            <i className={ clsx(style.hiddenPass, "ti-eye", ) } 
+                                onClick={handleHide}
+                            ></i>
 
-                        <div className= {style.errContainer}>
-                            <p className= {clsx({[style.errMessage] : isPass} )}>Invalid Password</p>
-                        </div>
-                    </section>
+                            <div className= {style.errContainer}>
+                                <p className= {clsx({[style.errMessage] : isPass} )}>Invalid Password</p>
+                            </div>
+                        </section>
 
-                        <Link to = '/'>
-                            <button className={style.submitSignInBtn}
-                            ref={loginBtnRef}
-                            onClick={(e) => {
-                                handlePassReplication();
-                                if (message !== "Login successful") {
-                                    //alert(message);
-                                    e.preventDefault();
-                                   
-                                }
-                                else {
-                                    if(isAdmin === 1) {
-                                        e.preventDefault()
-                                        navigate('/admin')
-                                    }
+                            <Link to = '/'>
+                                <button className={style.submitSignInBtn}
+                                ref={loginBtnRef}
+                                onClick={(e) => {
+                                    handlePassReplication();
+                                    if (message !== "Login successful") {
+                                        //alert(message);
+                                        e.preventDefault();
                                     
-                                }
-                            }}>Sign In</button>
-                        </Link>
+                                    }
+                                    else {
+                                        if(isAdmin === 1) {
+                                            e.preventDefault()
+                                            navigate('/admin')
+                                        }
+                                        
+                                    }
+                                }}>Sign In</button>
+                            </Link>
 
 
-                    <p className={style.moveSignUp}>
-                        Do not have account yet?
-                        <Link to ="/register" > Sign Up</Link>
-                    </p>
+                        <p className={style.moveSignUp}>
+                            Do not have account yet?
+                            <Link to ="/register" > Sign Up</Link>
+                        </p>
+                    </div>
+                    
+                    <div className={style.logo}>
+                        <img className= {style.WCLogo} src={WCLogo} alt="" />
+                    </div>
                 </div>
-                
-                <div className={style.logo}>
-                    <img className= {style.WCLogo} src={WCLogo} alt="" />
-                </div>
-            </div>
-    </div>
+        </div>
+        </>
     );
 }
 

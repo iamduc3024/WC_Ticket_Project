@@ -10,6 +10,7 @@ import {LoginContext} from '../../App'
 import { Link, useNavigate } from 'react-router-dom';
 import images from 'src/assets/images/nations_png/nation_image';
 import $ from "jquery"
+import { Helmet } from 'react-helmet';
 
 function Home() {
     
@@ -50,6 +51,9 @@ function Home() {
 
     return(
         <Fragment>
+            <Helmet>
+                <title>WC_Ticket</title>
+            </Helmet>
             <Header />
             <div className='space'></div>
 

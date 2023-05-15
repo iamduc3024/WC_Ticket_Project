@@ -6,6 +6,7 @@ import axios from 'axios';
 import clsx from 'clsx';
 import Footer from 'src/components/Layouts/component/Footer';
 import { LoginContext } from 'src/App';
+import Helmet from 'react-helmet';
 
 function Admin() {
     const [customers, setCustomers] = useState([]); // Dùng để lấy ra danh sách người dùng
@@ -82,6 +83,9 @@ function Admin() {
 
     return (
         <>
+            <Helmet>
+                <title>WC_Ticket</title>
+            </Helmet>
             <Header isAdminLogin={true} />
             <Slider />
 

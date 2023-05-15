@@ -9,6 +9,7 @@ import { LoginContext } from 'src/App'
 import axios from 'axios'
 import $ from "jquery"
 import WCLogo from '../../assets/logos/WCLogo.png'
+import { Helmet } from 'react-helmet'
 
 function Payment() {
     const {userInfo} = useContext(LoginContext) // Lưu trữ thông tin người dùng
@@ -105,111 +106,116 @@ function Payment() {
     }
 
     return (
-        <div className= {style.container}>
-            <div className= {style.paymentCointainer}>
-                <div className= {style.paymentContent}>
-                
-                    <section className= {style.paymentMethodContainer}>
-                        <h1>Payment Method</h1>
-                        <section className= {style.imageContainer}>
-                            <img src={visaLogo} alt="" className= {style.visaLogo}
-                            onClick={() => {
-                                setIsMomo(false)
-                                setIsCardNumber(true)
+        <>
+            <Helmet>
+                <title>WC_Ticket</title>
+            </Helmet>
+            <div className= {style.container}>
+                <div className= {style.paymentCointainer}>
+                    <div className= {style.paymentContent}>
+                    
+                        <section className= {style.paymentMethodContainer}>
+                            <h1>Payment Method</h1>
+                            <section className= {style.imageContainer}>
+                                <img src={visaLogo} alt="" className= {style.visaLogo}
+                                onClick={() => {
+                                    setIsMomo(false)
+                                    setIsCardNumber(true)
+                                    setIsNameCard(true)
+                                    setIsValidDate(true)
+                                }}/>
+                                <p>/</p>
+                                <img src={momoLogo} alt="" className= {style.momoLogo}
+                                onClick={() => {
+                                    setIsMomo(true)
+                                }}/>
+                            </section>
+                        </section>
+
+                        <section className= {clsx(style.paymentVisaDetails, {[style.invalidPay] : isMomo})}>
+                            <h1>Payment Details</h1>
+                            <input className= {clsx(style.nameCardInput, {[style.invalidInput] : !isNameCard})} 
+                            type="text" placeholder="Enter Name on Card" 
+                            onBlur={handleNameCardBlur}
+                            onFocus={() => {
                                 setIsNameCard(true)
+                            }}/>
+
+                            <input className= {clsx(style.cardNumberInpt, {[style.invalidInput] : !isCardNumber})} 
+                            type="text" placeholder="Card Number"
+                            onBlur={handleCardNumberBlur}
+                            onFocus={() => {
+                                setIsCardNumber(true)
+                            }}/>
+
+                            <input className= {clsx(style.exDateInp, {[style.invalidInput] : !isValidDate})} 
+                            type="text" placeholder="Expire Date Ex:28/11/2003"
+                            onBlur={handleDateBlur}
+                            onFocus={() => {
                                 setIsValidDate(true)
                             }}/>
-                            <p>/</p>
-                            <img src={momoLogo} alt="" className= {style.momoLogo}
-                            onClick={() => {
-                                setIsMomo(true)
+                        </section>
+
+                        <section className= {clsx(style.paymentMomoDetails, {[style.invalidPay] : !isMomo})}>
+                            <h1>Payment Details</h1>
+                            <input className= {clsx(style.momoNumberInp, {[style.invalidInput] : !isMomoValid}) } 
+                            type="text" placeholder="Momo Number"
+                            onBlur={handleMomoNumBlur}
+                            onFocus={() => {
+                                setIsMomoValid(true)
                             }}/>
                         </section>
-                    </section>
 
-                    <section className= {clsx(style.paymentVisaDetails, {[style.invalidPay] : isMomo})}>
-                        <h1>Payment Details</h1>
-                        <input className= {clsx(style.nameCardInput, {[style.invalidInput] : !isNameCard})} 
-                        type="text" placeholder="Enter Name on Card" 
-                        onBlur={handleNameCardBlur}
-                        onFocus={() => {
-                            setIsNameCard(true)
-                        }}/>
-
-                        <input className= {clsx(style.cardNumberInpt, {[style.invalidInput] : !isCardNumber})} 
-                        type="text" placeholder="Card Number"
-                        onBlur={handleCardNumberBlur}
-                        onFocus={() => {
-                            setIsCardNumber(true)
-                        }}/>
-
-                        <input className= {clsx(style.exDateInp, {[style.invalidInput] : !isValidDate})} 
-                        type="text" placeholder="Expire Date Ex:28/11/2003"
-                        onBlur={handleDateBlur}
-                        onFocus={() => {
-                            setIsValidDate(true)
-                        }}/>
-                    </section>
-
-                    <section className= {clsx(style.paymentMomoDetails, {[style.invalidPay] : !isMomo})}>
-                        <h1>Payment Details</h1>
-                        <input className= {clsx(style.momoNumberInp, {[style.invalidInput] : !isMomoValid}) } 
-                        type="text" placeholder="Momo Number"
-                        onBlur={handleMomoNumBlur}
-                        onFocus={() => {
-                            setIsMomoValid(true)
-                        }}/>
-                    </section>
-
-                    <section className= {style.buttons}>
-                        <Link to = '/order'
-                        onClick={() => {
-                            $("html, body").animate({ scrollTop: 800 }, "slow");
-                        }}>
-                            <button className= {style.backBtn}>Back</button>
-                        </Link>
-                        <Link to = '/'
-                        onClick={() => {
-                            $("html, body").animate({ scrollTop: 1 }, "slow");
-                        }}>
-                            <button className= {style.cfBtn}
-                            onClick={(e) => {
-                                if(isMomo) {
-                                    handleMomoNumBlur()
-                                    if(isMomoValid && document.querySelector('.' + style.momoNumberInp).value.length !== 0) {
-                                        handlePaymentSubmit()
+                        <section className= {style.buttons}>
+                            <Link to = '/order'
+                            onClick={() => {
+                                $("html, body").animate({ scrollTop: 800 }, "slow");
+                            }}>
+                                <button className= {style.backBtn}>Back</button>
+                            </Link>
+                            <Link to = '/'
+                            onClick={() => {
+                                $("html, body").animate({ scrollTop: 1 }, "slow");
+                            }}>
+                                <button className= {style.cfBtn}
+                                onClick={(e) => {
+                                    if(isMomo) {
+                                        handleMomoNumBlur()
+                                        if(isMomoValid && document.querySelector('.' + style.momoNumberInp).value.length !== 0) {
+                                            handlePaymentSubmit()
+                                        }
+                                        else {
+                                            e.preventDefault()
+                                        }
                                     }
                                     else {
-                                        e.preventDefault()
+                                        handleCardNumberBlur()
+                                        handleDateBlur() 
+                                        handleNameCardBlur()
+                                        if(isCardNumber && isNameCard && isValidDate
+                                            && document.querySelector('.' + style.nameCardInput).value.length !== 0
+                                            && document.querySelector('.' + style.cardNumberInpt).value.length !== 0
+                                            && document.querySelector('.' + style.exDateInp).value.length !== 0) {
+                                            handlePaymentSubmit()
+                                        }
+                                        else {
+                                            e.preventDefault()
+                                        }
                                     }
-                                }
-                                else {
-                                    handleCardNumberBlur()
-                                    handleDateBlur() 
-                                    handleNameCardBlur()
-                                    if(isCardNumber && isNameCard && isValidDate
-                                        && document.querySelector('.' + style.nameCardInput).value.length !== 0
-                                        && document.querySelector('.' + style.cardNumberInpt).value.length !== 0
-                                        && document.querySelector('.' + style.exDateInp).value.length !== 0) {
-                                        handlePaymentSubmit()
-                                    }
-                                    else {
-                                        e.preventDefault()
-                                    }
-                                }
-                            }}>Confirm Payment</button>
-                        </Link>
+                                }}>Confirm Payment</button>
+                            </Link>
 
-                    </section>
+                        </section>
 
-                </div>
+                    </div>
 
-                <div className= {style.logo}>
-                    <div className= {style.triangle}></div>
-                    <img className= {style.WCLogo} src={WCLogo} alt="" />
+                    <div className= {style.logo}>
+                        <div className= {style.triangle}></div>
+                        <img className= {style.WCLogo} src={WCLogo} alt="" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
